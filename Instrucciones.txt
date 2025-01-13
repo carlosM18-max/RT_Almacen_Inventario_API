@@ -1,0 +1,6 @@
+Traer cambios de rama main a otra rama:
+
+1.- Ver si tu rama esta actualizada
+git fetch origin
+2.- Traer los cambios de main a otra rama (hacer esto desde tu rama)
+git merge origin/main
