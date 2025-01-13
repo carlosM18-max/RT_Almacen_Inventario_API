@@ -4,3 +4,5 @@ Traer cambios de rama main a otra rama:
 git fetch origin
 2.- Traer los cambios de main a otra rama (hacer esto desde tu rama)
 git merge origin/main
+
+RECUERDA QUE PARA HACER NO TIENES QUE TENER NADA PENDIENTE EN TU RAMA
