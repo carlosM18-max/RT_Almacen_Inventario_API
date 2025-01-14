@@ -2,6 +2,11 @@ import { DataTypes } from "sequelize";
 import db from "../config/db";
 
 const factura = db.define("tb_facturas", {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
     numero_de_factura: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -78,8 +83,7 @@ const factura = db.define("tb_facturas", {
         // Archivo (PDF) del SAT
     }
 }, {
-    timestamps: true, // Agrega campos createdAt y updatedAt
-    freezeTableName: true // Evita que Sequelize pluralice el nombre de la tabla
+    timestamps: true,
 });
 
 export default factura;

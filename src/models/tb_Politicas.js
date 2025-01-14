@@ -2,6 +2,11 @@ import { DataTypes } from "sequelize";
 import db from "../config/db";
 
 const Politica = db.define("tb_politica", {
+    id:{
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
     descripcion: {
         type: DataTypes.STRING,
         allowNull: true,

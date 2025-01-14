@@ -2,6 +2,11 @@ import { DataTypes } from "sequelize";
 import db from "../config/db";
 
 const Usuarios = db.define("tb_usuarios", {
+    id:{
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
     numero_trabajador:{
       type:DataTypes.INTEGER(6),
       allowNull:false
@@ -18,6 +23,10 @@ const Usuarios = db.define("tb_usuarios", {
     nombre: {
       type: DataTypes.STRING(50),
       allowNull: false,
+    },
+    apellidos: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
     },
     imagen: {
       type: DataTypes.STRING(255),
@@ -73,8 +82,7 @@ const Usuarios = db.define("tb_usuarios", {
       allowNull:false
     },
   }, {
-    timestamps: true, 
-    freezeTableName: true,
+    timestamps: true,
   });
   
   export default Usuarios;

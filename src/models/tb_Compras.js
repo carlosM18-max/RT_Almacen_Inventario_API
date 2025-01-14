@@ -2,6 +2,11 @@ import { DataTypes } from "sequelize";
 import db from "../config/db";
 
 const Compras = db.define("tb_compras", {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
     cotizacion1: {
       type: DataTypes.STRING,// cotizacion
       allowNull: false,

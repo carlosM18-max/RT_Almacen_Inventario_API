@@ -4,6 +4,12 @@ import db from "../config/db";
 const articulos = db.define(
     "tb_articulos",
     {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        
       nombre: {
         type: DataTypes.STRING,
         allowNull: false,

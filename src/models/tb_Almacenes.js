@@ -4,6 +4,11 @@ import db from '../config/db';
 const Almacenes = db.define(
     "tb_almacenes",
     {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
         tipo_adquisicion: {
         type: DataTypes.ENUM("Donación", "Compra", "Como dato", "Invitación a 3"),
         allowNull: false,
@@ -112,7 +117,6 @@ const Almacenes = db.define(
     },
     {
       timestamps: true, // Agrega campos createdAt y updatedAt
-      freezeTableName: true, // Evita que Sequelize pluralice el nombre de la tabla
     }
   );
   
