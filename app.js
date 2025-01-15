@@ -3,8 +3,11 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+// Configuracion de la conexion
 import db from './src/config/db.js';
-import areasRoutes from './src/routes/areas.routes.js';
+// Importacion de las rutas
+import areasRoutes from './src/routes/areasRoutes.js';
+import almacenRouter from './src/routes/almacenesRoutes.js';
 
 dotenv.config();
 
@@ -36,6 +39,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Rutas
 app.use('/api/areas', areasRoutes);
+app.use('/api/almacenes', almacenRouter);
 
 // Mensaje que se mostrará al inicio
 app.get("/", (req, res) => {
