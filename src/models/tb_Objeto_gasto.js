@@ -4,6 +4,11 @@ import db from "../config/db";
 const Objetogastos = db.define(
     "tb_objeto_gasto",
     {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+        },
         capitulo: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -30,8 +35,7 @@ const Objetogastos = db.define(
       }
     },
     {
-      timestamps: true, 
-      freezeTableName: true 
+      timestamps: true
     }
   );
   

@@ -2,6 +2,12 @@ import { DataTypes } from "sequelize";
 import db from "../config/db";
 
 const Bajas = db.define("tb_bajas", {
+
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
     tipo: {
     type: DataTypes.ENUM("prestamo", "descompuesto", "descontinuación"),
     allowNull: true,
@@ -61,7 +67,7 @@ const Bajas = db.define("tb_bajas", {
   }
 }, {
   timestamps: true, // Agrega campos createdAt y updatedAt
-  freezeTableName: true, // Evita que Sequelize pluralice el nombre de la tabla
+  
 });
 
 export default Bajas;

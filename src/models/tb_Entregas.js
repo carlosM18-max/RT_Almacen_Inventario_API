@@ -2,6 +2,11 @@ import { DataTypes } from "sequelize";
 import db from "../config/db";
 
 const entregas = db.define("tb_entregas", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     canticad: {
       type: DataTypes.INTEGER,
       allowNull: false,

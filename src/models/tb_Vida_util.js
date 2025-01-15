@@ -2,6 +2,11 @@ import { DataTypes } from "sequelize";
 import db from "../config/db";
 
 const Vida_util = db.define("tb_vida_util", {
+    id:{
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
     cuenta: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -34,7 +39,6 @@ const Vida_util = db.define("tb_vida_util", {
     },
   }, {
     timestamps: true,
-    freezeTableName: true,
   });
   
   export default Vida_util;
