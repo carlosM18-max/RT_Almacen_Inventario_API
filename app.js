@@ -54,7 +54,7 @@ const startServer = async () => {
 
     app.listen(PORT, () => {
       console.log(`Servidor corriendo en el puerto http://localhost:${PORT}`);
-      console.log(`Documentación de Swagger (API) disponible en http://localhost:${PORT}/api-docs`);
+      console.log(`Interfaz Swagger (API) disponible en http://localhost:${PORT}/api-docs`);
     });
   } catch (error) {
     console.error('Error en la conexión a la base de datos:', error);
