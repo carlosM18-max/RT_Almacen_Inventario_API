@@ -1,7 +1,8 @@
 import express from 'express';
 import { getAllAreas, getAreaById, createArea, updateArea, deleteArea } from '../controllers/areasController.js';
 
-const areasRouter = express.Router();
+const router = express.Router();
+
 /**
  * @swagger
  * components:
@@ -42,7 +43,7 @@ const areasRouter = express.Router();
  *               items:
  *                 $ref: '#/components/schemas/Area'
  */
-areasRouter.get('/', getAllAreas);
+router.get('/', getAllAreas);
 
 /**
  * @swagger
@@ -67,7 +68,7 @@ areasRouter.get('/', getAllAreas);
  *       404:
  *         description: Área no encontrada
  */
-areasRouter.get('/:id', getAreaById);
+router.get('/:id', getAreaById);
 
 /**
  * @swagger
@@ -89,7 +90,7 @@ areasRouter.get('/:id', getAreaById);
  *             schema:
  *               $ref: '#/components/schemas/Area'
  */
-areasRouter.post('/', createArea);
+router.post('/', createArea);
 
 /**
  * @swagger
@@ -120,7 +121,7 @@ areasRouter.post('/', createArea);
  *       404:
  *         description: Área no encontrada
  */
-areasRouter.put('/:id', updateArea);
+router.put('/:id', updateArea);
 
 /**
  * @swagger
@@ -141,6 +142,6 @@ areasRouter.put('/:id', updateArea);
  *       404:
  *         description: Área no encontrada
  */
-areasRouter.delete('/:id', deleteArea);
+router.delete('/:id', deleteArea);
 
-export default areasRouter;
+export default router;

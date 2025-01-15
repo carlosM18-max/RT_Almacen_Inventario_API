@@ -1,7 +1,8 @@
 import express from "express";
 import { createAlmacen, getAllAlmacenes, getAlmacenById, updateAlmacen, deleteAlmacen } from "../controllers/almacenesController.js";
 
-const almacenRouter = express.Router();
+const router = express.Router();
+
 /**
  * @swagger
  * components:
@@ -100,7 +101,7 @@ const almacenRouter = express.Router();
  *                   items:
  *                     $ref: '#/components/schemas/Almacen'
  */
-almacenRouter.get("/almacenes", getAllAlmacenes);
+router.get("/", getAllAlmacenes);
 
 /**
  * @swagger
@@ -128,7 +129,7 @@ almacenRouter.get("/almacenes", getAllAlmacenes);
  *       404:
  *         description: Almacén no encontrado
  */
-almacenRouter.get("/almacenes/:id", getAlmacenById);
+router.get("/:id", getAlmacenById);
 
 /**
  * @swagger
@@ -155,7 +156,7 @@ almacenRouter.get("/almacenes/:id", getAlmacenById);
  *                 data:
  *                   $ref: '#/components/schemas/Almacen'
  */
-almacenRouter.post("/almacenes", createAlmacen);
+router.post("/", createAlmacen);
 
 /**
  * @swagger
@@ -191,7 +192,7 @@ almacenRouter.post("/almacenes", createAlmacen);
  *       404:
  *         description: Almacén no encontrado
  */
-almacenRouter.put("/almacenes/:id", updateAlmacen);
+router.put("/:id", updateAlmacen);
 
 /**
  * @swagger
@@ -212,6 +213,6 @@ almacenRouter.put("/almacenes/:id", updateAlmacen);
  *       404:
  *         description: Almacén no encontrado
  */
-almacenRouter.delete("/almacenes/:id", deleteAlmacen);
+router.delete("/:id", deleteAlmacen);
 
-export default almacenRouter;
+export default router;
