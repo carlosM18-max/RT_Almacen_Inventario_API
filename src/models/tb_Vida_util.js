@@ -12,7 +12,7 @@ const Vida_util = db.define("tb_vida_util", {
       allowNull: false,
       // cuenta
     },
-    id_articulo: {
+    id_partida: {
       type: DataTypes.INTEGER,
       allowNull: false,
       // partida

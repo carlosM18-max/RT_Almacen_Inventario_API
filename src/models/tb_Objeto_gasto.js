@@ -4,12 +4,12 @@ import db from "../config/db";
 const Objetogastos = db.define(
     "tb_objeto_gasto",
     {
-        id: {
+      id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
         },
-        capitulo: {
+      capitulo: {
         type: DataTypes.STRING,
         allowNull: true,
       },
