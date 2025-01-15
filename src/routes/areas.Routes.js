@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllAreas, getAreaById, createArea, updateArea, deleteArea } from '../controllers/areasController.js';
+import { getAllAreas, getAreaById, createArea, updateArea, deleteArea } from '../controllers/area.controller.js';
 
 const router = express.Router();
 
