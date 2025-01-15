@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db";
 
-const factura = db.define("tb_facturas", {
+const Facturas = db.define("tb_Facturas", {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -86,4 +86,4 @@ const factura = db.define("tb_facturas", {
     timestamps: true,
 });
 
-export default factura;
+export default Facturas;
