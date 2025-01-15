@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db";
 
-const Politica = db.define("tb_politica", {
+const Politica = db.define("tb_Politica", {
     id:{
         type: DataTypes.INTEGER,
         primaryKey: true,

@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db";
 
-const Solicitudes = db.define("tb_solicitudes", {
+const Solicitudes = db.define("tb_Solicitudes", {
     id:{
         type: DataTypes.INTEGER,
         primaryKey: true,

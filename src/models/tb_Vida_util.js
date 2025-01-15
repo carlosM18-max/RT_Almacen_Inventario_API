@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db";
 
-const Vida_util = db.define("tb_vida_util", {
+const VidaUtil = db.define("tb_Vida_Util", {
     id:{
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -41,4 +41,4 @@ const Vida_util = db.define("tb_vida_util", {
     timestamps: true,
   });
   
-  export default Vida_util;
+  export default VidaUtil;

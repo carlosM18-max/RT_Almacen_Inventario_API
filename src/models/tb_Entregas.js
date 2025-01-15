@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db";
 
-const entregas = db.define("tb_entregas", {
+const Entregas = db.define("tb_Entregas", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -74,4 +74,4 @@ const entregas = db.define("tb_entregas", {
     }
   });
   
-  export default entregas;
+  export default Entregas;

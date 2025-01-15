@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db"; 
 
-const Objetogastos = db.define(
-    "tb_objeto_gasto",
+const ObjetoGastos = db.define(
+    "tb_Objeto_Gastos",
     {
         id: {
             type: DataTypes.INTEGER,
@@ -39,4 +39,4 @@ const Objetogastos = db.define(
     }
   );
   
-  export default Objetogastos;
+  export default ObjetoGastos;

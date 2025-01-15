@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db";
 
-const cargas = db.define("tb_cargas", {
+const Cargas = db.define("tb_Cargas", {
     // Campo `id` auto-incremental y clave primaria
     id: {
       type: DataTypes.INTEGER,
@@ -20,4 +20,4 @@ const cargas = db.define("tb_cargas", {
       allowNull: false,
     },
   });
-  export default cargas;
+  export default Cargas;

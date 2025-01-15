@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db";
 
-const articulos = db.define(
-    "tb_articulos",
+const Articulos = db.define(
+    "tb_Articulos",
     {
         id: {
             type: DataTypes.INTEGER,
@@ -85,4 +85,4 @@ const articulos = db.define(
     }
   );
   
-  export default articulos;
+  export default Articulos;
