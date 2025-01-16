@@ -3,12 +3,12 @@ import db from "../config/db";
 
 const Bajas = db.define("tb_Bajas", {
 
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    tipo: {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  tipo: {
     type: DataTypes.ENUM("prestamo", "descompuesto", "descontinuación"),
     allowNull: true,
     // Tipo (préstamo, descompuesto, descontinuación)
@@ -24,7 +24,7 @@ const Bajas = db.define("tb_Bajas", {
     // Razón
   },
   estado: {
-    type: DataTypes.ENUM("Revisión","Aceptada","Rechazada"),
+    type: DataTypes.ENUM("Revisión", "Aceptada", "Rechazada"),
     allowNull: false,
     // Estado
   },
@@ -35,7 +35,7 @@ const Bajas = db.define("tb_Bajas", {
 
     // Alta/Baja
   },
-  archivo:{
+  archivo: {
     type: DataTypes.STRING,
     allowNull: false,
     // Archivo
@@ -60,14 +60,14 @@ const Bajas = db.define("tb_Bajas", {
     allowNull: true,
     // ID del inventario
   },
-  id_usuario:{
+  id_usuario: {
     type: DataTypes.INTEGER,
     allowNull: false,
     // ID del usuario
   }
 }, {
   timestamps: true, // Agrega campos createdAt y updatedAt
-  
+
 });
 
 export default Bajas;
