@@ -23,9 +23,9 @@ const Solicitudes = db.define("tb_solicitudes", {
     },
     // Estado o situación del pedido
     estado: {
-        type: DataTypes.ENUM("En Espera", "Aceptado", "Rechazado"),
+        type: DataTypes.ENUM("En Revisión", "Aceptado", "Rechazado"),
         allowNull: false,
-        defaultValue: "En Espera"
+        defaultValue: "En Revisión"
     },
     // Nombre del archivo asociado al pedido, si aplica
     archivo: {
@@ -64,7 +64,7 @@ const Solicitudes = db.define("tb_solicitudes", {
     },
     // tipo de rechazo 
     tipo_rechazo:{
-        type:DataTypes.ENUM("Falta de presupuesto","No planeado"),
+        type:DataTypes.ENUM("Falta de presupuesto","No planeado", "Incompleto", "Fuera de Plazo",), // Se agrego "Incompleto", "Fuera de Plazo", 
         allowNull:true
     },
     // tipo de proyecto
