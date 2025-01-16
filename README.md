@@ -6,23 +6,20 @@ API para gestionar el almacenamiento e inventario de Radio y Televisión, asegur
 ## Requisitos
 Para poder ejecutar la API es necesario lo siguiente:
 
-* Tener instalado Node.js (versión 16 o superior) 
+* Tener instalado Node.js (versión 16 o superior), ademas de contar con un gestor de paquetes (npm)
 [![Node](https://skillicons.dev/icons?i=nodejs)](https://nodejs.org/en) 
+[![npm](https://skillicons.dev/icons?i=npm)](https://www.npmjs.com/)
 [![Express](https://skillicons.dev/icons?i=express)](https://expressjs.com/) 
 [![JavaScript](https://skillicons.dev/icons?i=js)](https://www.javascript.com/) 
-[![npm](https://skillicons.dev/icons?i=npm)](https://www.npmjs.com/) 
 
 * Tener configurado el set up de MySQL (server, workbench, etc.) o tu base de datos preferida 
 [![MySQL](https://skillicons.dev/icons?i=mysql)](https://www.mysql.com/) 
 [![MongoDB](https://skillicons.dev/icons?i=mongodb)](https://www.mongodb.com/) 
-[![SQLite](https://skillicons.dev/icons?i=sqlite)](https://www.sqlite.org/index.html) 
-[![DynamoDB](https://skillicons.dev/icons?i=dynamodb)](https://aws.amazon.com/dynamodb/) 
 
 * Un editor de texto (en caso de que se necesite modificar algo a tu gusto) 
 [![VSCode](https://skillicons.dev/icons?i=vscode)](https://code.visualstudio.com/) 
 [![Eclipse](https://skillicons.dev/icons?i=eclipse)](https://www.eclipse.org/) 
 [![Android Studio](https://skillicons.dev/icons?i=androidstudio)](https://developer.android.com/studio) 
-[![Atom](https://skillicons.dev/icons?i=atom)](https://atom.io/)
 
 ## Instalacion
 
