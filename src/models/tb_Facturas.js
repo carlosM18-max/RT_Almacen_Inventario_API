@@ -77,7 +77,7 @@ const Facturas = db.define("tb_Facturas", {
         allowNull: true,
         // Dirección del proveedor
     },
-    archivo_sat:{
+    archivo_sat: {
         type: DataTypes.STRING,
         allowNull: false,
         // Archivo (PDF) del SAT
