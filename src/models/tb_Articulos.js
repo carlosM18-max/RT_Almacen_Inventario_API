@@ -69,10 +69,10 @@ const Articulos = db.define(
         allowNull: true,
         // id de vida útil
       },
-      id_de_póliza: {
+      id_de_poliza: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        // id de póliza
+        // id de póliza relacion
       },
       id_de_la_factura: {
         type: DataTypes.INTEGER,

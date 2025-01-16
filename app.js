@@ -9,6 +9,7 @@ import db from './src/config/db.js';
 import areasRoutes from './src/routes/areasRoutes.js';
 import almacenRouter from './src/routes/almacenesRoutes.js';
 
+
 dotenv.config();
 
 const app = express();
