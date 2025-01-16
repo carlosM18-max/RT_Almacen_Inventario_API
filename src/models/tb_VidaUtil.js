@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import db from "../config/db";
+import db from "../config/db.js";
 
 const VidaUtil = db.define("tb_Vida_Util", {
   id: {

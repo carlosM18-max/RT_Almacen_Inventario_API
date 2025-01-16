@@ -26,17 +26,17 @@ export const relaciones = () => {
 
   // Referencias de Baja
   Bajas.belongsTo(Usuarios, { foreignKey: "id_confirmacion", as: "usuarioConfirmacion" });
-  Usuarios.belongsTo(Casualtys, { foreignKey: "id", as: "usuarioConfirmacionBaja" });
+  Usuarios.belongsTo(Bajas, { foreignKey: "id", as: "usuarioConfirmacionBaja" });
 
   Bajas.belongsTo(Usuarios, { foreignKey: "id_solicitud_retiro", as: "usuarioSolicitudRetiro" });
-  Usuarios.belongsTo(Casualtys, { foreignKey: "id", as: "usuarioSolicitudRetiroBaja" });
+  Usuarios.belongsTo(Bajas, { foreignKey: "id", as: "usuarioSolicitudRetiroBaja" });
 
   Bajas.belongsTo(Articulos, { foreignKey: "id_articulos", as: "bajaArticulo" });
-  Articulos.belongsTo(Casualtys, { foreignKey: "id", as: "articuloBaja" });
+  Articulos.belongsTo(Bajas, { foreignKey: "id", as: "articuloBaja" });
 
   // SE REFERENCIA A ALMACEN POR QUE AHORA TIENE INVENTARIOS
   Bajas.belongsTo(Areas, { foreignKey: "id_inventario", as: "bajaInventario" });
-  Areas.belongsTo(Casualtys, { foreignKey: "id", as: "inventarioBaja" });
+  Areas.belongsTo(Bajas, { foreignKey: "id", as: "inventarioBaja" });
 
   // Referencias de Entregas
   Entregas.belongsTo(Areas, { foreignKey: "id_almacen", as: "entregaAlmacen" });
