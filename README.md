@@ -6,11 +6,9 @@ API para gestionar el almacenamiento e inventario de Radio y Televisión, asegur
 ## Requisitos
 Para poder ejecutar la API es necesario lo siguiente:
 
-* Tener instalado Node.js (versión 16 o superior), ademas de contar con un gestor de paquetes (npm)
+* Tener instalado Node.js (versión 16 o superior), ademas de contar con un gestor de paquetes de tu preferencia
 [![Node](https://skillicons.dev/icons?i=nodejs)](https://nodejs.org/en) 
 [![npm](https://skillicons.dev/icons?i=npm)](https://www.npmjs.com/)
-[![Express](https://skillicons.dev/icons?i=express)](https://expressjs.com/) 
-[![JavaScript](https://skillicons.dev/icons?i=js)](https://www.javascript.com/) 
 
 * Tener configurado el set up de MySQL (server, workbench, etc.) o tu base de datos preferida 
 [![MySQL](https://skillicons.dev/icons?i=mysql)](https://www.mysql.com/) 
