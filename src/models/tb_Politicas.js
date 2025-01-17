@@ -18,7 +18,7 @@ const Politica = db.define("tb_Politica", {
         // Cobertura
     },
     tipo: {
-        type: DataTypes.ENUM("Egresos", "presupuestales", "donaciones", "cheques", "ingresos", "transferencias", "retenciones", "depocitos"),
+        type: DataTypes.ENUM("Egresos", "Presupuestales", "Donaciones", "Cheques", "Ingresos", "Transferencias", "Retenciones", "Depositos"),
         allowNull: true,
         // Tipo: egresos, presupuestales, diario, cheques, ingresos
     },

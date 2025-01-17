@@ -8,7 +8,7 @@ const Bajas = db.define("tb_Bajas", {
     autoIncrement: true,
   },
   tipo: {
-     type: DataTypes.ENUM("prestamo", "descompuesto", "descontinuación"), // "perdida","obsolescencia","devolución","destrucción","incautación",
+    type: DataTypes.ENUM("prestamo", "descompuesto", "descontinuación"), // "perdida","obsolescencia","devolución","destrucción","incautación",
     //"caducidad",
     //"retiro",
     allowNull: true,
@@ -25,7 +25,7 @@ const Bajas = db.define("tb_Bajas", {
     // Razón
   },
   estado: {
-    type: DataTypes.ENUM("Revisión","Aceptada","Rechazada", "Archivado"), // //"Archivado","En validación"
+    type: DataTypes.ENUM("Revision", "Aceptada", "Rechazada", "Archivado"), // //"Archivado","En validación"
     allowNull: false,
     // Estado
   },

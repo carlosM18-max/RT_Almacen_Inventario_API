@@ -21,9 +21,10 @@ const Areas = db.define('tb_Areas', {
         type: DataTypes.STRING(10),
         allowNull: true
     }
-
-}, {
-    timestamps: true
-});
+},
+    {
+        timestamps: true
+    }
+);
 
 export default Areas;
