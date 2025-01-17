@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
-import db from "../config/db";
+import db from "../config/db.js";
 
-const Solicitudes = db.define("tb_solicitudes", {
-    id:{
+const Solicitudes = db.define("tb_Solicitudes", {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
@@ -17,8 +17,8 @@ const Solicitudes = db.define("tb_solicitudes", {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
-    tipo:{
-        type:DataTypes.ENUM("Insumo","Bien"),
+    tipo: {
+        type: DataTypes.ENUM("Insumo", "Bien"),
         allowNull: true,
     },
     // Estado o situación del pedido
@@ -58,24 +58,24 @@ const Solicitudes = db.define("tb_solicitudes", {
         allowNull: true,
     },
     // comentario
-    comentario:{
-    type:DataTypes.STRING,
-    allowNull:true
+    comentario: {
+        type: DataTypes.STRING,
+        allowNull: true
     },
     // tipo de rechazo 
-    tipo_rechazo:{
-        type:DataTypes.ENUM("Falta de presupuesto","No planeado", "Incompleto", "Fuera de Plazo",), // Se agrego "Incompleto", "Fuera de Plazo", 
-        allowNull:true
+    tipo_rechazo: {
+        type: DataTypes.ENUM("Falta de presupuesto","No planeado", "Incompleto", "Fuera de Plazo",), // Se agrego "Incompleto", "Fuera de Plazo", 
+        allowNull: true
     },
     // tipo de proyecto
-    tipo_proyecto:{
-        type:DataTypes.ENUM("Radio","Televisión"),
-        allowNull:true
+    tipo_proyecto: {
+        type: DataTypes.ENUM("Radio", "Televisión"),
+        allowNull: true
     },
     // propuesta de requicicion
-    id_propuesta_requicicion:{
-        type:DataTypes.INTEGER,
-        allowNull:true
+    id_propuesta_requicicion: {
+        type: DataTypes.INTEGER,
+        allowNull: true
     },
     id_petición_de_padre: {
         type: DataTypes.INTEGER,

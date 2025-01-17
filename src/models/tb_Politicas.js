@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
-import db from "../config/db";
+import db from "../config/db.js";
 
-const Politica = db.define("tb_politica", {
-    id:{
+const Politica = db.define("tb_Politica", {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
@@ -47,18 +47,18 @@ const Politica = db.define("tb_politica", {
         allowNull: true,
         // Cláusulas de exclusión
     },
-    archivo:{
-        type:DataTypes.STRING,
-        allowNull:false
+    archivo: {
+        type: DataTypes.STRING,
+        allowNull: false
     },
-    fecha:{
-        type:DataTypes.DATE,
-        allowNull:false
+    fecha: {
+        type: DataTypes.DATE,
+        allowNull: false
     },
-    cantidad:{
-        type:DataTypes.INTEGER,
-        allowNull:false
+    cantidad: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 });
-  
-  export default Politica;
+
+export default Politica;

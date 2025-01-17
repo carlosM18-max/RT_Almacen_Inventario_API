@@ -1,17 +1,17 @@
+import Almacenes from "./tb_Almacenes.js";
 import Areas from "./tb_Areas.js";
-import Articulos from "./tb_articulos.js";
+import Articulos from "./tb_Articulos.js";
+import Bajas from "./tb_Bajas.js";
 import Cargas from "./tb_Cargas.js";
-import Bajas from "./tb_bajas.js";
-import Compras from "./tb_compras.js";
+import Compras from "./tb_Compras.js";
 import Departamentos from "./tb_Departamentos.js";
-import Entregas from "./tb_entregas.js";
+import Entregas from "./tb_Entregas.js";
 import Facturas from "./tb_Facturas.js";
-import ObjetoDeGasto from "./tb_objeto_gasto.js";
+import ObjetoDeGasto from "./tb_ObjetoGasto.js";
 import Politica from "./tb_Politicas.js";
-import Solicitudes from "./tb_solicitudes.js";
-import Usuarios from "./tb_usuarios.js";
-import VidaUtil from "./tb_vida_util.js";
-import Almacenes from "./tb_almacenes.js";
+import Solicitudes from "./tb_Solicitudes.js";
+import Usuarios from "./tb_Usuarios.js";
+import VidaUtil from "./tb_VidaUtil.js";
 
 export const relaciones = () => {
   // RELACIÓN CON DE ARTÍCULOS
@@ -26,17 +26,17 @@ export const relaciones = () => {
 
   // Referencias de Baja
   Bajas.belongsTo(Usuarios, { foreignKey: "id_confirmacion", as: "usuarioConfirmacion" });
-  Usuarios.belongsTo(Casualtys, { foreignKey: "id", as: "usuarioConfirmacionBaja" });
+  Usuarios.belongsTo(Bajas, { foreignKey: "id", as: "usuarioConfirmacionBaja" });
 
   Bajas.belongsTo(Usuarios, { foreignKey: "id_solicitud_retiro", as: "usuarioSolicitudRetiro" });
-  Usuarios.belongsTo(Casualtys, { foreignKey: "id", as: "usuarioSolicitudRetiroBaja" });
+  Usuarios.belongsTo(Bajas, { foreignKey: "id", as: "usuarioSolicitudRetiroBaja" });
 
   Bajas.belongsTo(Articulos, { foreignKey: "id_articulos", as: "bajaArticulo" });
-  Articulos.belongsTo(Casualtys, { foreignKey: "id", as: "articuloBaja" });
+  Articulos.belongsTo(Bajas, { foreignKey: "id", as: "articuloBaja" });
 
   // SE REFERENCIA A ALMACEN POR QUE AHORA TIENE INVENTARIOS
   Bajas.belongsTo(Areas, { foreignKey: "id_inventario", as: "bajaInventario" });
-  Areas.belongsTo(Casualtys, { foreignKey: "id", as: "inventarioBaja" });
+  Areas.belongsTo(Bajas, { foreignKey: "id", as: "inventarioBaja" });
 
   // Referencias de Entregas
   Entregas.belongsTo(Areas, { foreignKey: "id_almacen", as: "entregaAlmacen" });

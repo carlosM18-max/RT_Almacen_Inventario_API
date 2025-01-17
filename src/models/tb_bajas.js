@@ -1,15 +1,14 @@
 import { DataTypes } from "sequelize";
-import db from "../config/db";
+import db from "../config/db.js";
 
-const Bajas = db.define("tb_bajas", {
-
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    tipo: {
-    type: DataTypes.ENUM("prestamo", "descompuesto", "descontinuación"), // "perdida","obsolescencia","devolución","destrucción","incautación",
+const Bajas = db.define("tb_Bajas", {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  tipo: {
+     type: DataTypes.ENUM("prestamo", "descompuesto", "descontinuación"), // "perdida","obsolescencia","devolución","destrucción","incautación",
     //"caducidad",
     //"retiro",
     allowNull: true,
@@ -37,7 +36,7 @@ const Bajas = db.define("tb_bajas", {
 
     // Alta/Baja
   },
-  archivo:{
+  archivo: {
     type: DataTypes.STRING,
     allowNull: false,
     // Archivo
@@ -62,14 +61,14 @@ const Bajas = db.define("tb_bajas", {
     allowNull: true,
     // ID del inventario
   },
-  id_usuario:{
+  id_usuario: {
     type: DataTypes.INTEGER,
     allowNull: false,
     // ID del usuario
   }
 }, {
   timestamps: true, // Agrega campos createdAt y updatedAt
-  
+
 });
 
 export default Bajas;

@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
-import db from "../config/db";
+import db from "../config/db.js";
 
-const factura = db.define("tb_facturas", {
+const Facturas = db.define("tb_Facturas", {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -77,7 +77,7 @@ const factura = db.define("tb_facturas", {
         allowNull: true,
         // Dirección del proveedor
     },
-    archivo_sat:{
+    archivo_sat: {
         type: DataTypes.STRING,
         allowNull: false,
         // Archivo (PDF) del SAT
@@ -86,4 +86,4 @@ const factura = db.define("tb_facturas", {
     timestamps: true,
 });
 
-export default factura;
+export default Facturas;
