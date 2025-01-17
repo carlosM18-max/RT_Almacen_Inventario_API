@@ -13,7 +13,7 @@ const Facturas = db.define("tb_Facturas", {
         // Número de factura
     },
     tipo_compra: {
-        type: DataTypes.ENUM("Adjudicación", "Licitacion", "Invitacion a 3", "Donación", "Convenio"),
+        type: DataTypes.ENUM("Adjudicación", "Licitacion", "Donación", "Convenio", "Intercambio"),
         allowNull: false,
         // Tipo de compra
     },

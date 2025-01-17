@@ -2,14 +2,15 @@ import { DataTypes } from "sequelize";
 import db from "../config/db.js";
 
 const Bajas = db.define("tb_Bajas", {
-
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
   tipo: {
-    type: DataTypes.ENUM("prestamo", "descompuesto", "descontinuación"),
+     type: DataTypes.ENUM("prestamo", "descompuesto", "descontinuación"), // "perdida","obsolescencia","devolución","destrucción","incautación",
+    //"caducidad",
+    //"retiro",
     allowNull: true,
     // Tipo (préstamo, descompuesto, descontinuación)
   },
@@ -24,7 +25,7 @@ const Bajas = db.define("tb_Bajas", {
     // Razón
   },
   estado: {
-    type: DataTypes.ENUM("Revisión", "Aceptada", "Rechazada"),
+    type: DataTypes.ENUM("Revisión","Aceptada","Rechazada", "Archivado"), // //"Archivado","En validación"
     allowNull: false,
     // Estado
   },

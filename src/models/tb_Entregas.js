@@ -23,7 +23,7 @@ const Entregas = db.define("tb_Entregas", {
     // Descripción
   },
   estado: {
-    type: DataTypes.ENUM("proceso", "entregado", "cancelado", "en inventario", "bajo resguardo"),
+    type: DataTypes.ENUM("proceso", "entregado", "cancelado", "pendiente de envío", "bajo resguardo", "no entregado", "devuelto"),
     allowNull: false,
     // Estado
   },

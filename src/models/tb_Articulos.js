@@ -36,7 +36,7 @@ const Articulos = db.define(
       // número de serie
     },
     estado: {
-      type: DataTypes.ENUM("reparacion", "en uso", "baja", "descompuesto"),
+      type: DataTypes.ENUM("reparacion", "en uso", "baja", "descompuesto", "perdido","no disponible" ), // mas reparacion", "disponible", "en espera", "perdido 
       allowNull: false,
       // estado
     },
