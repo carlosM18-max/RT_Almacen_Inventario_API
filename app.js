@@ -3,13 +3,18 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-// Configuracion de la conexion
+// Configuración de la conexión
 import db from './src/config/db.js';
 import { getDbState, setDbState, resetDbState } from './src/config/db.State.js';
-// Importacion de las rutas
+// Importación de las rutas
 import areasRoutes from './src/routes/areasRoutes.js';
 import almacenRouter from './src/routes/almacenesRoutes.js';
-// Relacion (FK)
+// Importacion de archvios de descargas y cargas
+import uploadRouter from './src/routes/uploadFilesRoutes.js';
+import uploadUserRouter from './src/routes/userFilesRoutes.js'
+import uploadDeliveriesRouter from './src/routes/deliveriesFilesRoutes.js'
+
+// Relación (FK)
 import { relaciones } from './src/models/relacion_tablas.js';
 
 dotenv.config();
@@ -34,7 +39,7 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: ['./src/routes/*.js'], // Ruta a los archivos que contienen las definiciones de las rutas
+  apis: ['./src/routes/*.js'], // Asegúrate de que la ruta incluya todos los archivos de rutas
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
@@ -43,6 +48,13 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Rutas
 app.use('/api/areas', areasRoutes);
 app.use('/api/almacenes', almacenRouter);
+// Rutas de descargas y cargas
+app.use('/api/upload', uploadRouter);
+app.use('/api/upload-files', uploadRouter);
+app.use('/api/users-upload', uploadUserRouter); 
+app.use('/api/users-files', uploadUserRouter); 
+app.use('/api/deliveries-upload', uploadDeliveriesRouter);
+app.use('/api/deliveries-files', uploadDeliveriesRouter);
 
 // Mensaje que se mostrará al inicio
 app.get("/", (req, res) => {
@@ -58,7 +70,7 @@ const initializeDatabase = async (force = false) => {
 
   if (!dbState.initialized || force) {
     console.log('------> Inicializando la base de datos');
-    
+
     // Sincronizar los modelos
     await db.sync({ force: true });
     console.log('------> Modelos sincronizados con la base de datos');
