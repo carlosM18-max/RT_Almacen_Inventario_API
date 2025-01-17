@@ -10,7 +10,7 @@ const Almacenes = db.define(
         autoIncrement: true,
     },
         tipo_adquisicion: {
-        type: DataTypes.ENUM("Donación", "Compra", "intercambio", "producción propia", "adjudicación" ),
+        type: DataTypes.ENUM("Donación", "Compra", "intercambio", "producción propia", "adjudicación","RTH" ),
 
         allowNull: false,
         // Tipo de alta (donación, compra, como dato)
