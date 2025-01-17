@@ -13,7 +13,7 @@ const Facturas = db.define("tb_Facturas", {
         // Número de factura
     },
     tipo_compra: {
-        type: DataTypes.ENUM("Adjudicación", "Licitacion", "Donación", "Convenio", "Intercambio"),
+        type: DataTypes.ENUM("Adjudicacion", "Licitacion", "Donacion", "Convenio", "Intercambio"),
         allowNull: false,
         // Tipo de compra
     },
@@ -62,7 +62,7 @@ const Facturas = db.define("tb_Facturas", {
         allowNull: false,
         // Total
     },
-    teléfono_proveedor: {
+    telefono_proveedor: {
         type: DataTypes.STRING(10),
         allowNull: false,
         // Teléfono del proveedor
@@ -72,7 +72,7 @@ const Facturas = db.define("tb_Facturas", {
         allowNull: false,
         // RFC del proveedor
     },
-    dirección_proveedor: {
+    direccion_proveedor: {
         type: DataTypes.STRING,
         allowNull: true,
         // Dirección del proveedor

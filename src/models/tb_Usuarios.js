@@ -17,7 +17,7 @@ const Usuarios = db.define("tb_Usuarios", {
     allowNull: false,
   },
   tipo: {
-    type: DataTypes.ENUM("admin, usuario, TICS"), // Admin, 
+    type: DataTypes.ENUM("Admin, Usuario, TICS"), // Admin, 
     allowNull: false
   },
   nombre: {

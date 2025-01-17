@@ -37,6 +37,7 @@ const swaggerOptions = {
   apis: ['./src/routes/*.js'], // Ruta a los archivos que contienen las definiciones de las rutas
 };
 
+// Ruta del API
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
@@ -84,7 +85,7 @@ const startServer = async () => {
   try {
     // Conexión a la base de datos
     await db.authenticate();
-    console.log('------> Servidor de datos autenticado');
+    console.log('------> COnexion a la base de datos autenticado');
 
     // Inicializar la base de datos
     // Cambia el parámetro a true si quieres forzar la reinicialización
