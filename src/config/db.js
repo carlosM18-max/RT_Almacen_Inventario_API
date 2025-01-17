@@ -7,19 +7,16 @@ const db = new Sequelize({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
-    logging: true,
+    logging: false,
     timezone: process.env.DB_TIMEZONE,
     username: process.env.DB_USERNAME,
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
     dialectOptions: {
         charset: 'utf8mb4',
-        collate: 'utf8mb4_unicode_ci',
     },
     define: {
-        engine: 'InnoDB',
         charset: 'utf8mb4',
-        collate: 'utf8mb4_unicode_ci',
         timestamps: true
     },
     pool: {
