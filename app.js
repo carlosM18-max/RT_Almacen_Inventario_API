@@ -9,6 +9,9 @@ import { getDbState, setDbState, resetDbState } from './src/config/db.State.js';
 // Importación de las rutas
 import areasRoutes from './src/routes/areasRoutes.js';
 import almacenRouter from './src/routes/almacenesRoutes.js';
+import facturasRouter from './src/routes/facturasRoutes.js';
+import politicasRouter from './src/routes/politicasRoutes.js';
+import { getAllData } from './src/controllers/politicasController.js';
 // Importacion de archvios de descargas y cargas
 import uploadRouter from './src/routes/uploadFilesRoutes.js';
 import uploadUserRouter from './src/routes/userFilesRoutes.js'
@@ -48,6 +51,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Rutas
 app.use('/api/areas', areasRoutes);
 app.use('/api/almacenes', almacenRouter);
+app.use('/api/facturas', facturasRouter);
+app.use('/api/politicas', politicasRouter);
+app.use('/api/all-data', getAllData);
 // Rutas de descargas y cargas
 app.use('/api/upload', uploadRouter);
 app.use('/api/upload-files', uploadRouter);
