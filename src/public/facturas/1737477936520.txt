@@ -1,0 +1,120 @@
+import 'package:flutter/material.dart';
+
+class CounterFunctionsScreen extends StatefulWidget {
+  const CounterFunctionsScreen({super.key});
+
+  @override
+  State<CounterFunctionsScreen> createState() => _CounterFunctionsScreenState();
+}
+
+class _CounterFunctionsScreenState extends State<CounterFunctionsScreen> {
+  int clickCounter = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Counter Functions - 210496',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: 'ArialRoundedMTBold'
+            ),
+          ),
+          // Boton de reinicio superior
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.refresh_rounded),
+              onPressed: () {
+                setState(() {
+                  clickCounter = 0;
+                });
+              },
+            )
+          ],
+        ),
+        // Estilos del body
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '$clickCounter',
+                style: TextStyle(
+                  fontSize: 48,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'ArialRoundedMTBold',
+                  color: clickCounter > 0
+                      ? Colors.green[600]
+                      : (clickCounter < 0 ? Colors.red[600] : Colors.black),
+                ),
+              ),
+              Text(
+                clickCounter == 1 || clickCounter == -1 ? 'Click' : 'Clicks',
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontFamily: 'ArialRoundedMTBold',
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            // Boton de reinicio de numeros
+            CustomButton(
+              icon: Icons.refresh_rounded,
+              color: Colors.yellow[100],
+              onPressed: () {
+                setState(() {
+                  clickCounter = 0;
+                });
+              },
+            ),
+            const SizedBox(height: 10),
+            CustomButton(
+              // Boton de suma de numeros
+              icon: Icons.plus_one,
+              color: Colors.green[600],
+              onPressed: () {
+                setState(() {
+                  clickCounter++;
+                });
+              },
+            ),
+            const SizedBox(height: 10),
+            CustomButton(
+              // Boton de resta de numeros
+              icon: Icons.exposure_minus_1_outlined,
+              color: Colors.red[600],
+              onPressed: () {
+                setState(() {
+                  clickCounter--;
+                });
+              },
+            ),
+          ],
+        ));
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  final IconData icon;
+  final Color? color;
+  final VoidCallback? onPressed;
+
+  const CustomButton({super.key, required this.icon, this.onPressed, this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      enableFeedback: true,
+      elevation: 5,
+      backgroundColor: color,
+      onPressed: onPressed,
+      child: Icon(icon),
+    );
+  }
+}

@@ -31,6 +31,31 @@ const storageUser = multer.diskStorage({
     },
 });
 
+// Configuración de almacenamiento para archivos de almacen 
+const storageAlmacen = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, "../public/users/almacen/"));
+    },
+    filename: function (req, file, cb) {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    },
+});
+
+// Configuración de multer para archivos de almacen 
+const uploadAlmacen = multer({ storage: storageAlmacen });
+
+// Configuración de almacenamiento para archivos de inventario 
+const storageInventario = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, "../public/users/inventario/"));
+    }, filename: function (req, file, cb) {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    },
+});
+
+// Configuración de multer para archivos de inventario 
+const uploadInventario = multer({ storage: storageInventario });
+
 // Configuración de multer para archivos de usuarios
 const uploadUser = multer({ storage: storageUser });
 
@@ -38,7 +63,7 @@ const uploadUser = multer({ storage: storageUser });
 const storagePolicy = multer.diskStorage({
     // Define el destino de los archivos de políticas subidos
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, "../public/politicas/"));
+        cb(null, path.join(__dirname, "../public/polizas/"));
     },
     // Define el nombre del archivo de políticas subido
     filename: function (req, file, cb) {
@@ -64,17 +89,20 @@ const storageBills = multer.diskStorage({
 // Configuración de multer para archivos de facturas
 const uploadBills = multer({ storage: storageBills });
 
+// Configuracion de almacenamiento para archivos de solicitudes
 const storageRequest = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, "../public/soliictudes/"));
+        cb(null, path.join(__dirname, "../public/solicitudes/"));
     },
     filename: function (req, file, cb) {
         cb(null, `${Date.now()}-${file.originalname}`);
     },
 });
 
+// Configuracion de multer para archivos de solicitudes
 const uploadRequest = multer({ storage: storageRequest });
 
+// Congiuracion de almacenamiento para archivos de propuestas de requisiciones
 const storageRequisition_proposal = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "../public/propuestaRequisicion/"));
@@ -84,11 +112,12 @@ const storageRequisition_proposal = multer.diskStorage({
     },
 });
 
+// Configuracion de multer para archivos de propuestas de requisiciones
 const uploadRequisition_proposal = multer({
     storage: storageRequisition_proposal,
 });
 
 // Exporta los middlewares de multer configurados
 export {
-    upload, uploadUser, uploadBills, uploadPolicy, uploadRequest, uploadRequisition_proposal
+    upload, uploadUser, uploadBills, uploadPolicy, uploadRequest, uploadRequisition_proposal, uploadAlmacen, uploadInventario
 };
