@@ -4,16 +4,16 @@ import {
   getAllPoliticas,
   getPoliticaById,
   getAllData,
-} from "../controllers/politicasController.js"
+} from "../controllers/polizasController.js"
 
 const router = Router()
 
 /**
  * @swagger
- * /api/politicas:
+ * /api/polizas:
  *   post:
  *     summary: Crea una nueva póliza
- *     tags: [Politicas]
+ *     tags: [Polizas]
  *     requestBody:
  *       required: true
  *       content:
@@ -59,10 +59,10 @@ router.post("/", createPolitica)
 
 /**
  * @swagger
- * /api/politicas:
+ * /api/polizas:
  *   get:
  *     summary: Devuelve la lista de todas las pólizas
- *     tags: [Politicas]
+ *     tags: [Polizas]
  *     responses:
  *       200:
  *         description: La lista de pólizas
@@ -77,10 +77,10 @@ router.get("/", getAllPoliticas)
 
 /**
  * @swagger
- * /api/politicas/{id}:
+ * /api/polizas/{id}:
  *   get:
  *     summary: Obtiene una póliza por su ID
- *     tags: [Politicas]
+ *     tags: [Polizas]
  *     parameters:
  *       - in: path
  *         name: id
@@ -114,7 +114,7 @@ router.get("/:id", getPoliticaById)
  *             schema:
  *               type: object
  *               properties:
- *                 politicas:
+ *                 Polizas:
  *                   type: array
  *                   items:
  *                     $ref: '#/components/schemas/Politica'

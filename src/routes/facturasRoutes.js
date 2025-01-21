@@ -1,13 +1,13 @@
-import { Router } from "express"
+import { Router } from "express";
 import {
   getAllFacturas,
   getFacturaById,
   createFactura,
   updateFactura,
   deleteFactura,
-} from "../controllers/facturasController.js"
+} from "../controllers/facturasController.js";
 
-const router = Router()
+const router = Router();
 
 /**
  * @swagger
@@ -23,12 +23,13 @@ const router = Router()
  *       properties:
  *         id:
  *           type: integer
- *           description: El ID autogenerado de la factura
+ *           description: El ID auto-generado de la factura
  *         numero_de_factura:
  *           type: string
  *           description: El número de la factura
  *         tipo_compra:
  *           type: string
+ *           enum: [Adjudicacion, Licitacion, Donacion, Convenio, Intercambio]
  *           description: El tipo de compra
  *         concepto:
  *           type: string
@@ -64,47 +65,14 @@ const router = Router()
  *         direccion_proveedor:
  *           type: string
  *           description: La dirección del proveedor
- *     Politica:
- *       type: object
- *       required:
- *         - descripcion
- *         - cobertura
- *         - tipo
- *       properties:
- *         id:
- *           type: integer
- *           description: El ID autogenerado de la póliza
- *         descripcion:
+ *         archivo_pdf:
  *           type: string
- *           description: La descripción de la póliza
- *         cobertura:
+ *           format: binary
+ *           description: El archivo PDF de la factura
+ *         archivo_sat:
  *           type: string
- *           description: La cobertura de la póliza
- *         tipo:
- *           type: string
- *           description: El tipo de póliza
- *         prima:
- *           type: number
- *           description: La prima de la póliza
- *         deducible:
- *           type: number
- *           description: El deducible de la póliza
- *         limites_indemnizacion:
- *           type: string
- *           description: Los límites de indemnización
- *         periodo_vigencia:
- *           type: string
- *           description: El período de vigencia
- *         clausulas_exclusion:
- *           type: string
- *           description: Las cláusulas de exclusión
- *         fecha:
- *           type: string
- *           format: date
- *           description: La fecha de la póliza
- *         cantidad:
- *           type: number
- *           description: La cantidad
+ *           format: binary
+ *           description: El archivo SAT de la factura
  */
 
 /**
@@ -123,7 +91,7 @@ const router = Router()
  *               items:
  *                 $ref: '#/components/schemas/Factura'
  */
-router.get("/", getAllFacturas)
+router.get("/", getAllFacturas);
 
 /**
  * @swagger
@@ -148,7 +116,7 @@ router.get("/", getAllFacturas)
  *       404:
  *         description: No se encontró la factura
  */
-router.get("/:id", getFacturaById)
+router.get("/:id", getFacturaById);
 
 /**
  * @swagger
@@ -167,6 +135,7 @@ router.get("/:id", getFacturaById)
  *                 type: string
  *               tipo_compra:
  *                 type: string
+ *                 enum: [Adjudicacion, Licitacion, Donacion, Convenio, Intercambio]
  *               concepto:
  *                 type: string
  *               iva:
@@ -206,40 +175,75 @@ router.get("/:id", getFacturaById)
  *       500:
  *         description: Algún error del servidor
  */
-router.post("/", createFactura)
+router.post("/", createFactura);
 
 /**
  * @swagger
  * /api/facturas/{id}:
- *  put:
- *    summary: Actualiza la factura por su ID
- *    tags: [Facturas]
- *    parameters:
- *      - in: path
- *        name: id
- *        schema:
- *          type: integer
- *        required: true
- *        description: El ID de la factura
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            $ref: '#/components/schemas/Factura'
- *    responses:
- *      200:
- *        description: La factura fue actualizada
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/Factura'
- *      404:
- *        description: No se encontró la factura
- *      500:
- *        description: Ocurrió algún error
+ *   put:
+ *     summary: Actualiza la factura por su ID
+ *     tags: [Facturas]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: El ID de la factura
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               numero_de_factura:
+ *                 type: string
+ *               tipo_compra:
+ *                 type: string
+ *                 enum: [Adjudicacion, Licitacion, Donacion, Convenio, Intercambio]
+ *               concepto:
+ *                 type: string
+ *               iva:
+ *                 type: number
+ *               fecha_factura:
+ *                 type: string
+ *                 format: date
+ *               nombre_proveedor:
+ *                 type: string
+ *               cantidad:
+ *                 type: number
+ *               precio_unitario:
+ *                 type: number
+ *               sub_total:
+ *                 type: number
+ *               total:
+ *                 type: number
+ *               telefono_proveedor:
+ *                 type: string
+ *               RFC_proveedor:
+ *                 type: string
+ *               direccion_proveedor:
+ *                 type: string
+ *               archivo_pdf:
+ *                 type: string
+ *                 format: binary
+ *               archivo_sat:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: La factura fue actualizada
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Factura'
+ *       404:
+ *         description: No se encontró la factura
+ *       500:
+ *         description: Ocurrió algún error
  */
-router.put("/:id", updateFactura)
+router.put("/:id", updateFactura);
 
 /**
  * @swagger
@@ -260,6 +264,6 @@ router.put("/:id", updateFactura)
  *       404:
  *         description: No se encontró la factura
  */
-router.delete("/:id", deleteFactura)
+router.delete("/:id", deleteFactura);
 
-export default router
+export default router;

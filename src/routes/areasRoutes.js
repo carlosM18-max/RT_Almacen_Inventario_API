@@ -1,5 +1,5 @@
-import express from 'express';
-import { getAllAreas, getAreaById, createArea, updateArea, deleteArea } from '../controllers/areasController.js';
+import express from "express";
+import { getAllAreas, getAreaById, createArea, updateArea, deleteArea } from "../controllers/areasController.js";
 
 const router = express.Router();
 
@@ -43,7 +43,7 @@ const router = express.Router();
  *               items:
  *                 $ref: '#/components/schemas/Area'
  */
-router.get('/', getAllAreas);
+router.get("/", getAllAreas);
 
 /**
  * @swagger
@@ -68,7 +68,7 @@ router.get('/', getAllAreas);
  *       404:
  *         description: Área no encontrada
  */
-router.get('/:id', getAreaById);
+router.get("/:id", getAreaById);
 
 /**
  * @swagger
@@ -79,9 +79,16 @@ router.get('/:id', getAreaById);
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
- *             $ref: '#/components/schemas/Area'
+ *             type: object
+ *             properties:
+ *               nombre:
+ *                 type: string
+ *               estado:
+ *                 type: boolean
+ *               abreviatura:
+ *                 type: string
  *     responses:
  *       201:
  *         description: Área creada exitosamente
@@ -90,7 +97,7 @@ router.get('/:id', getAreaById);
  *             schema:
  *               $ref: '#/components/schemas/Area'
  */
-router.post('/', createArea);
+router.post("/", createArea);
 
 /**
  * @swagger
@@ -108,9 +115,16 @@ router.post('/', createArea);
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
- *             $ref: '#/components/schemas/Area'
+ *             type: object
+ *             properties:
+ *               nombre:
+ *                 type: string
+ *               estado:
+ *                 type: boolean
+ *               abreviatura:
+ *                 type: string
  *     responses:
  *       200:
  *         description: Área actualizada exitosamente
@@ -121,7 +135,7 @@ router.post('/', createArea);
  *       404:
  *         description: Área no encontrada
  */
-router.put('/:id', updateArea);
+router.put("/:id", updateArea);
 
 /**
  * @swagger
@@ -142,6 +156,6 @@ router.put('/:id', updateArea);
  *       404:
  *         description: Área no encontrada
  */
-router.delete('/:id', deleteArea);
+router.delete("/:id", deleteArea);
 
 export default router;
