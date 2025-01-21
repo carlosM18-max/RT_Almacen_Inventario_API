@@ -10,6 +10,8 @@ import { getDbState, setDbState, resetDbState } from './src/config/db.State.js';
 import areasRoutes from './src/routes/areasRoutes.js';
 import almacenRouter from './src/routes/almacenesRoutes.js';
 import articulosRouter from './src/routes/articulosRoutes.js';
+import bajasRouter from './src/routes/bajasRoutes.js';
+import cargasRouter from './src/routes/cargasRoutes.js';
 import facturasRouter from './src/routes/facturasRoutes.js';
 import polizasRouter from './src/routes/polizasRoutes.js';
 import { getAllData } from './src/controllers/polizasController.js';
@@ -50,12 +52,14 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Rutas
-app.use('/api/areas', areasRoutes);
 app.use('/api/almacenes', almacenRouter);
+app.use('/api/areas', areasRoutes);
+app.use('/api/articulos', articulosRouter);
+app.use('/api/bajas', bajasRouter);
+app.use('/api/cargas', cargasRouter);
 app.use('/api/facturas', facturasRouter);
 app.use('/api/polizas', polizasRouter);
 app.use('/api/all-data', getAllData);
-app.use('/api/articulos', articulosRouter);
 // Rutas de descargas y cargas
 app.use('/api/upload', uploadRouter);
 app.use('/api/upload-files', uploadRouter);
