@@ -65,8 +65,8 @@ app.use('/api/all-data', getAllData);
 // Rutas de descargas y cargas
 app.use('/api/upload', uploadRouter);
 app.use('/api/upload-files', uploadRouter);
-app.use('/api/users-upload', uploadUserRouter); 
-app.use('/api/users-files', uploadUserRouter); 
+app.use('/api/users-upload', uploadUserRouter);
+app.use('/api/users-files', uploadUserRouter);
 app.use('/api/deliveries-upload', uploadDeliveriesRouter);
 app.use('/api/deliveries-files', uploadDeliveriesRouter);
 
@@ -91,15 +91,22 @@ const initializeDatabase = async (force = false) => {
 
     // Ejecutar las relaciones de las tablas
     relaciones();
-    console.log("------> Estableciendo Relaciones de las Tablas");
+    console.log("------> Estableciendo relaciones de las tablas, cargando...");
 
     // Volver a sincronizar para aplicar las relaciones
     await db.sync({ alter: true });
-    console.log("------> Relaciones y foreign keys aplicadas a la base de datos");
+    console.log("------> Relaciones y Foreign Keys aplicadas a la base de datos");
 
-    // Marcar la base de datos como inicializada
-    setDbState({ initialized: true, lastInitialized: new Date().toISOString() });
-    console.log("------> Base de datos marcada como inicializada");
+    // Obtener la fecha y hora actual
+    const now = new Date();
+    setDbState({
+      initialized: true,
+      lastInitialized: now.toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })
+    });
+
+
+    // Imprimir mensaje de inicialización con hora actual
+    console.log(`------> Base de datos inicializada a las ${now.toLocaleTimeString()}`);
   } else {
     console.log(`------> Base de datos ya inicializada (última inicialización: ${dbState.lastInitialized})`);
   }
@@ -112,7 +119,6 @@ const startServer = async () => {
     await db.authenticate();
     console.log('------> Servidor de datos autenticado');
 
-    // Inicializar la base de datos
     // Cambia el parámetro a true si quieres forzar la reinicialización
     const forceInit = process.argv.includes('--force-init');
     await initializeDatabase(forceInit);
