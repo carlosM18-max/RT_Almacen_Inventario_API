@@ -1,12 +1,14 @@
-import { Router } from "express"
+import { Router } from "express";
 import {
   createPoliza,
   getAllPoliza,
   getPolizaById,
+  updatePoliza,
+  deletePoliza,
   getAllData,
-} from "../controllers/polizasController.js"
+} from "../controllers/polizasController.js";
 
-const router = Router()
+const router = Router();
 
 /**
  * @swagger
@@ -26,6 +28,7 @@ const router = Router()
  *           description: Tipo de cobertura
  *         tipo:
  *           type: string
+ *           enum: [Egresos, Presupuestales, Donaciones, Cheques, Ingresos, Transferencias, Retenciones, Depositos]
  *           description: Tipo de póliza
  *         prima:
  *           type: number
@@ -38,6 +41,7 @@ const router = Router()
  *           description: Límites de indemnización
  *         periodo_vigencia:
  *           type: string
+ *           format: date
  *           description: Periodo de vigencia de la póliza
  *         clausulas_exclusion:
  *           type: string
@@ -70,6 +74,25 @@ const router = Router()
  *           type: string
  *           description: Descripción de la factura
  */
+
+/**
+ * @swagger
+ * /api/polizas:
+ *   get:
+ *     summary: Devuelve la lista de todas las pólizas
+ *     tags: [Polizas]
+ *     responses:
+ *       200:
+ *         description: La lista de pólizas
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Poliza'
+ */
+router.get("/", getAllPoliza);
+
 /**
  * @swagger
  * /api/polizas:
@@ -89,6 +112,7 @@ const router = Router()
  *                 type: string
  *               tipo:
  *                 type: string
+ *                 enum: [Egresos, Presupuestales, Donaciones, Cheques, Ingresos, Transferencias, Retenciones, Depositos]
  *               prima:
  *                 type: number
  *               deducible:
@@ -97,6 +121,7 @@ const router = Router()
  *                 type: string
  *               periodo_vigencia:
  *                 type: string
+ *                 format: date
  *               clausulas_exclusion:
  *                 type: string
  *               fecha:
@@ -117,25 +142,7 @@ const router = Router()
  *       500:
  *         description: Algún error del servidor
  */
-router.post("/", createPoliza)
-
-/**
- * @swagger
- * /api/polizas:
- *   get:
- *     summary: Devuelve la lista de todas las pólizas
- *     tags: [Polizas]
- *     responses:
- *       200:
- *         description: La lista de pólizas
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Poliza'
- */
-router.get("/", getAllPoliza)
+router.post("/", createPoliza);
 
 /**
  * @swagger
@@ -160,7 +167,86 @@ router.get("/", getAllPoliza)
  *       404:
  *         description: No se encontró la póliza
  */
-router.get("/:id", getPolizaById)
+router.get("/:id", getPolizaById);
+
+/**
+ * @swagger
+ * /api/polizas/{id}:
+ *   put:
+ *     summary: Actualiza una póliza existente
+ *     tags: [Polizas]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID de la póliza
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               descripcion:
+ *                 type: string
+ *               cobertura:
+ *                 type: string
+ *               tipo:
+ *                 type: string
+ *                 enum: [Egresos, Presupuestales, Donaciones, Cheques, Ingresos, Transferencias, Retenciones, Depositos]
+ *               prima:
+ *                 type: number
+ *               deducible:
+ *                 type: number
+ *               limites_indemnizacion:
+ *                 type: string
+ *               periodo_vigencia:
+ *                 type: string
+ *                 format: date
+ *               clausulas_exclusion:
+ *                 type: string
+ *               fecha:
+ *                 type: string
+ *                 format: date
+ *               cantidad:
+ *                 type: number
+ *               archivo:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Póliza actualizada exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Poliza'
+ *       404:
+ *         description: Póliza no encontrada
+ */
+router.put("/:id", updatePoliza);
+
+/**
+ * @swagger
+ * /api/polizas/{id}:
+ *   delete:
+ *     summary: Elimina una póliza
+ *     tags: [Polizas]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID de la póliza
+ *     responses:
+ *       200:
+ *         description: Póliza eliminada exitosamente
+ *       404:
+ *         description: Póliza no encontrada
+ */
+router.delete("/:id", deletePoliza);
 
 /**
  * @swagger
@@ -191,6 +277,6 @@ router.get("/:id", getPolizaById)
  *       500:
  *         description: Algún error del servidor
  */
-router.get("/all-data", getAllData)
+router.get("/all-data", getAllData);
 
-export default router
+export default router;
