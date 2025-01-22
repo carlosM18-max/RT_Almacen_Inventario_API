@@ -8,7 +8,7 @@ import Departamentos from "./tb_Departamentos.js";
 import Entregas from "./tb_Entregas.js";
 import Facturas from "./tb_Facturas.js";
 import ObjetoDeGasto from "./tb_ObjetoGasto.js";
-import Politica from "./tb_Politicas.js";
+import Poliza from "./tb_Polizas.js";
 import Solicitudes from "./tb_Solicitudes.js";
 import Usuarios from "./tb_Usuarios.js";
 import VidaUtil from "./tb_VidaUtil.js";
@@ -18,8 +18,8 @@ export const relaciones = () => {
   Articulos.belongsTo(VidaUtil, { foreignKey: "id_de_vida_util", as: "vidaUtil" });
   VidaUtil.belongsTo(Articulos, { foreignKey: "id", as: "articuloVidaUtil" });
 
-  Articulos.belongsTo(Politica, { foreignKey: "id_de_poliza", as: "articuloPoliza" });
-  Politica.belongsTo(Articulos, { foreignKey: "id", as: "polizaArticulo" });
+  Articulos.belongsTo(Poliza, { foreignKey: "id_de_poliza", as: "articuloPoliza" });
+  Poliza.belongsTo(Articulos, { foreignKey: "id", as: "polizaArticulo" });
 
   Articulos.belongsTo(Facturas, { foreignKey: "id_de_la_factura", as: "articuloFactura" });
   Facturas.belongsTo(Articulos, { foreignKey: "id", as: "facturaArticulo" });
@@ -91,8 +91,8 @@ export const relaciones = () => {
   Almacenes.belongsTo(Facturas, { foreignKey: "id_factura", as: "almacenFactura" });
   Facturas.belongsTo(Almacenes, { foreignKey: "id", as: "facturaAlmacen" });
 
-  Almacenes.belongsTo(Politica, { foreignKey: "id_poliza", as: "almacenPoliza" });
-  Politica.belongsTo(Almacenes, { foreignKey: "id", as: "polizaAlmacen" });
+  Almacenes.belongsTo(Poliza, { foreignKey: "id_poliza", as: "almacenPoliza" });
+  Poliza.belongsTo(Almacenes, { foreignKey: "id", as: "polizaAlmacen" });
 
   //REFERENCIAS DE VIDA UTIL
   VidaUtil.belongsTo(ObjetoDeGasto, { foreignKey: "id_partida", as: "vidaUtilObjetoGasto" });
