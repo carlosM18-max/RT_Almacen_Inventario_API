@@ -12,6 +12,7 @@ import almacenRouter from './src/routes/almacenesRoutes.js';
 import articulosRouter from './src/routes/articulosRoutes.js';
 import bajasRouter from './src/routes/bajasRoutes.js';
 import cargasRouter from './src/routes/cargasRoutes.js';
+import entregasRouter from './src/routes/entregasRoutes.js';
 import facturasRouter from './src/routes/facturasRoutes.js';
 import polizasRouter from './src/routes/polizasRoutes.js';
 import { getAllData } from './src/controllers/polizasController.js';
@@ -57,6 +58,7 @@ app.use('/api/areas', areasRoutes);
 app.use('/api/articulos', articulosRouter);
 app.use('/api/bajas', bajasRouter);
 app.use('/api/cargas', cargasRouter);
+app.use('/api/entregas', entregasRouter);
 app.use('/api/facturas', facturasRouter);
 app.use('/api/polizas', polizasRouter);
 app.use('/api/all-data', getAllData);
@@ -89,7 +91,7 @@ const initializeDatabase = async (force = false) => {
 
     // Ejecutar las relaciones de las tablas
     relaciones();
-    console.log("------> Relaciones definidas correctamente");
+    console.log("------> Estableciendo Relaciones de las Tablas");
 
     // Volver a sincronizar para aplicar las relaciones
     await db.sync({ alter: true });
