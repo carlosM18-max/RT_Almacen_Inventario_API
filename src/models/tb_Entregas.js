@@ -7,7 +7,7 @@ const Entregas = db.define("tb_Entregas", {
     primaryKey: true,
     autoIncrement: true,
   },
-  canticad: {
+  cantidad: {
     type: DataTypes.INTEGER,
     allowNull: false,
     // Cantidad
