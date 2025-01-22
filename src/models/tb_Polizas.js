@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db.js";
 
-const Politica = db.define("tb_Politica", {
+const Poliza = db.define("tb_Polizas", {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -39,7 +39,7 @@ const Politica = db.define("tb_Politica", {
     },
     periodo_vigencia: {
         type: DataTypes.DATE,
-        allowNull: true,
+        allowNull: false
         // Periodo de vigencia
     },
     clausulas_exclusion: {
@@ -61,4 +61,4 @@ const Politica = db.define("tb_Politica", {
     }
 });
 
-export default Politica;
+export default Poliza;

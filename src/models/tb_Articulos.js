@@ -24,7 +24,7 @@ const Articulos = db.define("tb_Articulos", {
     // modelo
   },
   fecha_de_adquisicion: {
-    type: DataTypes.STRING,
+    type: DataTypes.DATE,
     allowNull: true,
     // fecha de adquisición
   },

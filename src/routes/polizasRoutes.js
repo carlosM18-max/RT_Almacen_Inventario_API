@@ -1,13 +1,75 @@
 import { Router } from "express"
 import {
-  createPolitica,
-  getAllPoliticas,
-  getPoliticaById,
+  createPoliza,
+  getAllPoliza,
+  getPolizaById,
   getAllData,
 } from "../controllers/polizasController.js"
 
 const router = Router()
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Poliza:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           description: ID único de la póliza
+ *         descripcion:
+ *           type: string
+ *           description: Descripción de la póliza
+ *         cobertura:
+ *           type: string
+ *           description: Tipo de cobertura
+ *         tipo:
+ *           type: string
+ *           description: Tipo de póliza
+ *         prima:
+ *           type: number
+ *           description: Prima de la póliza
+ *         deducible:
+ *           type: number
+ *           description: Deducible de la póliza
+ *         limites_indemnizacion:
+ *           type: string
+ *           description: Límites de indemnización
+ *         periodo_vigencia:
+ *           type: string
+ *           description: Periodo de vigencia de la póliza
+ *         clausulas_exclusion:
+ *           type: string
+ *           description: Cláusulas de exclusión
+ *         fecha:
+ *           type: string
+ *           format: date
+ *           description: Fecha de emisión de la póliza
+ *         cantidad:
+ *           type: number
+ *           description: Cantidad asociada a la póliza
+ *         archivo:
+ *           type: string
+ *           format: binary
+ *           description: Archivo adjunto de la póliza
+ *     Factura:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           description: ID único de la factura
+ *         fecha:
+ *           type: string
+ *           format: date
+ *           description: Fecha de la factura
+ *         monto:
+ *           type: number
+ *           description: Monto total de la factura
+ *         descripcion:
+ *           type: string
+ *           description: Descripción de la factura
+ */
 /**
  * @swagger
  * /api/polizas:
@@ -51,11 +113,11 @@ const router = Router()
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Politica'
+ *               $ref: '#/components/schemas/Poliza'
  *       500:
  *         description: Algún error del servidor
  */
-router.post("/", createPolitica)
+router.post("/", createPoliza)
 
 /**
  * @swagger
@@ -71,9 +133,9 @@ router.post("/", createPolitica)
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Politica'
+ *                 $ref: '#/components/schemas/Poliza'
  */
-router.get("/", getAllPoliticas)
+router.get("/", getAllPoliza)
 
 /**
  * @swagger
@@ -94,11 +156,11 @@ router.get("/", getAllPoliticas)
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Politica'
+ *               $ref: '#/components/schemas/Poliza'
  *       404:
  *         description: No se encontró la póliza
  */
-router.get("/:id", getPoliticaById)
+router.get("/:id", getPolizaById)
 
 /**
  * @swagger
@@ -117,7 +179,7 @@ router.get("/:id", getPoliticaById)
  *                 Polizas:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Politica'
+ *                     $ref: '#/components/schemas/Poliza'
  *                 facturas:
  *                   type: array
  *                   items:
