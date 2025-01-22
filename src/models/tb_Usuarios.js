@@ -65,7 +65,7 @@ const Usuarios = db.define("tb_Usuarios", {
     type: DataTypes.STRING,
     allowNull: false,
     defaultValue: 'RADIO Y TELEVISION'
-    // Área presupuestal (RADIO Y TELEVISION)
+    // Unidad presupuestal (RADIO Y TELEVISION)
   },
   organo_superior: {
     type: DataTypes.STRING,
