@@ -17,7 +17,7 @@ export const getDbState = () => {
 };
 
 export const setDbState = (state) => {
-  fs.writeFileSync(DB_STATE_FILE, JSON.stringify(state, null, 2));
+  fs.writeFileSync(DB_STATE_FILE, JSON.stringify(state, null, 2), 'utf8');
 };
 
 export const resetDbState = () => {
