@@ -1,7 +1,13 @@
-import express from "express";
-import { getAllAreas, getAreaById, createArea, updateArea, deleteArea } from "../controllers/areasController.js";
+import { Router } from "express";
+import {
+  getAllAreas,
+  getAreaById,
+  createArea,
+  updateArea,
+  deleteArea,
+} from "../controllers/areasController.js";
 
-const router = express.Router();
+const router = Router();
 
 /**
  * @swagger
@@ -12,6 +18,7 @@ const router = express.Router();
  *       required:
  *         - nombre
  *         - estado
+ *         - abreviatura
  *       properties:
  *         id:
  *           type: integer
@@ -96,6 +103,8 @@ router.get("/:id", getAreaById);
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Area'
+ *       500:
+ *         description: Algún error del servidor
  */
 router.post("/", createArea);
 

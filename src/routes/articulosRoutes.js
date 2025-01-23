@@ -190,9 +190,41 @@ router.post("/", createArticulo);
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
- *             $ref: '#/components/schemas/Articulo'
+ *             type: object
+ *             properties:
+ *               nombre:
+ *                 type: string
+ *               marca:
+ *                 type: string
+ *               modelo:
+ *                 type: string
+ *               fecha_de_adquisicion:
+ *                 type: string
+ *               numero_de_serie:
+ *                 type: string
+ *               estado:
+ *                 type: string
+ *                 enum: [Reparacion, En uso, Baja, Descompuesto, Perdido, No disponible]
+ *               descripcion:
+ *                 type: string
+ *               caracteristicas:
+ *                 type: string
+ *               tipo:
+ *                 type: string
+ *                 enum: [Insumos, Bien]
+ *               QR:
+ *                 type: string
+ *               fotos_entrada:
+ *                 type: string
+ *                 format: binary
+ *               id_de_vida_util:
+ *                 type: integer
+ *               id_de_poliza:
+ *                 type: integer
+ *               id_de_la_factura:
+ *                 type: integer
  *     responses:
  *       200:
  *         description: Artículo actualizado exitosamente
