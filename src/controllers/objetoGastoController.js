@@ -1,8 +1,12 @@
 import ObjetoGastos from "../models/tb_ObjetoGasto.js";
 
 export const getAllObjetoGastos = async (req, res) => {
-    const objetoGastos = await ObjetoGastos.findAll();
-    res.json(objetoGastos);
+    try {
+        const objetoGastos = await ObjetoGastos.findAll();
+        res.json(objetoGastos);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
 export const getObjetoGastoById = async (req, res) => {

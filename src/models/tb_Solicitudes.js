@@ -64,12 +64,12 @@ const Solicitudes = db.define("tb_Solicitudes", {
     },
     // tipo de rechazo 
     tipo_rechazo: {
-        type: DataTypes.ENUM("Falta de presupuesto", "No planeado", "Incompleto", "Fuera de Plazo",), // Se agrego "Incompleto", "Fuera de Plazo", 
+        type: DataTypes.ENUM("Falta de presupuesto", "No planeado", "Incompleto", "Fuera de Plazo",), 
         allowNull: true
     },
     // tipo de proyecto
     tipo_proyecto: {
-        type: DataTypes.ENUM("Radio", "Televisión"),
+        type: DataTypes.ENUM("Radio", "Television"),
         allowNull: true
     },
     // propuesta de requicicion
@@ -77,7 +77,7 @@ const Solicitudes = db.define("tb_Solicitudes", {
         type: DataTypes.INTEGER,
         allowNull: true
     },
-    id_petición_de_padre: {
+    id_peticion_de_padre: {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
