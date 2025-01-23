@@ -20,9 +20,9 @@ export const Departamentos = db.define("tb_Departamentos", {
   },
   // Campo `estado` como entero, con valor por defecto 1, no nulo
   estado: {
-    type: DataTypes.INTEGER,
-    defaultValue: 1,
+    type: DataTypes.BOOLEAN,
     allowNull: false,
+    defaultValue: true
   },
   // Campo `areaId` como entero, no nulo, con referencia a la tabla `Area`
   id_area: {

@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import multer from 'multer';
 // Configuración de la conexión
 import db from './src/config/db.js';
 import { getDbState, setDbState, resetDbState } from './src/config/db.State.js';
@@ -13,6 +14,7 @@ import articulosRouter from './src/routes/articulosRoutes.js';
 import bajasRouter from './src/routes/bajasRoutes.js';
 import cargasRouter from './src/routes/cargasRoutes.js';
 import entregasRouter from './src/routes/entregasRoutes.js';
+import departamentosRouter from './src/routes/departamentosRoutes.js';
 import facturasRouter from './src/routes/facturasRoutes.js';
 import polizasRouter from './src/routes/polizasRoutes.js';
 import { getAllData } from './src/controllers/polizasController.js';
@@ -46,12 +48,14 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: ['./src/routes/*.js'], // Asegúrate de que la ruta incluya todos los archivos de rutas
+  apis: ['./src/routes/*.js'],
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+const upload = multer();
+app.use(upload.none());
 // Rutas
 app.use('/api/almacenes', almacenRouter);
 app.use('/api/areas', areasRoutes);
@@ -59,6 +63,7 @@ app.use('/api/articulos', articulosRouter);
 app.use('/api/bajas', bajasRouter);
 app.use('/api/cargas', cargasRouter);
 app.use('/api/entregas', entregasRouter);
+app.use('/api/departamentos', departamentosRouter);
 app.use('/api/facturas', facturasRouter);
 app.use('/api/polizas', polizasRouter);
 app.use('/api/all-data', getAllData);
@@ -99,11 +104,7 @@ const initializeDatabase = async (force = false) => {
 
     // Obtener la fecha y hora actual
     const now = new Date();
-    setDbState({
-      initialized: true,
-      lastInitialized: now.toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })
-    });
-
+    setDbState({initialized: true, lastInitialized: now.toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })});
 
     // Imprimir mensaje de inicialización con hora actual
     console.log(`------> Base de datos inicializada a las ${now.toLocaleTimeString()}`);
