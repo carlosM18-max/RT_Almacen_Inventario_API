@@ -7,7 +7,6 @@ const Solicitudes = db.define("tb_Solicitudes", {
         primaryKey: true,
         autoIncrement: true,
     },
-    // Descripción del artículo solicitado
     Cantidad_Solicitar: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -20,11 +19,9 @@ const Solicitudes = db.define("tb_Solicitudes", {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    // Cantidad solicitada del artículo
-
     archivo: {
-        type: DataTypes.BLOB, // Tipo de dato para el archivo, ajusta según necesites
-        allowNull: true, // Dependiendo si siempre se incluye un archivo o no
+        type: DataTypes.BLOB,
+        allowNull: true,
     },
     // ID del usuario que aprueba el pedido
     id_usuario_aprobador: {
