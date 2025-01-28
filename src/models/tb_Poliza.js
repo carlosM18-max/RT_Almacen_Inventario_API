@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db.js";
 
-const Poliza = db.define("tb_Polizas", {
+const Poliza = db.define("tb_Poliza", {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -56,9 +56,13 @@ const Poliza = db.define("tb_Polizas", {
         allowNull: false
     },
     cantidad: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false
     }
-});
+},
+    {
+        timestamps: true
+    }
+);
 
 export default Poliza;

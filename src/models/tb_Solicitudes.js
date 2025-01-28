@@ -14,20 +14,9 @@ const Solicitudes = db.define("tb_Solicitudes", {
     },
     // Cantidad solicitada del artículo
     cantidad: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: true,
     },
-    tipo: {
-        type: DataTypes.ENUM("Insumo", "Bien"),
-        allowNull: true,
-    },
-    // Estado o situación del pedido
-    estado: {
-        type: DataTypes.ENUM("En Revision", "Aceptado", "Rechazado"),
-        allowNull: false,
-        defaultValue: "En Revisión"
-    },
-    // Nombre del archivo asociado al pedido, si aplica
     archivo: {
         type: DataTypes.STRING, // Tipo de dato para el archivo, ajusta según necesites
         allowNull: true, // Dependiendo si siempre se incluye un archivo o no
@@ -42,47 +31,14 @@ const Solicitudes = db.define("tb_Solicitudes", {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
-    // Nombre o tipo del artículo solicitado
-    id_articulo: {
+    id_almacen: {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
-    // Número de almacen asociado al artículo
-    id_numero_inventario: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-    },
-    // Número de inventario asociado al artículo
-    id_numero_almacen: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-    },
-    // comentario
-    comentario: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    // tipo de rechazo 
-    tipo_rechazo: {
-        type: DataTypes.ENUM("Falta de presupuesto", "No planeado", "Incompleto", "Fuera de Plazo",), 
-        allowNull: true
-    },
-    // tipo de proyecto
-    tipo_proyecto: {
-        type: DataTypes.ENUM("Radio", "Television"),
-        allowNull: true
-    },
-    // propuesta de requicicion
-    id_propuesta_requicicion: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-    },
-    id_peticion_de_padre: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-    },
-
-
-});
+},
+    {
+        timestamps: true
+    }
+);
 
 export default Solicitudes;

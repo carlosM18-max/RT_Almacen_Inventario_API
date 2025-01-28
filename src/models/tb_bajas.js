@@ -7,54 +7,25 @@ const Bajas = db.define("tb_Bajas", {
     primaryKey: true,
     autoIncrement: true,
   },
-  tipo: {
-    type: DataTypes.ENUM("prestamo", "descompuesto", "descontinuación"), // "perdida","obsolescencia","devolución","destrucción","incautación",
-    //"caducidad",
-    //"retiro",
-    allowNull: true,
-    // Tipo (préstamo, descompuesto, descontinuación)
-  },
   fecha: {
     type: DataTypes.DATE,
     allowNull: true,
     // Fecha
   },
-  razon: {
-    type: DataTypes.STRING,
-    allowNull: true,
-    // Razón
-  },
-  estado: {
-    type: DataTypes.ENUM("Revision", "Aceptada", "Rechazada", "Archivado"), // //"Archivado","En validación"
+  estado_bien: {
+    type: DataTypes.ENUM("Nuevo", "Bueno", "Regular", "Malo", "Inservible"), // //"Archivado","En validación"
     allowNull: false,
     // Estado
   },
-  alta_baja: {
-    type: DataTypes.BOOLEAN,
-    allowNull: true,
-    defaultValue: 0
-
-    // Alta/Baja
-  },
-  archivo: {
-    type: DataTypes.STRING,
+  ampara_baja: {
+    type: DataTypes.STRING(500),
     allowNull: false,
     // Archivo
   },
-  id_confirmacion: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-    // ID de confirmación
-  },
-  id_solicitud_retiro: {
-    type: DataTypes.INTEGER,
+  solicitud_dictamen: {
+    type: DataTypes.STRING(500),
     allowNull: true,
     // ID de solicitud de retiro
-  },
-  id_articulos: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-    // ID del bien
   },
   id_inventario: {
     type: DataTypes.INTEGER,

@@ -7,15 +7,24 @@ const Facturas = db.define("tb_Facturas", {
         primaryKey: true,
         autoIncrement: true,
     },
+    tipo_alta: {
+        type: DataTypes.ENUM("Compra CM", "Domacion DN", "Comodato CO"),
+        allowNull: false,
+    },
     numero_de_factura: {
         type: DataTypes.INTEGER,
         allowNull: false,
         // Número de factura
     },
     tipo_compra: {
-        type: DataTypes.ENUM("Adjudicacion", "Licitacion", "Donacion", "Convenio", "Intercambio"),
+        type: DataTypes.ENUM("Presupuesto", "Estatal"),
         allowNull: false,
         // Tipo de compra
+    },
+    Tipo_documento_ampara: {
+        type: DataTypes.ENUM("(Contrato De Comodato CO", "Comprobante Fiscal Digital por Internet CFDI"),
+        allowNull: false,
+        // Tipo de documento que ampara
     },
     concepto: {
         type: DataTypes.STRING,
@@ -32,18 +41,23 @@ const Facturas = db.define("tb_Facturas", {
         allowNull: false,
         // Fecha
     },
+    fecha_adquisicion: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        // Fecha de adquisición
+    },
     archivo_pdf: {
-        type: DataTypes.STRING,
+        type: DataTypes.BLOB,
         allowNull: false,
         // Archivo (PDF)
     },
     nombre_proveedor: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
-        // Nombre del proveedor
+        // Nombre del proveedor va asociada con la tabla de proveedores
     },
     cantidad: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         // Cantidad
     },
@@ -58,30 +72,10 @@ const Facturas = db.define("tb_Facturas", {
         // Subtotal
     },
     total: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(10),
         allowNull: false,
         // Total
     },
-    telefono_proveedor: {
-        type: DataTypes.STRING(10),
-        allowNull: false,
-        // Teléfono del proveedor
-    },
-    RFC_proveedor: {
-        type: DataTypes.STRING(13),
-        allowNull: false,
-        // RFC del proveedor
-    },
-    direccion_proveedor: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        // Dirección del proveedor
-    },
-    archivo_sat: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        // Archivo (PDF) del SAT
-    }
 }, {
     timestamps: true,
 });

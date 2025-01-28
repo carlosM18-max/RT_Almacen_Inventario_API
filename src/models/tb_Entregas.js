@@ -22,30 +22,10 @@ const Entregas = db.define("tb_Entregas", {
     allowNull: false,
     // Descripción
   },
-  estado: {
-    type: DataTypes.ENUM("Proceso", "Entregado", "Cancelado", "Pendiente de envio", "Bajo resguardo", "No entregado", "Devuelto"),
+  id_solicitud: {
+    type: DataTypes.INTEGER,
     allowNull: false,
-    // Estado
-  },
-  observaciones: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-    // Observaciones
-  },
-  fotos_entrada: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    // Fotos de entrada
-  },
-  tipo: {
-    type: DataTypes.ENUM("externo", "interno"),
-    allowNull: false,
-    // Tipo
-  },
-  ubicacion: {
-    type: DataTypes.STRING,
-    allowNull: true,
-    // Ubicación
+    // ID de la solicitud
   },
   id_almacen: {
     type: DataTypes.INTEGER,
@@ -57,11 +37,6 @@ const Entregas = db.define("tb_Entregas", {
     allowNull: true,
     // ID del inventario
   },
-  id_articulos: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    // ID del bien
-  },
   id_usuario_entrega: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -72,6 +47,9 @@ const Entregas = db.define("tb_Entregas", {
     allowNull: false,
     // ID del usuario que recibe
   }
+}, {
+  timestamps: true, // Agrega campos createdAt y updatedAt
+
 });
 
 export default Entregas;

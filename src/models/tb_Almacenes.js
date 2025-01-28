@@ -8,7 +8,7 @@ const Almacenes = db.define("tb_Almacenes", {
     autoIncrement: true,
   },
   tipo_adquisicion: {
-    type: DataTypes.ENUM("Donacion", "Compra", "Intercambio", "Produccion propia", "Adjudicacion", "RTH"),
+    type: DataTypes.ENUM("Donación", "Compra", "Comodato"),
     allowNull: false,
     // Tipo de alta (donación, compra, como dato)
   },
@@ -16,16 +16,6 @@ const Almacenes = db.define("tb_Almacenes", {
     type: DataTypes.STRING,
     allowNull: false,
     // Nombre
-  },
-  descripcion: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    // Descripción
-  },
-  tipo: {
-    type: DataTypes.ENUM("Insumos", "Bien"),
-    allowNull: false,
-    // Tipo (insumo, bien)
   },
   fecha_entrega: {
     type: DataTypes.DATE,
@@ -43,9 +33,9 @@ const Almacenes = db.define("tb_Almacenes", {
     // Tipo de activo (mueble, inmueble)
   },
   codigo_armonizable: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER(10),
     allowNull: false,
-    // Código armonizable
+    // Código armonizable relacion con objeto de gasto
   },
   registro_contable: {
     type: DataTypes.STRING,
@@ -58,27 +48,17 @@ const Almacenes = db.define("tb_Almacenes", {
     // Cantidad
   },
   locacion: {
-    type: DataTypes.STRING,
+    type: DataTypes.ENUM("Pendiete"),
     allowNull: false,
-    // Locación
+    // Locación lleva in enum de locaciones
   },
   estado: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     // Estatus
   },
-  numero_serie: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    // Número de serie
-  },
-  numero_almacen: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    // Número de almacén
-  },
-  numero_inventario: {
-    type: DataTypes.STRING,
+  id_inventario: {
+    type: DataTypes.INTEGER,
     allowNull: false,
     // Número de inventario
   },
@@ -87,20 +67,15 @@ const Almacenes = db.define("tb_Almacenes", {
     allowNull: false,
     // Motivo
   },
-  tipo_resguardo: {
-    type: DataTypes.ENUM("almacen", "inventario"),
-    allowNull: false,
-    // Tipo de resguardo (almacen, inventario)
-  },
-  id_articulo: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    // ID del artículo
-  },
   id_factura: {
     type: DataTypes.INTEGER,
     allowNull: false,
     // ID de la factura
+  },
+  id_solictud: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    // ID de la solicitud
   },
   id_poliza: {
     type: DataTypes.INTEGER,
@@ -109,7 +84,7 @@ const Almacenes = db.define("tb_Almacenes", {
   },
   // Orden de entrega
   orden_entrega: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: false
   }
 },
