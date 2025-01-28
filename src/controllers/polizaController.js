@@ -1,4 +1,4 @@
-import Poliza from "../models/tb_Polizas.js";
+import Poliza from "../models/tb_Poliza.js";
 import Factura from "../models/tb_Facturas.js";
 import VidaUtil from "../models/tb_VidaUtil.js";
 import { uploadPolicy } from "../middlewares/configStorageFile.js"; 
