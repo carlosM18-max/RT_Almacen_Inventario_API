@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db.js";
 
-const Politica = db.define("tb_Politica", {
+const Politica = db.define("tb_Poliza", {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -56,7 +56,7 @@ const Politica = db.define("tb_Politica", {
         allowNull: false
     },
     cantidad: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false
     }
 });
