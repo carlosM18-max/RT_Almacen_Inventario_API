@@ -22,10 +22,9 @@ const Poliza = db.define("tb_Poliza", {
         allowNull: true,
         // Tipo: egresos, presupuestales, diario, cheques, ingresos
     },
-    prima: {
+    cantidad: {
         type: DataTypes.FLOAT,
-        allowNull: true,
-        // Prima
+        allowNull: false
     },
     deducible: {
         type: DataTypes.FLOAT,
@@ -42,23 +41,27 @@ const Poliza = db.define("tb_Poliza", {
         allowNull: false
         // Periodo de vigencia
     },
+    fecha: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    archivo: {
+        type: DataTypes.BLOB,
+        allowNull: false
+    },
+    prima: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+        // Prima
+    },
     clausulas_exclusion: {
         type: DataTypes.STRING,
         allowNull: true,
         // Cláusulas de exclusión
     },
-    archivo: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    fecha: {
-        type: DataTypes.DATE,
-        allowNull: false
-    },
-    cantidad: {
-        type: DataTypes.FLOAT,
-        allowNull: false
-    }
+
+
+  
 },
     {
         timestamps: true
