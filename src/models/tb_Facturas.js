@@ -31,7 +31,6 @@ const Facturas = db.define("tb_Facturas", {
         allowNull: false,
         // Tipo de compra
     },
-
     concepto: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -67,7 +66,6 @@ const Facturas = db.define("tb_Facturas", {
         allowNull: false,
         // IVA
     },
-
     total: {
         type: DataTypes.FLOAT(10),
         allowNull: false,
@@ -78,9 +76,6 @@ const Facturas = db.define("tb_Facturas", {
         allowNull: false,
         // Archivo (PDF)
     },
-
-
-
 }, {
     timestamps: true,
 });

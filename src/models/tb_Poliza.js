@@ -59,9 +59,6 @@ const Poliza = db.define("tb_Poliza", {
         allowNull: true,
         // Cláusulas de exclusión
     },
-
-
-  
 },
     {
         timestamps: true
