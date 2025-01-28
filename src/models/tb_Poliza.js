@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db.js";
 
-const Politica = db.define("tb_Poliza", {
+const Poliza = db.define("tb_Poliza", {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -18,7 +18,7 @@ const Politica = db.define("tb_Poliza", {
         // Cobertura
     },
     tipo: {
-        type: DataTypes.ENUM("Egresos", "presupuestales", "donaciones", "cheques", "ingresos", "transferencias", "retenciones", "depocitos"),
+        type: DataTypes.ENUM("Egresos", "Presupuestales", "Donaciones", "Cheques", "Ingresos", "Transferencias", "Retenciones", "Depositos"),
         allowNull: true,
         // Tipo: egresos, presupuestales, diario, cheques, ingresos
     },
@@ -39,7 +39,7 @@ const Politica = db.define("tb_Poliza", {
     },
     periodo_vigencia: {
         type: DataTypes.DATE,
-        allowNull: true,
+        allowNull: false
         // Periodo de vigencia
     },
     clausulas_exclusion: {
@@ -59,6 +59,10 @@ const Politica = db.define("tb_Poliza", {
         type: DataTypes.FLOAT,
         allowNull: false
     }
-});
+},
+    {
+        timestamps: true
+    }
+);
 
-export default Politica;
+export default Poliza;

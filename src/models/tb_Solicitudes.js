@@ -35,6 +35,10 @@ const Solicitudes = db.define("tb_Solicitudes", {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
-});
+},
+    {
+        timestamps: true
+    }
+);
 
 export default Solicitudes;

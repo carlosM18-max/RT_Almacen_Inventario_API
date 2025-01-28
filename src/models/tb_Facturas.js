@@ -17,15 +17,14 @@ const Facturas = db.define("tb_Facturas", {
         // Número de factura
     },
     tipo_compra: {
-        type: DataTypes.ENUM("Presupuesto","Estatal"),
+        type: DataTypes.ENUM("Presupuesto", "Estatal"),
         allowNull: false,
         // Tipo de compra
     },
     Tipo_documento_ampara: {
-        type: DataTypes.ENUM("(Contrato De Comodato CO",  "Comprobante Fiscal Digital por Internet CFDI"),
+        type: DataTypes.ENUM("(Contrato De Comodato CO", "Comprobante Fiscal Digital por Internet CFDI"),
         allowNull: false,
         // Tipo de documento que ampara
-
     },
     concepto: {
         type: DataTypes.STRING,

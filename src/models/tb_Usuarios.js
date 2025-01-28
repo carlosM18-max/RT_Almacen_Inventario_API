@@ -45,7 +45,7 @@ const Usuarios = db.define("tb_Usuarios", {
     allowNull: false,
   },
   direcion_pertenencia: {
-    type:DataTypes.ENUM( "DIRECTOR GENERAL",
+    type: DataTypes.ENUM("DIRECTOR GENERAL",
       "ASISTENTE DE LA DIRECCIÓN GENERAL",
       "AUXILIAR DEL DEPARTAMENTO DE LA DIRECCIÓN GENERAL",
       "RECEPCIÓN ENTRADA PRINCIPAL",
@@ -125,9 +125,9 @@ const Usuarios = db.define("tb_Usuarios", {
     // Área presupuestal (DIRECCIÓN DE ADMINISTRACIÓN Y FINANZAS)
   },
   cargo: {
-    type: DataTypes.ENUM("JEFE DE ÁREA A","JEFE DE ÁREA B", "JEFE DE DEPARTAMENTO C",
-      "SUBDIRECTOR A","SUBDIRECTOR DE ÁREA C",
-      "DIRECTOR DE ÁREA B","DIRECTOR GENERAL A","DIRECTOR GENERAL B","SUBSECRETARIO A","SECRETARIO В"),
+    type: DataTypes.ENUM("JEFE DE ÁREA A", "JEFE DE ÁREA B", "JEFE DE DEPARTAMENTO C",
+      "SUBDIRECTOR A", "SUBDIRECTOR DE ÁREA C",
+      "DIRECTOR DE ÁREA B", "DIRECTOR GENERAL A", "DIRECTOR GENERAL B", "SUBSECRETARIO A", "SECRETARIO В"),
     allowNull: false
   },
   imagen: {

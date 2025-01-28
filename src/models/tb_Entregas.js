@@ -7,7 +7,7 @@ const Entregas = db.define("tb_Entregas", {
     primaryKey: true,
     autoIncrement: true,
   },
-  canticad: {
+  cantidad: {
     type: DataTypes.INTEGER,
     allowNull: false,
     // Cantidad
@@ -47,6 +47,9 @@ const Entregas = db.define("tb_Entregas", {
     allowNull: false,
     // ID del usuario que recibe
   }
+}, {
+  timestamps: true, // Agrega campos createdAt y updatedAt
+
 });
 
 export default Entregas;

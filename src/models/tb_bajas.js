@@ -7,14 +7,13 @@ const Bajas = db.define("tb_Bajas", {
     primaryKey: true,
     autoIncrement: true,
   },
-  
   fecha: {
     type: DataTypes.DATE,
     allowNull: true,
     // Fecha
   },
   estado_bien: {
-    type: DataTypes.ENUM("Nuevo","Bueno","Regular", "Malo", "Inservible"), // //"Archivado","En validación"
+    type: DataTypes.ENUM("Nuevo", "Bueno", "Regular", "Malo", "Inservible"), // //"Archivado","En validación"
     allowNull: false,
     // Estado
   },

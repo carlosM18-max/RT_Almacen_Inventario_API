@@ -8,7 +8,7 @@ const Inventario = db.define("tb_Inventario", {
         autoIncrement: true,
     },
     tipo_inventario: {
-        type: DataTypes.ENUM('RTH', 'PG','GOB','NT','GA'),
+        type: DataTypes.ENUM('RTH', 'PG', 'GOB', 'NT', 'GA'),
         allowNull: false,
         // Tipo de inventario
     },
@@ -43,15 +43,16 @@ const Inventario = db.define("tb_Inventario", {
         // Serie
     },
     tipo_posesion: {
-        type: DataTypes.ENUM('inventario','Comodato'),
+        type: DataTypes.ENUM('inventario', 'Comodato'),
         allowNull: false,
         // Tipo de posesión
     },
-    estado_bien:{
-        type: DataTypes.ENUM('Nuevo','Bueno','Regular', 'Malo', 'Inservible'),
+    estado_bien: {
+        type: DataTypes.ENUM('Nuevo', 'Bueno', 'Regular', 'Malo', 'Inservible'),
         allowNull: false,
         // Estado del bien
     },
-
-    });
-    export default Inventario;
+}, {
+    timestamps: true, // Agrega campos createdAt y updatedAt
+});
+export default Inventario;
