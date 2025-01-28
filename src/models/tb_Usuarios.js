@@ -13,7 +13,7 @@ const Usuarios = db.define("tb_Usuarios", {
     // numero de trabajador
   },
   nombre: {
-    type: DataTypes.STRING(70),
+    type: DataTypes.STRING(50),
     allowNull: false,
   },
   apellidos: {

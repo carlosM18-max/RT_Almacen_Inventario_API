@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import db from "../config/db.js";
 
 const RegistroContable = db.define( 
-    "tb_Registro_Contable", 
+    "tb_Registrocontable", 
     { 
         id: { 
             type: DataTypes.INTEGER, 
