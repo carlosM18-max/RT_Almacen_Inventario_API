@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import db from '../config/db.js';
 
 const Almacenes = db.define(
-  "tb_Almacenes",
+  "tb_almacenes",
   {
     id: {
       type: DataTypes.INTEGER, 

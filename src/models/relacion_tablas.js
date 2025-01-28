@@ -1,15 +1,15 @@
-import Almacenes from "./tb_Almacenes.js";
+import Almacenes from "./tb_almacenes.js";
 import Bajas from "./tb_bajas.js";
 import Entregas from "./tb_Entregas.js";
 import Facturas from "./tb_Facturas.js";
 import Inventario from "./tb_inventario.js";
-import ObjetoGastos from "./tb_ObjetoGasto.js";
+import ObjetoGastos from "./tb_objetogasto.js";
 import Poliza from "./tb_Poliza.js";
 import Proveedores from "./tb_provedores.js";
 import RegistroContable from "./tb_registro_contable.js";
 import Solicitudes from "./tb_Solicitudes.js";
 import Usuarios from "./tb_Usuarios.js";
-import VidaUtil from "./tb_VidaUtil.js";
+import VidaUtil from "./tb_vidautil.js";
 
 export const relaciones = () => {
  // Referencias de Almacenes

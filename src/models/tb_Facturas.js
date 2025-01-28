@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db.js";
 
-const Facturas = db.define("tb_Facturas", {
+const Facturas = db.define("tb_facturas", {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
