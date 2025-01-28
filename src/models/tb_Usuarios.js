@@ -131,7 +131,7 @@ const Usuarios = db.define("tb_Usuarios", {
     allowNull: false
   },
   imagen: {
-    type: DataTypes.STRING(255),
+    type: DataTypes.BLOB,
     allowNull: false,
   },
 }, {

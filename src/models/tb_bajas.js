@@ -18,12 +18,12 @@ const Bajas = db.define("tb_Bajas", {
     // Estado
   },
   ampara_baja: {
-    type: DataTypes.STRING(500),
+    type: DataTypes.BLOB,
     allowNull: false,
     // Archivo
   },
   solicitud_dictamen: {
-    type: DataTypes.STRING(500),
+    type: DataTypes.BLOB,
     allowNull: true,
     // ID de solicitud de retiro
   },

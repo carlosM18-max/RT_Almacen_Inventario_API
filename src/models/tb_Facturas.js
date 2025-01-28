@@ -11,6 +11,16 @@ const Facturas = db.define("tb_Facturas", {
         type: DataTypes.ENUM("Compra CM", "Domacion DN", "Comodato CO"),
         allowNull: false,
     },
+    Tipo_documento_ampara: {
+        type: DataTypes.ENUM("(Contrato De Comodato CO", "Comprobante Fiscal Digital por Internet CFDI"),
+        allowNull: false,
+        // Tipo de documento que ampara
+    },
+    fecha_adquisicion: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        // Fecha de adquisición
+    },
     numero_de_factura: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -21,35 +31,16 @@ const Facturas = db.define("tb_Facturas", {
         allowNull: false,
         // Tipo de compra
     },
-    Tipo_documento_ampara: {
-        type: DataTypes.ENUM("(Contrato De Comodato CO", "Comprobante Fiscal Digital por Internet CFDI"),
-        allowNull: false,
-        // Tipo de documento que ampara
-    },
+
     concepto: {
         type: DataTypes.STRING,
         allowNull: false,
         // Concepto
     },
-    iva: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
-        // IVA
-    },
     fecha_factura: {
         type: DataTypes.DATE,
         allowNull: false,
         // Fecha
-    },
-    fecha_adquisicion: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        // Fecha de adquisición
-    },
-    archivo_pdf: {
-        type: DataTypes.BLOB,
-        allowNull: false,
-        // Archivo (PDF)
     },
     nombre_proveedor: {
         type: DataTypes.INTEGER,
@@ -57,7 +48,7 @@ const Facturas = db.define("tb_Facturas", {
         // Nombre del proveedor va asociada con la tabla de proveedores
     },
     cantidad: {
-        type: DataTypes.STRING,
+        type: DataTypes.FLOAT,
         allowNull: false,
         // Cantidad
     },
@@ -71,11 +62,25 @@ const Facturas = db.define("tb_Facturas", {
         allowNull: false,
         // Subtotal
     },
+    iva: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+        // IVA
+    },
+
     total: {
         type: DataTypes.FLOAT(10),
         allowNull: false,
         // Total
     },
+    archivo_pdf: {
+        type: DataTypes.BLOB,
+        allowNull: false,
+        // Archivo (PDF)
+    },
+
+
+
 }, {
     timestamps: true,
 });
