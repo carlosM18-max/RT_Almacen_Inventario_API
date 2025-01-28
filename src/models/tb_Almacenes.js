@@ -57,15 +57,20 @@ const Almacenes = db.define("tb_Almacenes", {
     allowNull: false,
     // Estatus
   },
-  id_inventario: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    // Número de inventario
-  },
   motivo: {
     type: DataTypes.STRING,
     allowNull: false,
     // Motivo
+  },
+  // Orden de entrega
+  orden_entrega: {
+    type: DataTypes.STRING(255),
+    allowNull: false
+  },
+  id_inventario: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    // Número de inventario
   },
   id_factura: {
     type: DataTypes.INTEGER,
@@ -81,11 +86,6 @@ const Almacenes = db.define("tb_Almacenes", {
     type: DataTypes.INTEGER,
     allowNull: false,
     // ID de la póliza
-  },
-  // Orden de entrega
-  orden_entrega: {
-    type: DataTypes.STRING(255),
-    allowNull: false
   }
 },
   {

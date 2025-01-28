@@ -6,7 +6,7 @@ import {
   updatePoliza,
   deletePoliza,
   getAllData,
-} from "../controllers/polizasController.js";
+} from "../controllers/polizaController.js";
 
 const router = Router();
 

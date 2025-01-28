@@ -60,7 +60,6 @@ const Usuarios = db.define("tb_Usuarios", {
       "ARCHIVO",
       "TECNOLOGÍAS DE LA INFORMACIÓN",
       "DIRECCIÓN DE TELEVISIÓN",
-      "SUBDIRECTOR DE CONTENIDOS",
       "ENCARGADA DE DTO. DE PLAN.",
       "POSTPRODUCCIÓN DE TELEVISIÓN",
       "ASISTENTE DE DIRECCIÓN DE TELEVISIÓN",

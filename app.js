@@ -8,23 +8,18 @@ import multer from 'multer';
 import db from './src/config/db.js';
 import { getDbState, setDbState, resetDbState } from './src/config/db.State.js';
 // Importación de las rutas
-import areasRoutes from './src/routes/areasRoutes.js';
 import almacenRouter from './src/routes/almacenesRoutes.js';
-import articulosRouter from './src/routes/articulosRoutes.js';
 import bajasRouter from './src/routes/bajasRoutes.js';
-import cargasRouter from './src/routes/cargasRoutes.js';
 import entregasRouter from './src/routes/entregasRoutes.js';
-import departamentosRouter from './src/routes/departamentosRoutes.js';
 import objetoGastoRouter from './src/routes/objetoGastoRoutes.js';
 import solicitudesRouter from './src/routes/solicitudesRoutes.js';
 import facturasRouter from './src/routes/facturasRoutes.js';
-import polizasRouter from './src/routes/polizasRoutes.js';
-import { getAllData } from './src/controllers/polizasController.js';
+import polizasRouter from './src/routes/polizaRoutes.js';
+import { getAllData } from './src/controllers/polizaController.js';
 // Importacion de archvios de descargas y cargas
 import uploadRouter from './src/routes/uploadFilesRoutes.js';
 import uploadUserRouter from './src/routes/userFilesRoutes.js'
 import uploadDeliveriesRouter from './src/routes/deliveriesFilesRoutes.js'
-
 // Relación (FK)
 import { relaciones } from './src/models/relacion_tablas.js';
 
@@ -60,11 +55,7 @@ const upload = multer();
 app.use(upload.none());
 // Rutas
 app.use('/api/almacenes', almacenRouter);
-app.use('/api/areas', areasRoutes);
-app.use('/api/articulos', articulosRouter);
 app.use('/api/bajas', bajasRouter);
-app.use('/api/cargas', cargasRouter);
-app.use('/api/departamentos', departamentosRouter);
 app.use('/api/entregas', entregasRouter);
 app.use('/api/facturas', facturasRouter);
 app.use('/api/objetoGastos', objetoGastoRouter);

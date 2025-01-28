@@ -37,15 +37,12 @@ export const createAlmacen = async (req, res) => {
       cantidad,
       locacion,
       estado,
-      numero_serie,
-      numero_almacen, // Se ingresará manualmente
-      numero_inventario, // Se ingresará manualmente
       motivo,
-      tipo_resguardo,
-      id_articulo,
+      orden_entrega,
+      id_inventario,
       id_factura,
-      id_poliza,
-      orden_entrega
+      id_solicitud,
+      id_poliza
     } = req.body;
 
     // Crear nuevo Almacen
@@ -62,15 +59,12 @@ export const createAlmacen = async (req, res) => {
       cantidad,
       locacion,
       estado,
-      numero_serie,
-      numero_almacen,
-      numero_inventario,
       motivo,
-      tipo_resguardo,
-      id_articulo,
+      orden_entrega,
+      id_inventario,
       id_factura,
-      id_poliza,
-      orden_entrega
+      id_solicitud,
+      id_poliza
     });
 
     res.status(201).json(newAlmacen);

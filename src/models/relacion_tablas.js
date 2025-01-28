@@ -12,57 +12,57 @@ import Usuarios from "./tb_Usuarios.js";
 import VidaUtil from "./tb_VidaUtil.js";
 
 export const relaciones = () => {
- // Referencias de Almacenes
-Almacenes.belongsTo(Facturas, { foreignKey: "id_factura", as: "facturaAlmacen" });
-Facturas.hasMany(Almacenes, { foreignKey: "id", as: "almacenesFactura" });
+    // Referencias de Almacenes
+    Almacenes.belongsTo(Facturas, { foreignKey: "id_factura", as: "facturaAlmacen" });
+    Facturas.hasMany(Almacenes, { foreignKey: "id", as: "almacenesFactura" });
 
-Almacenes.belongsTo(Poliza, { foreignKey: "id_poliza", as: "polizaAlmacen" });
-Poliza.hasMany(Almacenes, { foreignKey: "id", as: "almacenesPoliza" });
+    Almacenes.belongsTo(Poliza, { foreignKey: "id_poliza", as: "polizaAlmacen" });
+    Poliza.hasMany(Almacenes, { foreignKey: "id", as: "almacenesPoliza" });
 
-Almacenes.belongsTo(ObjetoGastos, { foreignKey: "codigo_armonizable", as: "partidaPresupuestal" });
-ObjetoGastos.hasMany(Almacenes, { foreignKey: "id_partida", as: "almacenesPartida" });
+    Almacenes.belongsTo(ObjetoGastos, { foreignKey: "codigo_armonizable", as: "partidaPresupuestal" });
+    ObjetoGastos.hasMany(Almacenes, { foreignKey: "id_partida", as: "almacenesPartida" });
 
-Almacenes.hasMany(Inventario, { foreignKey: "id_almacen", as: "bienesAlmacen" });
-Inventario.belongsTo(Almacenes, { foreignKey: "id", as: "almacenBien" });
+    Almacenes.hasMany(Inventario, { foreignKey: "id_almacen", as: "bienesAlmacen" });
+    Inventario.belongsTo(Almacenes, { foreignKey: "id", as: "almacenBien" });
 
-Almacenes.hasMany(Entregas, { foreignKey: "orden_entrega", as: "OrdenentregasAlmacen" });
-Entregas.belongsTo(Almacenes, { foreignKey: "id", as: "almacenentregas" });
+    Almacenes.hasMany(Entregas, { foreignKey: "orden_entrega", as: "OrdenentregasAlmacen" });
+    Entregas.belongsTo(Almacenes, { foreignKey: "id", as: "almacenentregas" });
 
-Almacenes.hasMany(Solicitudes, { foreignKey: "id_solicitud", as: "solicitudesAlmacen" });
-Solicitudes.belongsTo(Almacenes, { foreignKey: "id", as: "almacenSolicitud" });
+    Almacenes.hasMany(Solicitudes, { foreignKey: "id_solicitud", as: "solicitudesAlmacen" });
+    Solicitudes.belongsTo(Almacenes, { foreignKey: "id", as: "almacenSolicitud" });
 
-Almacenes.hasMany(Entregas, { foreignKey: "id", as: "entregasAlmacen" });
-Entregas.belongsTo(Almacenes, { foreignKey: "id_almacen", as: "almacenEntrega" });
- 
-Almacenes.hasMany(RegistroContable, { foreignKey: "registro_contable", as: "registrosAlmacen" });
-RegistroContable.belongsTo(Almacenes, { foreignKey: "id", as: "almacenRegistro" });
+    Almacenes.hasMany(Entregas, { foreignKey: "id", as: "entregasAlmacen" });
+    Entregas.belongsTo(Almacenes, { foreignKey: "id_almacen", as: "almacenEntrega" });
 
-Bajas.belongsTo(Inventario, { foreignKey: "id_inventario", as: "bienBaja" });
-Inventario.hasMany(Bajas, { foreignKey: "id", as: "bajasInventario" });
+    Almacenes.hasMany(RegistroContable, { foreignKey: "registro_contable", as: "registrosAlmacen" });
+    RegistroContable.belongsTo(Almacenes, { foreignKey: "id", as: "almacenRegistro" });
 
-// Referencias de Entregas
-Entregas.belongsTo(Usuarios, { foreignKey: "id_usuario_entrega", as: "usuarioEntrega" });
-Usuarios.hasMany(Entregas, { foreignKey: "id", as: "entregasUsuario" });
+    Bajas.belongsTo(Inventario, { foreignKey: "id_inventario", as: "bienBaja" });
+    Inventario.hasMany(Bajas, { foreignKey: "id", as: "bajasInventario" });
 
-Entregas.belongsTo(Usuarios, { foreignKey: "id_usuario_recibe", as: "usuarioRecibe" });
-Usuarios.hasMany(Entregas, { foreignKey: "id", as: "entregasRecibidas" });
+    // Referencias de Entregas
+    Entregas.belongsTo(Usuarios, { foreignKey: "id_usuario_entrega", as: "usuarioEntrega" });
+    Usuarios.hasMany(Entregas, { foreignKey: "id", as: "entregasUsuario" });
 
-Entregas.belongsTo(Solicitudes, { foreignKey: "id_solicitud", as: "solicitudEntrega" });
-Solicitudes.hasMany(Entregas, { foreignKey: "id", as: "entregasSolicitud" });
+    Entregas.belongsTo(Usuarios, { foreignKey: "id_usuario_recibe", as: "usuarioRecibe" });
+    Usuarios.hasMany(Entregas, { foreignKey: "id", as: "entregasRecibidas" });
 
-// Referencias de Facturas
-Facturas.belongsTo(Proveedores, { foreignKey: "nombre_proveedor", as: "proveedorFactura" });
-Proveedores.hasMany(Facturas, { foreignKey: "nombre", as: "facturasProveedor" });
+    Entregas.belongsTo(Solicitudes, { foreignKey: "id_solicitud", as: "solicitudEntrega" });
+    Solicitudes.hasMany(Entregas, { foreignKey: "id", as: "entregasSolicitud" });
 
-// Referencias de Solicitudes
-Solicitudes.belongsTo(Usuarios, { foreignKey: "id_usuario_solicitud", as: "usuarioCreadorSolicitud" });
-Usuarios.hasMany(Solicitudes, { foreignKey: "id", as: "solicitudesCreadas" });
+    // Referencias de Facturas
+    Facturas.belongsTo(Proveedores, { foreignKey: "nombre_proveedor", as: "proveedorFactura" });
+    Proveedores.hasMany(Facturas, { foreignKey: "nombre", as: "facturasProveedor" });
 
-Solicitudes.belongsTo(Usuarios, { foreignKey: "id_usuario_aprobador", as: "usuarioAprobadorSolicitud" });
-Usuarios.hasMany(Solicitudes, { foreignKey: "id", as: "solicitudesAprobadas" });
+    // Referencias de Solicitudes
+    Solicitudes.belongsTo(Usuarios, { foreignKey: "id_usuario_solicitud", as: "usuarioCreadorSolicitud" });
+    Usuarios.hasMany(Solicitudes, { foreignKey: "id", as: "solicitudesCreadas" });
 
-// Referencias de Vida Útil
-VidaUtil.belongsTo(ObjetoGastos, { foreignKey: "id_partida", as: "partidaVidaUtil" });
-ObjetoGastos.hasMany(VidaUtil, { foreignKey: "id_partida", as: "vidasUtilesPartida" });
+    Solicitudes.belongsTo(Usuarios, { foreignKey: "id_usuario_aprobador", as: "usuarioAprobadorSolicitud" });
+    Usuarios.hasMany(Solicitudes, { foreignKey: "id", as: "solicitudesAprobadas" });
+
+    // Referencias de Vida Útil
+    VidaUtil.belongsTo(ObjetoGastos, { foreignKey: "id_partida", as: "partidaVidaUtil" });
+    ObjetoGastos.hasMany(VidaUtil, { foreignKey: "id_partida", as: "vidasUtilesPartida" });
 
 };
