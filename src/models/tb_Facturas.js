@@ -78,6 +78,11 @@ const Facturas = db.define("tb_Facturas", {
         allowNull: false,
         // Archivo (PDF)
     },
+    id_proveedor: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        // ID del proveedor
+    },
 
 
 
