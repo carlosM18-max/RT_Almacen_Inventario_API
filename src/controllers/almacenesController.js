@@ -27,8 +27,6 @@ export const createAlmacen = async (req, res) => {
     const {
       tipo_adquisicion,
       nombre,
-      descripcion,
-      tipo,
       fecha_entrega,
       fecha_salida,
       tipo_activo,
@@ -49,8 +47,6 @@ export const createAlmacen = async (req, res) => {
     const newAlmacen = await Almacenes.create({
       tipo_adquisicion,
       nombre,
-      descripcion,
-      tipo,
       fecha_entrega,
       fecha_salida,
       tipo_activo,
