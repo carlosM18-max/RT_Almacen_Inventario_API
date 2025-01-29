@@ -10,38 +10,31 @@ const router = express.Router();
  *     Almacen:
  *       type: object
  *       required:
- *         - nombre
  *         - tipo_adquisicion
- *         - descripcion
- *         - tipo
+ *         - nombre
  *         - fecha_entrega
+ *         - fecha_salida
  *         - tipo_activo
  *         - codigo_armonizable
  *         - registro_contable
  *         - cantidad
  *         - locacion
  *         - estado
- *         - numero_serie
  *         - motivo
- *         - tipo_resguardo
- *         - id_articulo
- *         - id_factura
- *         - id_poliza
  *         - orden_entrega
+ *         - id_inventario
+ *         - id_factura
+ *         - id_solicitud
+ *         - id_poliza
  *       properties:
  *         id:
  *           type: integer
  *           description: ID auto-generado del almacén
- *         nombre:
- *           type: string
  *         tipo_adquisicion:
  *           type: string
- *           enum: [Donación, Compra, Como dato, Invitación a 3]
- *         descripcion:
+ *           enum: [Donacion, Compra, Como dato]
+ *         nombre:
  *           type: string
- *         tipo:
- *           type: string
- *           enum: [Insumos, Bien]
  *         fecha_entrega:
  *           type: string
  *           format: date
@@ -59,27 +52,21 @@ const router = express.Router();
  *           type: integer
  *         locacion:
  *           type: string
+ *           enum: [pendiente]
  *         estado:
  *           type: boolean
- *         numero_serie:
- *           type: string
- *         numero_almacen:
- *           type: string
- *         numero_inventario:
- *           type: string
  *         motivo:
  *           type: string
- *         tipo_resguardo:
+ *         orden_entrega:
  *           type: string
- *           enum: [almacen, inventario]
- *         id_articulo:
+ *         id_inventario:
  *           type: integer
  *         id_factura:
  *           type: integer
+ *         id_solicitud:
+ *           type: integer
  *         id_poliza:
  *           type: integer
- *         orden_entrega:
- *           type: string
  */
 
 /**
@@ -144,54 +131,43 @@ router.get("/:id", getAlmacenById);
  *           schema:
  *             type: object
  *             properties:
- *               nombre:
- *                 type: string
  *               tipo_adquisicion:
- *                 type: string
- *                 enum: [Donación, Compra, Como dato, Invitación a 3]
- *               descripcion:
- *                 type: string
- *               tipo:
- *                 type: string
- *                 enum: [Insumos, Bien]
+ *                  type: string
+ *                  enum: [Donacion, Compra, Como dato]
+ *               nombre:
+ *                  type: string
  *               fecha_entrega:
- *                 type: string
- *                 format: date
+ *                  type: string
+ *                  format: date
  *               fecha_salida:
- *                 type: string
- *                 format: date
+ *                  type: string
+ *                  format: date
  *               tipo_activo:
- *                 type: string
- *                 enum: [mueble, inmueble]
+ *                  type: string
+ *                  enum: [mueble, inmueble]
  *               codigo_armonizable:
- *                 type: string
+ *                  type: string
  *               registro_contable:
- *                 type: string
+ *                  type: string
  *               cantidad:
- *                 type: integer
+ *                  type: integer
  *               locacion:
- *                 type: string
+ *                  type: string
+ *                  enum: [pendiente]
  *               estado:
- *                 type: boolean
- *               numero_serie:
- *                 type: string
- *               numero_almacen:
- *                 type: string
- *               numero_inventario:
- *                 type: string
+ *                  type: boolean
  *               motivo:
- *                 type: string
- *               tipo_resguardo:
- *                 type: string
- *                 enum: [almacen, inventario]
- *               id_articulo:
- *                 type: integer
- *               id_factura:
- *                 type: integer
- *               id_poliza:
- *                 type: integer
+ *                  type: string
  *               orden_entrega:
- *                 type: string
+ *                  type: string
+ *               id_inventario:
+ *                  type: integer
+ *               id_factura:
+ *                  type: integer
+ *               id_solicitud:
+ *                  type: integer
+ *               id_poliza:
+ *                  type: integer
  *     responses:
  *       201:
  *         description: Almacén creado exitosamente
@@ -228,53 +204,42 @@ router.post("/", createAlmacen);
  *             type: object
  *             properties:
  *               tipo_adquisicion:
- *                 type: string
- *                 enum: [Donación, Compra, Como dato, Invitación a 3]
+ *                  type: string
+ *                  enum: [Donacion, Compra, Como dato]
  *               nombre:
- *                 type: string
- *               descripcion:
- *                 type: string
- *               tipo:
- *                 type: string
- *                 enum: [Insumos, Bien]
+ *                  type: string
  *               fecha_entrega:
- *                 type: string
- *                 format: date
+ *                  type: string
+ *                  format: date
  *               fecha_salida:
- *                 type: string
- *                 format: date
+ *                  type: string
+ *                  format: date
  *               tipo_activo:
- *                 type: string
- *                 enum: [mueble, inmueble]
+ *                  type: string
+ *                  enum: [mueble, inmueble]
  *               codigo_armonizable:
- *                 type: string
+ *                  type: string
  *               registro_contable:
- *                 type: string
+ *                  type: string
  *               cantidad:
- *                 type: integer
+ *                  type: integer
  *               locacion:
- *                 type: string
+ *                  type: string
+ *                  enum: [pendiente]
  *               estado:
- *                 type: boolean
- *               numero_serie:
- *                 type: string
- *               numero_almacen:
- *                 type: string
- *               numero_inventario:
- *                 type: string
+ *                  type: boolean
  *               motivo:
- *                 type: string
- *               tipo_resguardo:
- *                 type: string
- *                 enum: [almacen, inventario]
- *               id_articulo:
- *                 type: integer
- *               id_factura:
- *                 type: integer
- *               id_poliza:
- *                 type: integer
+ *                  type: string
  *               orden_entrega:
- *                 type: string
+ *                  type: string
+ *               id_inventario:
+ *                  type: integer
+ *               id_factura:
+ *                  type: integer
+ *               id_solicitud:
+ *                  type: integer
+ *               id_poliza:
+ *                  type: integer
  *     responses:
  *       200:
  *         description: Almacén actualizado exitosamente

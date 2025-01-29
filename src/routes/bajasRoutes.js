@@ -11,45 +11,27 @@ const router = express.Router();
  *     Baja:
  *       type: object
  *       required:
- *         - tipo
- *         - estado
- *         - archivo
- *         - id_usuario
+ *         - estado_bien
  *       properties:
  *         id:
  *           type: integer
  *           description: ID auto-generado de la baja
- *         tipo:
- *           type: string
- *           enum: [prestamo, descompuesto, descontinuación]
- *           description: Tipo de baja (préstamo, descompuesto, descontinuación)
  *         fecha:
  *           type: string
  *           format: date
  *           description: Fecha de la baja
- *         razon:
+ *         estado_bien:
  *           type: string
- *           description: Razón de la baja
- *         estado:
- *           type: string
- *           enum: [Revision, Aceptada, Rechazada, Archivado]
+ *           enum: [Nuevo, Bueno, Regular, Malo, Inservible]
  *           description: Estado de la baja
- *         alta_baja:
- *           type: boolean
- *           description: Alta/Baja
- *         archivo:
+ *         ampara_baja:
  *           type: string
  *           format: binary
- *           description: Archivo de la baja
- *         id_confirmacion:
- *           type: integer
- *           description: ID de confirmación
- *         id_solicitud_retiro:
- *           type: integer
- *           description: ID de solicitud de retiro
- *         id_articulos:
- *           type: integer
- *           description: ID del bien
+ *           description: Archivo de la ampara
+ *         solicitud_dictamen:
+ *           type: string
+ *           format: binary
+ *           description: Archivo del dictamen de la solicitud
  *         id_inventario:
  *           type: integer
  *           description: ID del inventario
@@ -114,32 +96,22 @@ router.get("/:id", getBajaById);
  *           schema:
  *             type: object
  *             properties:
- *               tipo:
- *                 type: string
- *                 enum: [prestamo, descompuesto, descontinuación]
  *               fecha:
- *                 type: string
- *                 format: date
- *               razon:
- *                 type: string
- *               estado:
- *                 type: string
- *                 enum: [Revision, Aceptada, Rechazada, Archivado]
- *               alta_baja:
- *                 type: boolean
- *               archivo:
- *                 type: string
- *                 format: binary
- *               id_confirmacion:
- *                 type: integer
- *               id_solicitud_retiro:
- *                 type: integer
- *               id_articulos:
- *                 type: integer
+ *                  type: string
+ *                  format: date
+ *               estado_bien:
+ *                  type: string
+ *                  enum: [Nuevo, Bueno, Regular, Malo, Inservible]
+ *               ampara_baja:
+ *                  type: string
+ *                  format: binary
+ *               solicitud_dictamen:
+ *                  type: string
+ *                  format: binary
  *               id_inventario:
- *                 type: integer
+ *                  type: integer
  *               id_usuario:
- *                 type: integer
+ *                  type: integer
  *     responses:
  *       201:
  *         description: Baja creada exitosamente
@@ -172,32 +144,22 @@ router.post("/", upload.single("archivo"), createBaja);
  *           schema:
  *             type: object
  *             properties:
- *               tipo:
- *                 type: string
- *                 enum: [prestamo, descompuesto, descontinuación]
  *               fecha:
- *                 type: string
- *                 format: date
- *               razon:
- *                 type: string
- *               estado:
- *                 type: string
- *                 enum: [Revision, Aceptada, Rechazada, Archivado]
- *               alta_baja:
- *                 type: boolean
- *               archivo:
- *                 type: string
- *                 format: binary
- *               id_confirmacion:
- *                 type: integer
- *               id_solicitud_retiro:
- *                 type: integer
- *               id_articulos:
- *                 type: integer
+ *                  type: string
+ *                  format: date
+ *               estado_bien:
+ *                  type: string
+ *                  enum: [Nuevo, Bueno, Regular, Malo, Inservible]
+ *               ampara_baja:
+ *                  type: string
+ *                  format: binary
+ *               solicitud_dictamen:
+ *                  type: string
+ *                  format: binary
  *               id_inventario:
- *                 type: integer
+ *                  type: integer
  *               id_usuario:
- *                 type: integer
+ *                  type: integer
  *     responses:
  *       200:
  *         description: Baja actualizada exitosamente

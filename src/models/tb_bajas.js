@@ -25,7 +25,6 @@ const Bajas = db.define("tb_Bajas", {
   solicitud_dictamen: {
     type: DataTypes.BLOB,
     allowNull: true,
-    // ID de solicitud de retiro
   },
   id_inventario: {
     type: DataTypes.INTEGER,

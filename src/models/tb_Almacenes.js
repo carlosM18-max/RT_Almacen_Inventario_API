@@ -8,7 +8,7 @@ const Almacenes = db.define("tb_Almacenes", {
     autoIncrement: true,
   },
   tipo_adquisicion: {
-    type: DataTypes.ENUM("Donación", "Compra", "Comodato"),
+    type: DataTypes.ENUM("Donacion", "Compra", "Como dato"),
     allowNull: false,
     // Tipo de alta (donación, compra, como dato)
   },
@@ -28,7 +28,7 @@ const Almacenes = db.define("tb_Almacenes", {
     // Fecha de salida
   },
   tipo_activo: {
-    type: DataTypes.ENUM("mueble", "inmueble"),
+    type: DataTypes.ENUM("Mueble", "Inmueble"),
     allowNull: false,
     // Tipo de activo (mueble, inmueble)
   },
