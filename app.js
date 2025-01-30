@@ -16,10 +16,10 @@ import solicitudesRouter from './src/routes/solicitudesRoutes.js';
 import facturasRouter from './src/routes/facturasRoutes.js';
 import polizasRouter from './src/routes/polizaRoutes.js';
 import { getAllData } from './src/controllers/polizaController.js';
-// Importacion de archvios de descargas y cargas
+// Importacion de archivos de descargas y cargas
 import uploadRouter from './src/routes/uploadFilesRoutes.js';
-import uploadUserRouter from './src/routes/userFilesRoutes.js'
-import uploadDeliveriesRouter from './src/routes/deliveriesFilesRoutes.js'
+import uploadUserRouter from './src/routes/userFilesRoutes.js';
+import uploadDeliveriesRouter from './src/routes/deliveriesFilesRoutes.js';
 // Relación (FK)
 import { relaciones } from './src/models/relacion_tablas.js';
 
@@ -51,8 +51,21 @@ const swaggerOptions = {
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-const upload = multer();
-app.use(upload.none());
+// Configuración de multer para manejar archivos
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'deliveries/'); 
+    },
+    filename: (req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+});
+
+// Middleware para manejar la carga de archivos
+app.use(upload.any()); // Usamos upload.any() para manejar cualquier archivo
+
 // Rutas
 app.use('/api/almacenes', almacenRouter);
 app.use('/api/bajas', bajasRouter);
