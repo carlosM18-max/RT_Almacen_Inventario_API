@@ -21,11 +21,9 @@ const upload = multer({ storage });
 
 // Configuración de almacenamiento para archivos de usuarios
 const storageUser = multer.diskStorage({
-    // Define el destino de los archivos de usuarios subidos
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "../public/users/"));
     },
-    // Define el nombre del archivo de usuario subido
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname));
     },
@@ -61,11 +59,9 @@ const uploadUser = multer({ storage: storageUser });
 
 // Configuración de almacenamiento para archivos de políticas
 const storagePolicy = multer.diskStorage({
-    // Define el destino de los archivos de políticas subidos
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "../public/polizas/"));
     },
-    // Define el nombre del archivo de políticas subido
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname));
     },
@@ -76,11 +72,9 @@ const uploadPolicy = multer({ storage: storagePolicy });
 
 // Configuración de almacenamiento para archivos de facturas
 const storageBills = multer.diskStorage({
-    // Define el destino de los archivos de facturas subidos
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "../public/facturas/"));
     },
-    // Define el nombre del archivo de factura subido
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname));
     },
@@ -102,7 +96,7 @@ const storageRequest = multer.diskStorage({
 // Configuracion de multer para archivos de solicitudes
 const uploadRequest = multer({ storage: storageRequest });
 
-// Congiuracion de almacenamiento para archivos de propuestas de requisiciones
+// Configuracion de almacenamiento para archivos de propuestas de requisiciones
 const storageRequisition_proposal = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "../public/propuestaRequisicion/"));

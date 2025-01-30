@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { uploadDelivery as fileDeliveriesUploadConfig } from '../config/fileUploadConfig.js';
+import { uploadDelivery } from '../config/fileUploadConfig.js';
 import { listDeliveryFiles } from '../config/fileListConfig.js';
 import { uploadPolicy } from '../controllers/uploadController.js';
 
@@ -19,11 +19,11 @@ const router = Router();
  *           schema:
  *             type: object
  *             properties:
- *               file:
+ *               anyFile:
  *                 type: string
  *                 format: binary
  *             required:
- *               - file
+ *               - anyFile
  *     responses:
  *       201:
  *         description: Archivo subido correctamente
@@ -60,7 +60,7 @@ const router = Router();
  */
 
 // Ruta para subir archivos de entregas
-router.post('/', fileDeliveriesUploadConfig.single('file'), uploadPolicy);
+router.post('/', uploadDelivery.single('anyFile'), uploadPolicy);
 
 /**
  * @swagger
