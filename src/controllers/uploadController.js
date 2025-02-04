@@ -1,4 +1,4 @@
-const uploadPolicy = (req, res, next) => {
+const uploadPolicy = (req, res) => {
     console.log(req.file);  // Esto te mostrará el archivo subido en el backend
     if (!req.file) {
         return res.status(400).json({ message: 'No file uploaded' });
