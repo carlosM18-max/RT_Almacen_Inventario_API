@@ -19,11 +19,11 @@ const router = Router();
  *           schema:
  *             type: object
  *             properties:
- *               anyFile:
+ *               file:
  *                 type: string
  *                 format: binary
  *             required:
- *               - anyFile
+ *               - file
  *     responses:
  *       201:
  *         description: Archivo subido correctamente
@@ -60,7 +60,8 @@ const router = Router();
  */
 
 // Ruta para subir archivos de entregas
-router.post('/', uploadDelivery.single('anyFile'), uploadPolicy);
+router.post('/', uploadDelivery.single('file'), uploadPolicy);
+
 
 /**
  * @swagger
