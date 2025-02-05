@@ -20,7 +20,6 @@ import { getAllData } from './src/controllers/polizaController.js';
 import uploadRouter from './src/routes/uploadFilesRoutes.js';
 import uploadUserRouter from './src/routes/userFilesRoutes.js';
 import uploadDeliveriesRouter from './src/routes/deliveriesFilesRoutes.js';
-import { uploadDelivery } from './src/config/fileUploadConfig.js';
 // Relación (FK)
 import { relaciones } from './src/models/relacion_tablas.js';
 
@@ -28,8 +27,9 @@ dotenv.config();
 
 const app = express();
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
 
 // Configuración de Swagger
 const swaggerOptions = {
@@ -52,7 +52,6 @@ const swaggerOptions = {
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use(uploadDelivery.any());
 
 // Rutas
 app.use('/api/almacenes', almacenRouter);
