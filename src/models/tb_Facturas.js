@@ -41,7 +41,7 @@ const Facturas = db.define("tb_Facturas", {
         allowNull: false,
         // Fecha
     },
-    nombre_proveedor: {
+    id_proveedor: {
         type: DataTypes.INTEGER,
         allowNull: false,
         // Nombre del proveedor va asociada con la tabla de proveedores

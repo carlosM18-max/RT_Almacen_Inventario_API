@@ -52,6 +52,10 @@ const Inventario = db.define("tb_Inventario", {
         allowNull: false,
         // Estado del bien
     },
+    id_registrocontable:{
+        type: DataTypes.INTEGER,
+        primaryKey: true,       
+    }
 }, {
     timestamps: true, // Agrega campos createdAt y updatedAt
 });

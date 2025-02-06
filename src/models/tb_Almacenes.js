@@ -52,17 +52,6 @@ const Almacenes = db.define("tb_Almacenes", {
     allowNull: false,
     // Locación lleva in enum de locaciones
   },
-  estado: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    // Estatus
-  },
-  motivo: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    // Motivo
-  },
-  // Orden de entrega
   orden_entrega: {
     type: DataTypes.STRING(255),
     allowNull: false
@@ -72,21 +61,17 @@ const Almacenes = db.define("tb_Almacenes", {
     allowNull: false,
     // Número de inventario
   },
+
   id_factura: {
     type: DataTypes.INTEGER,
     allowNull: false,
     // ID de la factura
   },
-  id_solictud: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    // ID de la solicitud
-  },
   id_poliza: {
     type: DataTypes.INTEGER,
     allowNull: false,
     // ID de la póliza
-  }
+  },
 },
   {
     timestamps: true, // Agrega campos createdAt y updatedAt
