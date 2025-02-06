@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { uploadUser as fileUserUploadConfig } from '../config/fileUploadConfig.js';
+import { uploadUser } from '../config/fileUploadConfig.js';
 import { listUserFiles } from '../config/fileListConfig.js';
 import { uploadPolicy } from '../controllers/uploadController.js';
 
@@ -61,7 +61,7 @@ const router = Router();
  */
 
 // Ruta para subir archivos de entregas
-router.post('/', fileUserUploadConfig.single('file'), uploadPolicy);
+router.post('/', uploadUser.single('file'), uploadPolicy);
 
 /**
  * @swagger
