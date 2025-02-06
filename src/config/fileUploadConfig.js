@@ -17,7 +17,17 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage });
+const upload = multer({
+  storage,
+  limits: { fileSize: 20 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+    if (!allowedTypes.includes(file.mimetype)) {
+      return cb(new Error('Tipo de archivo no permitido'), false);
+    }
+    cb(null, true);
+  },
+});
 
 // Configuración de almacenamiento de archivos del usuario
 const storageUser = multer.diskStorage({
@@ -29,7 +39,16 @@ const storageUser = multer.diskStorage({
   },
 });
 
-const uploadUser = multer({ storage: storageUser });
+const uploadUser = multer({
+  storage: storageUser, limits: { fileSize: 20 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+    if (!allowedTypes.includes(file.mimetype)) {
+      return cb(new Error('Tipo de archivo no permitido'), false);
+    }
+    cb(null, true);
+  },
+});
 
 // Configuración de multer para los archivos de entregas
 const storageDeliveries = multer.diskStorage({
@@ -47,7 +66,7 @@ const storageDeliveries = multer.diskStorage({
 
 const uploadDelivery = multer({
   storage: storageDeliveries,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 5 MB límite
+  limits: { fileSize: 20 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png'];
     if (!allowedTypes.includes(file.mimetype)) {

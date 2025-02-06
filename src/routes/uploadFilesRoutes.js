@@ -1,43 +1,9 @@
 import { Router } from 'express';
-import { upload as fileUploadConfig } from '../config/fileUploadConfig.js'; 
+import { upload } from '../config/fileUploadConfig.js'; 
 import { listFiles } from '../config/fileListConfig.js';
 import { uploadPolicy } from '../controllers/uploadController.js';
 
 const router = Router();
-
-/**
- * @swagger
- * components:
- *   schemas:
- *     UploadResponse:
- *       type: object
- *       properties:
- *         status:
- *           type: string
- *           example: "created"
- *         file:
- *           type: object
- *           properties:
- *             fieldname:
- *               type: string
- *             originalname:
- *               type: string
- *             encoding:
- *               type: string
- *             mimetype:
- *               type: string
- *             destination:
- *               type: string
- *             filename:
- *               type: string
- *             path:
- *               type: string
- *             size:
- *               type: integer
- *       required:
- *         - status
- *         - file
- */
 
 /**
  * @swagger
@@ -94,7 +60,7 @@ const router = Router();
  */
 
 // Ruta para subir archivos (pólizas)
-router.post('/', fileUploadConfig.single('file'), uploadPolicy);
+router.post('/', upload.single('file'), uploadPolicy);
 
 /**
  * @swagger

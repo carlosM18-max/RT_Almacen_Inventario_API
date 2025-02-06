@@ -1,5 +1,5 @@
 const uploadPolicy = (req, res) => {
-    // console.log(req.file);  // Para depuración
+    // console.log(req.file);
     if (!req.file) {
         return res.status(400).json({ message: 'No file uploaded' });
     }
