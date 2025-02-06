@@ -35,7 +35,7 @@ Usuarios.hasMany(Entregas, { foreignKey: "id", as: "entregasUsuario" });
 Entregas.belongsTo(Usuarios, { foreignKey: "id_usuario_recibe", as: "usuarioRecibe" });
 Usuarios.hasMany(Entregas, { foreignKey: "id", as: "entregasRecibidas" });
 
-Entregas.belongsTo(Solicitudes, { foreignKey: "id_solicitud", as: "solicitudEntrega" });
+Entregas.belongsTo(Solicitudes, { foreignKey: "id_solicitud" , as: "solicitudEntrega" });
 Solicitudes.hasMany(Entregas, { foreignKey: "id", as: "entregasSolicitud" });
 
 Entregas.belongsTo(Inventario, { foreignKey: "id_inventario", as: "bienEntrega" });
@@ -59,7 +59,7 @@ Solicitudes.belongsTo(Usuarios, {foreignKey: "id_usuario_aprobador", as: "usuari
 Usuarios.hasMany(Solicitudes, { foreignKey: "id", as: "solicitudesaprobadas" });
 
 Solicitudes.belongsTo(Almacenes, {foreignKey: "id_almacen", as: "solicitudalmacen" });
-Almacenes.hasMany(Solicitudes, { foreignKey: "id", as: "alamacensolicitudes" });
+Almacenes.hasMany(Solicitudes, { foreignKey: "id", as: "alamacens" });
 
 // Referencias de Vida Útil
 VidaUtil.belongsTo(ObjetoGastos, { foreignKey: "id_partida", as: "partidaVidaUtil" });

@@ -28,7 +28,7 @@ const Bajas = db.define("tb_Bajas", {
   },
   id_inventario: {
     type: DataTypes.INTEGER,
-    allowNull: true,
+    allowNull: false,
     // ID del inventario
   },
   id_usuario: {
