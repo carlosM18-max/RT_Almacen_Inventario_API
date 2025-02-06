@@ -52,16 +52,6 @@ const Almacenes = db.define("tb_Almacenes", {
     allowNull: false,
     // Locación lleva in enum de locaciones
   },
-  estado: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    // Estatus
-  },
-  motivo: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    // Motivo
-  },
   // Orden de entrega
   orden_entrega: {
     type: DataTypes.STRING(255),

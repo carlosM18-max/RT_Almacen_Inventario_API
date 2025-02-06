@@ -22,17 +22,8 @@ export const relaciones = () => {
     Almacenes.belongsTo(ObjetoGastos, { foreignKey: "codigo_armonizable", as: "partidaPresupuestal" });
     ObjetoGastos.hasMany(Almacenes, { foreignKey: "id_partida", as: "almacenesPartida" });
 
-    Almacenes.hasMany(Inventario, { foreignKey: "id_almacen", as: "bienesAlmacen" });
-    Inventario.belongsTo(Almacenes, { foreignKey: "id", as: "almacenBien" });
-
     Almacenes.hasMany(Entregas, { foreignKey: "orden_entrega", as: "OrdenentregasAlmacen" });
     Entregas.belongsTo(Almacenes, { foreignKey: "id", as: "almacenentregas" });
-
-    Almacenes.hasMany(Solicitudes, { foreignKey: "id_solicitud", as: "solicitudesAlmacen" });
-    Solicitudes.belongsTo(Almacenes, { foreignKey: "id", as: "almacenSolicitud" });
-
-    Almacenes.hasMany(Entregas, { foreignKey: "id", as: "entregasAlmacen" });
-    Entregas.belongsTo(Almacenes, { foreignKey: "id_almacen", as: "almacenEntrega" });
 
     Almacenes.hasMany(RegistroContable, { foreignKey: "registro_contable", as: "registrosAlmacen" });
     RegistroContable.belongsTo(Almacenes, { foreignKey: "id", as: "almacenRegistro" });
@@ -51,8 +42,12 @@ export const relaciones = () => {
     Solicitudes.hasMany(Entregas, { foreignKey: "id", as: "entregasSolicitud" });
 
     // Referencias de Facturas
-    Facturas.belongsTo(Proveedores, { foreignKey: "nombre_proveedor", as: "proveedorFactura" });
-    Proveedores.hasMany(Facturas, { foreignKey: "nombre", as: "facturasProveedor" });
+    
+    Facturas.belongsTo(Proveedores, { foreignKey: "id_proveedor", as: "proveedorFactura" });
+    Proveedores.hasMany(Facturas, { foreignKey: "id", as: "facturasProveedor" });
+
+    Inventario.belongsTo(RegistroContable, { foreignKey: "id_registrocontable", as: "InventariConta" });
+    RegistroContable.hasMany(Inventario, { foreignKey: "id", as: "Regisinventa" });
 
     // Referencias de Solicitudes
     Solicitudes.belongsTo(Usuarios, { foreignKey: "id_usuario_solicitud", as: "usuarioCreadorSolicitud" });
