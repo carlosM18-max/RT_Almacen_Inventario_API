@@ -56,12 +56,6 @@ const Almacenes = db.define("tb_Almacenes", {
     type: DataTypes.STRING(255),
     allowNull: false
   },
-  id_inventario: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    // Número de inventario
-  },
-
   id_factura: {
     type: DataTypes.INTEGER,
     allowNull: false,

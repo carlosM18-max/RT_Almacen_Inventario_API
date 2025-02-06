@@ -24,9 +24,6 @@ const Usuarios = db.define("tb_Usuarios", {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
-    validate: {
-      isEmail: true,
-    },
   },
   clave: {
     type: DataTypes.STRING,
