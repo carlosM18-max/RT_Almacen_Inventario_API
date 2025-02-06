@@ -66,6 +66,10 @@ const Almacenes = db.define("tb_Almacenes", {
     allowNull: false,
     // ID de la póliza
   },
+  id_partida: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
 },
   {
     timestamps: true, // Agrega campos createdAt y updatedAt
