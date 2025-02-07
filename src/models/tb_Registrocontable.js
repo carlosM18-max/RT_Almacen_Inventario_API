@@ -8,22 +8,22 @@ const RegistroContable = db.define("tb_Registro_Contable", {
         autoIncrement: true,
     },
     nombre: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: false,
         // Nombre
     },
     cuenta: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: false,
         // cuenta 
     },
     supc_cuenta: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: false,
         // cuenta 
     },
     clasificador: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: false,
         // clasificador
     },

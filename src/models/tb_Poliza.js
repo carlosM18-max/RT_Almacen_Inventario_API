@@ -8,12 +8,12 @@ const Poliza = db.define("tb_Poliza", {
         autoIncrement: true,
     },
     descripcion: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: true,
         // Descripción del bien asegurado
     },
     cobertura: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: true,
         // Cobertura
     },
@@ -23,16 +23,16 @@ const Poliza = db.define("tb_Poliza", {
         // Tipo: egresos, presupuestales, diario, cheques, ingresos
     },
     cantidad: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(11, 10),
         allowNull: false
     },
     deducible: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(11, 10),
         allowNull: true,
         // Deducible
     },
     limites_indemnizacion: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: true,
         // Límites de indemnización
     },
@@ -50,12 +50,12 @@ const Poliza = db.define("tb_Poliza", {
         allowNull: false
     },
     prima: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(11, 10),
         allowNull: true,
         // Prima
     },
     clausulas_exclusion: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: true,
         // Cláusulas de exclusión
     },

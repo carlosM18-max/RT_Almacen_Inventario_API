@@ -3,7 +3,6 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import multer from 'multer';
 // Configuración de la conexión
 import db from './src/config/db.js';
 import { getDbState, setDbState, resetDbState } from './src/config/db.State.js';
@@ -30,7 +29,6 @@ app.use(cors());
 app.use(express.json({ limit: '20mb' }));
 app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 
-
 // Configuración de Swagger
 const swaggerOptions = {
   definition: {
@@ -51,7 +49,6 @@ const swaggerOptions = {
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
 
 // Rutas
 app.use('/api/almacenes', almacenRouter);
@@ -99,7 +96,7 @@ const initializeDatabase = async (force = false) => {
 
     // Obtener la fecha y hora actual
     const now = new Date();
-    setDbState({initialized: true, lastInitialized: now.toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })});
+    setDbState({ initialized: true, lastInitialized: now.toLocaleString('es-MX', { timeZone: 'America/Mexico_City' }) });
 
     // Imprimir mensaje de inicialización con hora actual
     console.log(`------> Base de datos inicializada a las ${now.toLocaleTimeString()}`);

@@ -22,7 +22,7 @@ const Facturas = db.define("tb_Facturas", {
         // Fecha de adquisición
     },
     numero_de_factura: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER(20),
         allowNull: false,
         // Número de factura
     },
@@ -32,7 +32,7 @@ const Facturas = db.define("tb_Facturas", {
         // Tipo de compra
     },
     concepto: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: false,
         // Concepto
     },
@@ -47,27 +47,27 @@ const Facturas = db.define("tb_Facturas", {
         // Nombre del proveedor va asociada con la tabla de proveedores
     },
     cantidad: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(11, 10),
         allowNull: false,
         // Cantidad
     },
     precio_unitario: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(11, 10),
         allowNull: false,
         // Precio unitario
     },
     sub_total: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(11, 10),
         allowNull: false,
         // Subtotal
     },
     iva: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(11, 10),
         allowNull: false,
         // IVA
     },
     total: {
-        type: DataTypes.FLOAT(10),
+        type: DataTypes.FLOAT(11, 10),
         allowNull: false,
         // Total
     },
@@ -76,8 +76,10 @@ const Facturas = db.define("tb_Facturas", {
         allowNull: false,
         // Archivo (PDF)
     },
-}, {
-    timestamps: true,
-});
+},
+    {
+        timestamps: true,
+    }
+);
 
 export default Facturas;

@@ -13,32 +13,32 @@ const Inventario = db.define("tb_Inventario", {
         // Tipo de inventario
     },
     numero_inventario: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER(20),
         allowNull: false,
         // Número de inventario
     },
     color: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(50),
         allowNull: false,
         // Color
     },
     material: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(50),
         allowNull: false,
         // Material
     },
     marca: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(50),
         allowNull: false,
         // Marca
     },
     modelo: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(50),
         allowNull: false,
         // Modelo
     },
     serie: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(50),
         allowNull: false,
         // Serie
     },
@@ -55,8 +55,10 @@ const Inventario = db.define("tb_Inventario", {
     id_registrocontable: {
         type: DataTypes.INTEGER,
         allowNull: false,
-      },
-}, {
-    timestamps: true, // Agrega campos createdAt y updatedAt
-});
+    },
+},
+    {
+        timestamps: true, // Agrega campos createdAt y updatedAt
+    }
+);
 export default Inventario;
