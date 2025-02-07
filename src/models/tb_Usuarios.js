@@ -21,20 +21,20 @@ const Usuarios = db.define("tb_Usuarios", {
     allowNull: false,
   },
   email: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(100),
     allowNull: false,
     unique: true,
   },
   clave: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
   identificacion: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(13),
     allowNull: false,
   },
   RFC: {
-    type: DataTypes.STRING(13),
+    type: DataTypes.STRING(20),
     allowNull: false,
   },
   CURP: {
@@ -43,10 +43,10 @@ const Usuarios = db.define("tb_Usuarios", {
   },
   direcion_pertenencia: {
     type: DataTypes.ENUM("DIRECCIÓN GENERAL", "DIRECCIÓN DE COORDINACIÓN FINANCIERA Y PLANEACIÓN",
-      "DIRECCIÓN DE TELEVISIÓN", "DIRECCIÓN DE NOTICIAS", "DIRECCIÓN DE RADIO", 
-      "DIRECCIÓN DE INGENIERIA", "DIRECCIÓN DE PROYECTOS ESTRATEGICOS","ORGANO INTERNO DE CONTROL", 
+      "DIRECCIÓN DE TELEVISIÓN", "DIRECCIÓN DE NOTICIAS", "DIRECCIÓN DE RADIO",
+      "DIRECCIÓN DE INGENIERIA", "DIRECCIÓN DE PROYECTOS ESTRATEGICOS", "ORGANO INTERNO DE CONTROL",
       "DIRECCIÓN DE PROMOCIÓN E INTERCAMBIO", "DIRECCIÓN JURIDICA",
-      "DIRECCIÓN DE VINCULACIÓN","IMAGEN","ESTACIONES DE RADIO "
+      "DIRECCIÓN DE VINCULACIÓN", "IMAGEN", "ESTACIONES DE RADIO "
     ), //pendiente
     allowNull: false
   },
@@ -72,8 +72,10 @@ const Usuarios = db.define("tb_Usuarios", {
     type: DataTypes.BLOB,
     allowNull: false,
   },
-}, {
-  timestamps: true,
-});
+},
+  {
+    timestamps: true,
+  }
+);
 
 export default Usuarios;

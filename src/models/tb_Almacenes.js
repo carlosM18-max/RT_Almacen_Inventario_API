@@ -13,7 +13,7 @@ const Almacenes = db.define("tb_Almacenes", {
     // Tipo de alta (donación, compra, como dato)
   },
   nombre: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: false,
     // Nombre
   },
@@ -38,12 +38,12 @@ const Almacenes = db.define("tb_Almacenes", {
     // Código armonizable relacion con objeto de gasto
   },
   registro_contable: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: false,
     // Cuenta contable
   },
   cantidad: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
     // Cantidad
   },

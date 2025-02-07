@@ -9,15 +9,15 @@ const ObjetoGastos = db.define("tb_Objeto_Gastos", {
     // se relaciona con el codigo armonizado de la tabla de almacenes
   },
   capitulo: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: true,
   },
   nombre: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: true,
   },
   descripcion: {
-    type: DataTypes.TEXT,
+    type: DataTypes.STRING(255),
     allowNull: true,
   }
 },

@@ -13,7 +13,7 @@ const Bajas = db.define("tb_Bajas", {
     // Fecha
   },
   estado_bien: {
-    type: DataTypes.ENUM("Nuevo", "Bueno", "Regular", "Malo", "Inservible"), 
+    type: DataTypes.ENUM("Nuevo", "Bueno", "Regular", "Malo", "Inservible"),
     allowNull: false,
     // Estado
   },
@@ -36,9 +36,10 @@ const Bajas = db.define("tb_Bajas", {
     allowNull: false,
     // ID del usuario
   }
-}, {
-  timestamps: true, // Agrega campos createdAt y updatedAt
-
-});
+},
+  {
+    timestamps: true, // Agrega campos createdAt y updatedAt
+  }
+);
 
 export default Bajas;

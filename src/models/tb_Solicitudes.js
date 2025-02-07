@@ -8,15 +8,15 @@ const Solicitudes = db.define("tb_Solicitudes", {
         autoIncrement: true,
     },
     Cantidad_Solicitar: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER(50),
         allowNull: true,
     },
-    Unidad_Medida:{
-        type: DataTypes.STRING,
+    Unidad_Medida: {
+        type: DataTypes.INTEGER(50),
         allowNull: true,
     },
     descripcion: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: true,
     },
     archivo: {

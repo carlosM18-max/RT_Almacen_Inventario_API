@@ -8,7 +8,7 @@ const Entregas = db.define("tb_Entregas", {
     autoIncrement: true,
   },
   cantidad: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
     // Cantidad
   },
@@ -18,7 +18,7 @@ const Entregas = db.define("tb_Entregas", {
     // Fecha de entrega
   },
   descripcion: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: false,
     // Descripción
   },
@@ -47,9 +47,10 @@ const Entregas = db.define("tb_Entregas", {
     allowNull: false,
     // ID del usuario que recibe
   }
-}, {
-  timestamps: true, // Agrega campos createdAt y updatedAt
-
-});
+},
+  {
+    timestamps: true, // Agrega campos createdAt y updatedAt
+  }
+);
 
 export default Entregas;

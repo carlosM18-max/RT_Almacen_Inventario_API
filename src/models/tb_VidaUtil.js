@@ -8,7 +8,7 @@ const VidaUtil = db.define("tb_Vida_Util", {
     autoIncrement: true,
   },
   cuenta: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: false,
     // cuenta
   },
@@ -18,27 +18,29 @@ const VidaUtil = db.define("tb_Vida_Util", {
     // partida
   },
   concepto: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: false,
     // concepto
   },
   años_de_vida_util: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.INTEGER(50),
     allowNull: false,
     // vida útil en años
   },
   porcentaje_depreciacion_mensual: {
-    type: DataTypes.FLOAT,
+    type: DataTypes.FLOAT(11, 10),
     allowNull: false,
     // porcentaje de depreciación mensual
   },
   porcentaje_depreciacion_anual: {
-    type: DataTypes.FLOAT,
+    type: DataTypes.FLOAT(11, 10),
     allowNull: false,
     // porcentaje de depreciación anual
   },
-}, {
-  timestamps: true,
-});
+},
+  {
+    timestamps: true,
+  }
+);
 
 export default VidaUtil;

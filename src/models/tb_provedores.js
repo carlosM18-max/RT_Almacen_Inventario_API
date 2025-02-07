@@ -8,12 +8,12 @@ const Proveedores = db.define("tb_Proveedores", {
         autoIncrement: true,
     },
     nombre: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: false,
     },
     // Nombre
     apellidos: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: false,
         // Apellido Paterno
     },
@@ -22,25 +22,25 @@ const Proveedores = db.define("tb_Proveedores", {
         allowNull: false,
     },
     rfc: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(20),
         allowNull: false,
         // RFC
     },
     direccion: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(255),
         allowNull: false,
         // Dirección
     },
     telefono: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER(10),
         allowNull: false,
     },
     email: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(50),
         allowNull: false,
     },
     cuenta_bancaria: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(20),
         allowNull: false,
         // Cuenta bancaria
     },
