@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
+// TODO: configuracion del estado de la base de datos terminada.
 const DB_STATE_FILE = path.join(process.cwd(), 'dbState.json');
 
 export const getDbState = () => {

@@ -1,7 +1,8 @@
 import multer from "multer";
 import path from "path";
 import { fileURLToPath } from 'url';
-import fs from 'fs';
+
+// TODO: Configuracion de las rutas de carga de archivos terminada.
 
 // Obtener el nombre de archivo y directorio actual
 const __filename = fileURLToPath(import.meta.url);

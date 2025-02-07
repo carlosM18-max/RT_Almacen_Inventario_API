@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize";
 import dotenv from 'dotenv';
 
 dotenv.config();
-
+// TODO: Configuracion de la conexión a la base de datos terminada.
 const db = new Sequelize({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
