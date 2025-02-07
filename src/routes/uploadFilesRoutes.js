@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { upload } from '../config/fileUploadConfig.js'; 
+import { upload } from '../middlewares/configStorageFile.js'; 
 import { listFiles } from '../config/fileListConfig.js';
 import { uploadPolicy } from '../controllers/uploadController.js';
 
