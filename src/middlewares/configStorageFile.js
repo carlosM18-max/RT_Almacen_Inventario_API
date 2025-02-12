@@ -2,7 +2,7 @@ import multer from "multer";
 import path from "path";
 import { fileURLToPath } from 'url';
 
-// TODO: Configuracion de las rutas de carga de archivos terminada.
+// FIXME: Configuracion de las rutas de carga de archivos (En proceso).
 
 // Obtener el nombre de archivo y directorio actual
 const __filename = fileURLToPath(import.meta.url);
@@ -136,7 +136,7 @@ const storageDeliveries = multer.diskStorage({
 
 const uploadDelivery = multer({
     storage: storageDeliveries,
-    limits: { fileSize: 20 * 1024 * 1024 },
+    limits: { fileSize: 50 * 1024 * 1024 },
     fileFilter: (req, file, cb) => {
         const allowedTypes = [
             'application/pdf',
