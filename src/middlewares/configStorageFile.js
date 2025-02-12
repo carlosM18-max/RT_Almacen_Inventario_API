@@ -138,9 +138,21 @@ const uploadDelivery = multer({
     storage: storageDeliveries,
     limits: { fileSize: 20 * 1024 * 1024 },
     fileFilter: (req, file, cb) => {
-        const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+        const allowedTypes = [
+            'application/pdf',
+            'application/zip',
+            'application/x-zip-compressed',
+            'application/x-compressed',
+            'application/x-rar-compressed',
+            'application/vnd.rar',
+            'image/jpeg',
+            'image/png'
+        ];
         if (!allowedTypes.includes(file.mimetype)) {
             return cb(new Error('Tipo de archivo no permitido'), false);
+        } else {
+            // Mostrar el datos del archivo
+            console.log('Archivo subido correctamente', file);
         }
         cb(null, true);
     },

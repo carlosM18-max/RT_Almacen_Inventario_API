@@ -43,6 +43,28 @@ const swaggerOptions = {
         url: `http://localhost:${process.env.PORT || 3000}`,
       },
     ],
+    components: {
+      schemas: {
+        UploadResponse: {
+          type: 'object',
+          properties: {
+            message: {
+              type: 'string',
+              example: 'Archivo subido correctamente',
+            },
+            fileName: {
+              type: 'string',
+              example: 'archivo.pdf',
+            },
+            fileUrl: {
+              type: 'string',
+              format: 'uri',
+              example: 'http://localhost:3000/uploads/archivo.pdf',
+            },
+          },
+        },
+      },
+    },
   },
   apis: ['./src/routes/*.js'],
 };
