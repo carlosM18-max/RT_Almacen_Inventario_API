@@ -34,6 +34,9 @@ const router = Router();
  *         clave:
  *           type: string
  *           description: Clave del usuario
+ *         departamento:
+ *           type: string
+ *           description: Departamento del usuario
  *         email:
  *           type: string
  *           description: Correo electrónico del usuario
@@ -150,6 +153,8 @@ router.get("/:id", getUsuarioById);
  *                 type: string
  *               clave:
  *                 type: string
+ *               departamento:
+ *                 type: string
  *               email:
  *                 type: string
  *               RFC:
@@ -230,6 +235,8 @@ router.post("/", createUsuario);
  *               apellidos:
  *                 type: string
  *               clave:
+ *                 type: string
+ *               departamento:
  *                 type: string
  *               email:
  *                 type: string
