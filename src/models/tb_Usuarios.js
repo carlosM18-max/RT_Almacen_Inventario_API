@@ -29,10 +29,10 @@ const Usuarios = db.define("tb_Usuarios", {
     type: DataTypes.STRING(100),
     allowNull: true,
   },
-  identificacion: {
-    type: DataTypes.STRING(13),
-    allowNull: true,
-  },
+  // identificacion: {
+  //   type: DataTypes.STRING(13),
+  //   allowNull: true,
+  // },
   RFC: {
     type: DataTypes.STRING(13),
     allowNull: true,
@@ -68,10 +68,10 @@ const Usuarios = db.define("tb_Usuarios", {
       "DIRECTOR DE ÁREA B", "DIRECTOR GENERAL A", "DIRECTOR GENERAL B", "SUBSECRETARIO A", "SECRETARIO В"),
     allowNull: true,
   },
-  imagen: {
-    type: DataTypes.BLOB("long"),
-    allowNull: true,
-  },
+  // imagen: {
+  //   type: DataTypes.BLOB("long"),
+  //   allowNull: true,
+  // },
 },
   {
     timestamps: true,
