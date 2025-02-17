@@ -1,6 +1,5 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db.js";
-import Almacenes from "./tb_Almacenes.js";
 
 const Usuarios = db.define("tb_Usuarios", {
   id: {
@@ -30,7 +29,11 @@ const Usuarios = db.define("tb_Usuarios", {
     allowNull: true,
     unique: true,
   },
-  clave: {
+  password: {
+    type: DataTypes.STRING(100),
+    allowNull: true,
+  },
+  confirmPassword: {
     type: DataTypes.STRING(100),
     allowNull: true,
   },
@@ -50,7 +53,7 @@ const Usuarios = db.define("tb_Usuarios", {
     type: DataTypes.STRING(18),
     allowNull: true,
   },
-  direcion_pertenencia: {
+  direccion_pertenencia: {
     type: DataTypes.ENUM("Direccion General", "Direccion de Coordinacion Financiera Y Planeacion",
       "Direccion de Television", "Direccion de Noticias", "Direccion de Radio",
       "Direccion de Ingenieria", "Direccion de Proyectos Estrategicos", "Organo Interno de Control",
@@ -71,13 +74,13 @@ const Usuarios = db.define("tb_Usuarios", {
     defaultValue: 'RADIO Y TELEVICION DE HIDALGO'
     // Área presupuestal (DIRECCIÓN DE ADMINISTRACIÓN Y FINANZAS)
   },
-  cargo: {
+  /* cargo: {
     type: DataTypes.ENUM("Jefe de Area A", "Jefe de Area B", "Jefe de Departamento C",
       "Subdirector A", "Subdirector de Area C",
       "Director de Area B", "Director General A", "Director General B",
       "Subsecretario A", "Secretario В"),
     allowNull: true,
-  },
+  }, */
   fecha_registro: {
     type: DataTypes.DATE,
     allowNull: true,
