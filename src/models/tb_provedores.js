@@ -45,7 +45,7 @@ const Proveedores = db.define("tb_Proveedores", {
         // Cuenta bancaria
     },
     archivo_acuerdo: {
-        type: DataTypes.BLOB,
+        type: DataTypes.BLOB("long"),
         allowNull: false,
         // Archivo (PDF)
     },

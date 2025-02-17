@@ -17,7 +17,7 @@ const RegistroContable = db.define("tb_Registro_Contable", {
         allowNull: false,
         // cuenta 
     },
-    supc_cuenta: {
+    sup_cuenta: {
         type: DataTypes.STRING(255),
         allowNull: false,
         // cuenta 

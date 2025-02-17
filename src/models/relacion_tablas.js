@@ -11,6 +11,7 @@ import Solicitudes from "./tb_Solicitudes.js";
 import Usuarios from "./tb_Usuarios.js";
 import VidaUtil from "./tb_VidaUtil.js";
 
+
 export const relaciones = () => {
     // Referencias de Almacenes
     Almacenes.belongsTo(Facturas, { foreignKey: "id_factura", as: "facturaAlmacen" });

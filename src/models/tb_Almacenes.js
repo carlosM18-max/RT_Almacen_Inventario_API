@@ -7,6 +7,7 @@ const Almacenes = db.define("tb_Almacenes", {
     primaryKey: true,
     autoIncrement: true,
   },
+  
   tipo_adquisicion: {
     type: DataTypes.ENUM("Donacion", "Compra", "Como dato"),
     allowNull: false,
@@ -33,7 +34,7 @@ const Almacenes = db.define("tb_Almacenes", {
     // Tipo de activo (mueble, inmueble)
   },
   codigo_armonizable: {
-    type: DataTypes.INTEGER(10),
+    type: DataTypes.INTEGER(4),
     allowNull: false,
     // Código armonizable relacion con objeto de gasto
   },

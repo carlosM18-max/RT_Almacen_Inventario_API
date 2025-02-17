@@ -34,7 +34,7 @@ const Usuarios = db.define("tb_Usuarios", {
     allowNull: false,
   },
   RFC: {
-    type: DataTypes.STRING(20),
+    type: DataTypes.STRING(13),
     allowNull: false,
   },
   CURP: {
@@ -69,7 +69,7 @@ const Usuarios = db.define("tb_Usuarios", {
     allowNull: false
   },
   imagen: {
-    type: DataTypes.BLOB,
+    type: DataTypes.BLOB("long"),
     allowNull: false,
   },
 },

@@ -11,7 +11,7 @@ const Facturas = db.define("tb_Facturas", {
         type: DataTypes.ENUM("Compra CM", "Domacion DN", "Comodato CO"),
         allowNull: false,
     },
-    Tipo_documento_ampara: {
+    tipo_documento_ampara: {
         type: DataTypes.ENUM("(Contrato De Comodato CO", "Comprobante Fiscal Digital por Internet CFDI"),
         allowNull: false,
         // Tipo de documento que ampara
@@ -47,27 +47,27 @@ const Facturas = db.define("tb_Facturas", {
         // Nombre del proveedor va asociada con la tabla de proveedores
     },
     cantidad: {
-        type: DataTypes.FLOAT(11, 10),
+        type: DataTypes. DECIMAL(10, 2),
         allowNull: false,
         // Cantidad
     },
     precio_unitario: {
-        type: DataTypes.FLOAT(11, 10),
+        type: DataTypes. DECIMAL(10, 2),
         allowNull: false,
         // Precio unitario
     },
     sub_total: {
-        type: DataTypes.FLOAT(11, 10),
+        type: DataTypes. DECIMAL(10, 2),
         allowNull: false,
         // Subtotal
     },
     iva: {
-        type: DataTypes.FLOAT(11, 10),
+        type: DataTypes. DECIMAL(10, 2),
         allowNull: false,
         // IVA
     },
     total: {
-        type: DataTypes.FLOAT(11, 10),
+        type: DataTypes. DECIMAL(10, 2),
         allowNull: false,
         // Total
     },

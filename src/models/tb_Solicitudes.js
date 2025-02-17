@@ -7,11 +7,11 @@ const Solicitudes = db.define("tb_Solicitudes", {
         primaryKey: true,
         autoIncrement: true,
     },
-    Cantidad_Solicitar: {
+    cantidad_solicitar: {
         type: DataTypes.INTEGER(50),
         allowNull: true,
     },
-    Unidad_Medida: {
+    unidad_medida: {
         type: DataTypes.INTEGER(50),
         allowNull: true,
     },
@@ -20,7 +20,7 @@ const Solicitudes = db.define("tb_Solicitudes", {
         allowNull: true,
     },
     archivo: {
-        type: DataTypes.BLOB,
+        type: DataTypes.BLOB("long"),
         allowNull: true,
     },
     // ID del usuario que aprueba el pedido

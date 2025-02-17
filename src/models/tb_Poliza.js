@@ -23,11 +23,11 @@ const Poliza = db.define("tb_Poliza", {
         // Tipo: egresos, presupuestales, diario, cheques, ingresos
     },
     cantidad: {
-        type: DataTypes.FLOAT(11, 10),
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false
     },
     deducible: {
-        type: DataTypes.FLOAT(11, 10),
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: true,
         // Deducible
     },
@@ -46,11 +46,11 @@ const Poliza = db.define("tb_Poliza", {
         allowNull: false
     },
     archivo: {
-        type: DataTypes.BLOB,
+        type: DataTypes.BLOB("long"),
         allowNull: false
     },
     prima: {
-        type: DataTypes.FLOAT(11, 10),
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: true,
         // Prima
     },
