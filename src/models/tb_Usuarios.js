@@ -33,7 +33,7 @@ const Usuarios = db.define("tb_Usuarios", {
     type: DataTypes.STRING(100),
     allowNull: true,
   },
-  confirmPassword: {
+  confirm_password: {
     type: DataTypes.STRING(100),
     allowNull: true,
   },
