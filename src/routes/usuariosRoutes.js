@@ -22,6 +22,9 @@ const router = Router();
  *         id:
  *           type: integer
  *           description: ID auto-generado del usuario
+ *         rol:
+ *           type: string
+ *           description: Rol del usuario
  *         numero_trabajador:
  *           type: integer
  *           description: Número de trabajador del usuario
@@ -83,6 +86,10 @@ const router = Router();
  *              - SUBSECRETARIO A
  *              - SUBSECRETARIO B
  *           description: Cargo del usuario
+ *         fecha_registro:
+ *           type: string
+ *           format: date
+ *           description: Fecha de registro del usuario
  */
 
 /** 
@@ -145,6 +152,8 @@ router.get("/:id", getUsuarioById);
  *           schema:
  *             type: object
  *             properties:
+ *               rol:
+ *                 type: string
  *               numero_trabajador:
  *                 type: integer
  *               nombre:
@@ -194,6 +203,9 @@ router.get("/:id", getUsuarioById);
  *                   - DIRECTOR GENERAL B
  *                   - SUBSECRETARIO A
  *                   - SUBSECRETARIO B
+ *               fecha_registro:
+ *                type: string
+ *                format: date
  *     responses:
  *       201:
  *         description: Usuario creada exitosamente
@@ -220,13 +232,15 @@ router.post("/", createUsuario);
  *           type: integer
  *         required: true
  *         description: ID del usuario
-  *     requestBody:
+ *     requestBody:
  *       required: true
  *       content:
  *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
+ *               rol:
+ *                 type: string
  *               numero_trabajador:
  *                 type: integer
  *               nombre:
@@ -283,6 +297,9 @@ router.post("/", createUsuario);
  *                   - DIRECTOR GENERAL B
  *                   - SUBSECRETARIO A
  *                   - SUBSECRETARIO B
+ *               fecha_registro:
+ *                type: string
+ *                format: date
  *     responses:
  *       201:
  *         description: Usuario creada exitosamente
