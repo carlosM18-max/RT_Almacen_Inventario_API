@@ -9,37 +9,37 @@ const Usuarios = db.define("tb_Usuarios", {
   },
   numero_trabajador: {
     type: DataTypes.INTEGER(6),
-    allowNull: false
+    allowNull: true,
     // numero de trabajador
   },
   nombre: {
     type: DataTypes.STRING(50),
-    allowNull: false,
+    allowNull: true,
   },
   apellidos: {
     type: DataTypes.STRING(50),
-    allowNull: false,
+    allowNull: true,
   },
   email: {
     type: DataTypes.STRING(100),
-    allowNull: false,
+    allowNull: true,
     unique: true,
   },
   clave: {
     type: DataTypes.STRING(100),
-    allowNull: false,
+    allowNull: true,
   },
   identificacion: {
     type: DataTypes.STRING(13),
-    allowNull: false,
+    allowNull: true,
   },
   RFC: {
     type: DataTypes.STRING(13),
-    allowNull: false,
+    allowNull: true,
   },
   CURP: {
     type: DataTypes.STRING(18),
-    allowNull: false,
+    allowNull: true,
   },
   direcion_pertenencia: {
     type: DataTypes.ENUM("DIRECCIÓN GENERAL", "DIRECCIÓN DE COORDINACIÓN FINANCIERA Y PLANEACIÓN",
@@ -48,17 +48,17 @@ const Usuarios = db.define("tb_Usuarios", {
       "DIRECCIÓN DE PROMOCIÓN E INTERCAMBIO", "DIRECCIÓN JURIDICA",
       "DIRECCIÓN DE VINCULACIÓN", "IMAGEN", "ESTACIONES DE RADIO "
     ), //pendiente
-    allowNull: false
+    allowNull: true,
   },
   organo_superior: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
     defaultValue: 'ORGANISMOS DESCENTRALIZADOS'
     // Órgano superior (ORGANISMOS DESCENTRALIZADO)
   },
   area_presupuestal: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
     defaultValue: 'RADIO Y TELEVICION DE HIDALGO'
     // Área presupuestal (DIRECCIÓN DE ADMINISTRACIÓN Y FINANZAS)
   },
@@ -66,11 +66,11 @@ const Usuarios = db.define("tb_Usuarios", {
     type: DataTypes.ENUM("JEFE DE ÁREA A", "JEFE DE ÁREA B", "JEFE DE DEPARTAMENTO C",
       "SUBDIRECTOR A", "SUBDIRECTOR DE ÁREA C",
       "DIRECTOR DE ÁREA B", "DIRECTOR GENERAL A", "DIRECTOR GENERAL B", "SUBSECRETARIO A", "SECRETARIO В"),
-    allowNull: false
+    allowNull: true,
   },
   imagen: {
     type: DataTypes.BLOB("long"),
-    allowNull: false,
+    allowNull: true,
   },
 },
   {
