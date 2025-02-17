@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { 
-    getAllUsuarios, 
-    getUsuarioById, 
-    createUsuario, 
-    updateUsuario, 
-    deleteUsuario 
+import {
+    getAllUsuarios,
+    getUsuarioById,
+    createUsuario,
+    updateUsuario,
+    deleteUsuario
 } from "../controllers/usuariosController.js";
 
 const router = Router();
@@ -28,15 +28,18 @@ const router = Router();
  *         numero_trabajador:
  *           type: integer
  *           description: Número de trabajador del usuario
- *         nombre:  
+ *         nombre:
  *           type: string
  *           description: Nombre del usuario
  *         apellidos:
  *           type: string
  *           description: Apellido del usuario
- *         clave:
+ *         password:
  *           type: string
  *           description: Clave del usuario
+ *         confirm_password:
+ *           type: string
+ *           description: Confirmación de la clave del usuario
  *         departamento:
  *           type: string
  *           description: Departamento del usuario
@@ -49,7 +52,7 @@ const router = Router();
  *         CURP:
  *           type: string
  *           description: CURP del usuario
- *         direcion_pertenencia:
+ *         direccion_pertenencia:
  *           type: string
  *           enum:
  *              - DIRECCIÓN GENERAL
@@ -72,27 +75,13 @@ const router = Router();
  *         area_presupuestal:
  *           type: string
  *           description: Area presupuestal del usuario
- *         cargo:
- *           type: string
- *           enum:
- *              - JEFE DE ÁREA A
- *              - JEFE DE ÁREA B
- *              - JEFE DE DEPARTAMENTO C
- *              - SUBDIRECTOR A
- *              - SUBDIRECTOR DE ÁREA C
- *              - DIRECTOR DE ÁREA B
- *              - DIRECTOR GENERAL A
- *              - DIRECTOR GENERAL B
- *              - SUBSECRETARIO A
- *              - SUBSECRETARIO B
- *           description: Cargo del usuario
  *         fecha_registro:
  *           type: string
  *           format: date
  *           description: Fecha de registro del usuario
  */
 
-/** 
+/**
  * @swagger
  * /api/usuarios:
  *   get:
@@ -108,10 +97,9 @@ const router = Router();
  *               items:
  *                 $ref: '#/components/schemas/Usuarios'
  *       500:
- *         description: Algú error del servidor
+ *         description: Algún error del servidor
  */
 router.get("/", getAllUsuarios);
-
 
 /**
  * @swagger
@@ -122,9 +110,9 @@ router.get("/", getAllUsuarios);
  *     parameters:
  *       - in: path
  *         name: id
+ *         required: true
  *         schema:
  *           type: integer
- *         required: true
  *         description: ID del usuario
  *     responses:
  *       200:
@@ -137,7 +125,6 @@ router.get("/", getAllUsuarios);
  *         description: Usuario no encontrado
  */
 router.get("/:id", getUsuarioById);
-
 
 /**
  * @swagger
@@ -160,7 +147,9 @@ router.get("/:id", getUsuarioById);
  *                 type: string
  *               apellidos:
  *                 type: string
- *               clave:
+ *               password:
+ *                 type: string
+ *               confirm_password:
  *                 type: string
  *               departamento:
  *                 type: string
@@ -170,7 +159,7 @@ router.get("/:id", getUsuarioById);
  *                 type: string
  *               CURP:
  *                 type: string
- *               direcion_pertenencia:
+ *               direccion_pertenencia:
  *                 type: string
  *                 enum:
  *                   - DIRECCIÓN GENERAL
@@ -190,25 +179,12 @@ router.get("/:id", getUsuarioById);
  *                 type: string
  *               area_presupuestal:
  *                 type: string
- *               cargo:
- *                 type: string
- *                 enum:
- *                   - JEFE DE ÁREA A
- *                   - JEFE DE ÁREA B
- *                   - JEFE DE DEPARTAMENTO C
- *                   - SUBDIRECTOR A
- *                   - SUBDIRECTOR DE ÁREA C
- *                   - DIRECTOR DE ÁREA B
- *                   - DIRECTOR GENERAL A
- *                   - DIRECTOR GENERAL B
- *                   - SUBSECRETARIO A
- *                   - SUBSECRETARIO B
  *               fecha_registro:
  *                type: string
  *                format: date
  *     responses:
  *       201:
- *         description: Usuario creada exitosamente
+ *         description: Usuario creado exitosamente
  *         content:
  *           application/json:
  *             schema:
@@ -217,7 +193,6 @@ router.get("/:id", getUsuarioById);
  *         description: Algún error del servidor
  */
 router.post("/", createUsuario);
-
 
 /**
  * @swagger
@@ -228,14 +203,14 @@ router.post("/", createUsuario);
  *     parameters:
  *       - in: path
  *         name: id
+ *         required: true
  *         schema:
  *           type: integer
- *         required: true
  *         description: ID del usuario
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
  *             type: object
  *             properties:
@@ -245,26 +220,21 @@ router.post("/", createUsuario);
  *                 type: integer
  *               nombre:
  *                 type: string
- *                 format: date
  *               apellidos:
  *                 type: string
- *               clave:
+ *               password:
+ *                 type: string
+ *               confirm_password:
  *                 type: string
  *               departamento:
  *                 type: string
  *               email:
  *                 type: string
- *               identificacion:
- *                 type: string
  *               RFC:
  *                 type: string
  *               CURP:
  *                 type: string
- *               telefono:
- *                 type: string
- *               direccion:
- *                 type: string
- *               direcion_pertenencia:
+ *               direccion_pertenencia:
  *                 type: string
  *                 enum:
  *                   - DIRECCIÓN GENERAL
@@ -284,25 +254,12 @@ router.post("/", createUsuario);
  *                 type: string
  *               area_presupuestal:
  *                 type: string
- *               cargo:
- *                 type: string
- *                 enum:
- *                   - JEFE DE ÁREA A
- *                   - JEFE DE ÁREA B
- *                   - JEFE DE DEPARTAMENTO C
- *                   - SUBDIRECTOR A
- *                   - SUBDIRECTOR DE ÁREA C
- *                   - DIRECTOR DE ÁREA B
- *                   - DIRECTOR GENERAL A
- *                   - DIRECTOR GENERAL B
- *                   - SUBSECRETARIO A
- *                   - SUBSECRETARIO B
  *               fecha_registro:
  *                type: string
  *                format: date
  *     responses:
  *       201:
- *         description: Usuario creada exitosamente
+ *         description: Usuario actualizado exitosamente
  *         content:
  *           application/json:
  *             schema:
@@ -312,25 +269,24 @@ router.post("/", createUsuario);
  */
 router.put("/:id", updateUsuario);
 
-
 /**
  * @swagger
  * /api/usuarios/{id}:
  *   delete:
- *     summary: Elimina un usuario
+ *     summary: Eliminar un usuario
  *     tags: [Usuarios]
  *     parameters:
  *       - in: path
  *         name: id
+ *         required: true
  *         schema:
  *           type: integer
- *         required: true
  *         description: ID del usuario
  *     responses:
  *       200:
- *         description: Usuario eliminada exitosamente
+ *         description: Usuario eliminado exitosamente
  *       404:
- *         description: Uusario no encontrada
+ *         description: Usuario no encontrado
  */
 router.delete("/:id", deleteUsuario);
 
