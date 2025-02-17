@@ -14,6 +14,7 @@ import objetoGastoRouter from './src/routes/objetoGastoRoutes.js';
 import solicitudesRouter from './src/routes/solicitudesRoutes.js';
 import facturasRouter from './src/routes/facturasRoutes.js';
 import polizasRouter from './src/routes/polizaRoutes.js';
+import usuariosRouter from './src/routes/usuariosRoutes.js';
 import { getAllData } from './src/controllers/polizaController.js';
 // Importacion de archivos de descargas y cargas
 import uploadRouter from './src/routes/uploadFilesRoutes.js';
@@ -79,8 +80,9 @@ app.use('/api/entregas', entregasRouter);
 app.use('/api/facturas', facturasRouter);
 app.use('/api/objetoGastos', objetoGastoRouter);
 app.use('/api/polizas', polizasRouter);
-app.use('/api/all-data', getAllData);
 app.use('/api/solicitudes', solicitudesRouter);
+app.use('/api/usuarios', usuariosRouter);
+app.use('/api/all-data', getAllData);
 // Rutas de descargas y cargas
 app.use('/api/upload', uploadRouter);
 app.use('/api/upload-files', uploadRouter);
