@@ -28,12 +28,12 @@ const VidaUtil = db.define("tb_Vida_Util", {
     // vida útil en años
   },
   porcentaje_depreciacion_mensual: {
-    type: DataTypes.FLOAT(11, 10),
+    type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
     // porcentaje de depreciación mensual
   },
   porcentaje_depreciacion_anual: {
-    type: DataTypes.FLOAT(11, 10),
+    type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
     // porcentaje de depreciación anual
   },
