@@ -14,6 +14,7 @@ import objetoGastoRouter from './src/routes/objetoGastoRoutes.js';
 import solicitudesRouter from './src/routes/solicitudesRoutes.js';
 import facturasRouter from './src/routes/facturasRoutes.js';
 import polizasRouter from './src/routes/polizaRoutes.js';
+import usuariosRouter from './src/routes/usuariosRoutes.js';
 import { getAllData } from './src/controllers/polizaController.js';
 // Importacion de archivos de descargas y cargas
 import uploadRouter from './src/routes/uploadFilesRoutes.js';
@@ -26,8 +27,8 @@ dotenv.config();
 
 const app = express();
 app.use(cors());
-app.use(express.json({ limit: '20mb' }));
-app.use(express.urlencoded({ extended: true, limit: '20mb' }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Configuración de Swagger
 const swaggerOptions = {
@@ -43,6 +44,28 @@ const swaggerOptions = {
         url: `http://localhost:${process.env.PORT || 3000}`,
       },
     ],
+    components: {
+      schemas: {
+        UploadResponse: {
+          type: 'object',
+          properties: {
+            message: {
+              type: 'string',
+              example: 'Archivo subido correctamente',
+            },
+            fileName: {
+              type: 'string',
+              example: 'archivo.pdf',
+            },
+            fileUrl: {
+              type: 'string',
+              format: 'uri',
+              example: 'http://localhost:3000/uploads/archivo.pdf',
+            },
+          },
+        },
+      },
+    },
   },
   apis: ['./src/routes/*.js'],
 };
@@ -57,8 +80,9 @@ app.use('/api/entregas', entregasRouter);
 app.use('/api/facturas', facturasRouter);
 app.use('/api/objetoGastos', objetoGastoRouter);
 app.use('/api/polizas', polizasRouter);
-app.use('/api/all-data', getAllData);
 app.use('/api/solicitudes', solicitudesRouter);
+app.use('/api/usuarios', usuariosRouter);
+app.use('/api/all-data', getAllData);
 // Rutas de descargas y cargas
 app.use('/api/upload', uploadRouter);
 app.use('/api/upload-files', uploadRouter);

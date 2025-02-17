@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { uploadDelivery } from '../config/fileUploadConfig.js';
+import { uploadDelivery } from '../middlewares/configStorageFile.js';
 import { listDeliveryFiles } from '../config/fileListConfig.js';
 import { uploadPolicy } from '../controllers/uploadController.js';
 
@@ -22,6 +22,12 @@ const router = Router();
  *               file:
  *                 type: string
  *                 format: binary
+ *                 description: |
+ *                   Tipos de archivos permitidos:
+ *                   - .PDF (`application/pdf`)
+ *                   - .ZIP (`application/zip`, `application/x-zip-compressed`, `application/x-compressed`)
+ *                   - .RAR (`application/x-rar-compressed`, `application/vnd.rar`, `application/x-compressed`)
+ *                   - .IMG (`image/jpeg`, `image/png`, `image/jpg`)
  *             required:
  *               - file
  *     responses:

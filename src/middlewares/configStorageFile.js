@@ -1,35 +1,70 @@
 import multer from "multer";
 import path from "path";
 import { fileURLToPath } from 'url';
-import fs from 'fs';
+
+// FIXME: Configuracion de las rutas de carga de archivos (En proceso).
 
 // Obtener el nombre de archivo y directorio actual
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Ruta de archivos
+// Ruta de archivos Generales
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, "../public/uploads/"));
+    destination: function (req, _file, cb) {
+        cb(null, path.join(__dirname, "../public/uploads"));
     },
-    filename: (req, file, cb) => {
+    filename: function (req, file, cb) {
         cb(null, `${Date.now()}-${file.originalname}`);
     },
 });
 
-const upload = multer({ storage });
-
-// Configuración de almacenamiento para archivos de usuarios
-const storageUser = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, "../public/users/"));
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname));
+const upload = multer({
+    storage,
+    limits: { fileSize: 20 * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+        const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+        if (!allowedTypes.includes(file.mimetype)) {
+            return cb(new Error('Tipo de archivo no permitido'), false);
+        }
+        cb(null, true);
     },
 });
 
-// Configuración de almacenamiento para archivos de almacen 
+// Ruta de archivos de Usuarios
+const storageUser = multer.diskStorage({
+    destination: function (req, _file, cb) {
+        cb(null, path.join(__dirname, "../public/users"));
+    },
+    filename: function (req, file, cb) {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    },
+});
+
+const uploadUser = multer({
+    storage: storageUser,
+    limits: { fileSize: 50 * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+        const allowedTypes = [
+            'application/pdf',
+            'application/zip',
+            'application/x-zip-compressed',
+            'application/x-compressed',
+            'application/x-rar-compressed',
+            'application/vnd.rar',
+            'image/jpeg',
+            'image/png'
+        ];
+        if (!allowedTypes.includes(file.mimetype)) {
+            return cb(new Error('Tipo de archivo no permitido'), false);
+        } else {
+            // Mostrar el datos del archivo
+            console.log('Archivo subido correctamente', file);
+        }
+        cb(null, true);
+    },
+});
+
+// Ruta de archivos de Usuarios de Almacen
 const storageAlmacen = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "../public/users/almacen/"));
@@ -39,10 +74,9 @@ const storageAlmacen = multer.diskStorage({
     },
 });
 
-// Configuración de multer para archivos de almacen 
 const uploadAlmacen = multer({ storage: storageAlmacen });
 
-// Configuración de almacenamiento para archivos de inventario 
+// Ruta de archivos de Usuarios de Inventario
 const storageInventario = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "../public/users/inventario/"));
@@ -51,13 +85,9 @@ const storageInventario = multer.diskStorage({
     },
 });
 
-// Configuración de multer para archivos de inventario 
 const uploadInventario = multer({ storage: storageInventario });
 
-// Configuración de multer para archivos de usuarios
-const uploadUser = multer({ storage: storageUser });
-
-// Configuración de almacenamiento para archivos de políticas
+// Ruta de archivos de Polizas
 const storagePolicy = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "../public/polizas/"));
@@ -67,10 +97,9 @@ const storagePolicy = multer.diskStorage({
     },
 });
 
-// Configuración de multer para archivos de políticas
 const uploadPolicy = multer({ storage: storagePolicy });
 
-// Configuración de almacenamiento para archivos de facturas
+// Ruta de archivos de Facturas
 const storageBills = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "../public/facturas/"));
@@ -80,10 +109,9 @@ const storageBills = multer.diskStorage({
     },
 });
 
-// Configuración de multer para archivos de facturas
 const uploadBills = multer({ storage: storageBills });
 
-// Configuracion de almacenamiento para archivos de solicitudes
+// Ruta de archivos de Solicitudes
 const storageRequest = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "../public/solicitudes/"));
@@ -93,10 +121,9 @@ const storageRequest = multer.diskStorage({
     },
 });
 
-// Configuracion de multer para archivos de solicitudes
 const uploadRequest = multer({ storage: storageRequest });
 
-// Configuracion de almacenamiento para archivos de propuestas de requisiciones
+// Ruta de archivos de Requisiciones
 const storageRequisition_proposal = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "../public/propuestaRequisicion/"));
@@ -106,12 +133,52 @@ const storageRequisition_proposal = multer.diskStorage({
     },
 });
 
-// Configuracion de multer para archivos de propuestas de requisiciones
 const uploadRequisition_proposal = multer({
     storage: storageRequisition_proposal,
 });
 
-// Exporta los middlewares de multer configurados
+// Ruta de archivos de Entregas
+const storageDeliveries = multer.diskStorage({
+    destination: function (req, _file, cb) {
+        cb(null, path.join(__dirname, "../public/deliveries"));
+    },
+    filename: function (req, file, cb) {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    },
+});
+
+const uploadDelivery = multer({
+    storage: storageDeliveries,
+    limits: { fileSize: 50 * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+        const allowedTypes = [
+            'application/pdf',
+            'application/zip',
+            'application/x-zip-compressed',
+            'application/x-compressed',
+            'application/x-rar-compressed',
+            'application/vnd.rar',
+            'image/jpeg',
+            'image/png'
+        ];
+        if (!allowedTypes.includes(file.mimetype)) {
+            return cb(new Error('Tipo de archivo no permitido'), false);
+        } else {
+            // Mostrar el datos del archivo
+            console.log('Archivo subido correctamente', file);
+        }
+        cb(null, true);
+    },
+});
+
 export {
-    upload, uploadUser, uploadBills, uploadPolicy, uploadRequest, uploadRequisition_proposal, uploadAlmacen, uploadInventario
+    upload,
+    uploadUser,
+    uploadAlmacen,
+    uploadInventario,
+    uploadPolicy,
+    uploadBills,
+    uploadRequest,
+    uploadRequisition_proposal,
+    uploadDelivery
 };
