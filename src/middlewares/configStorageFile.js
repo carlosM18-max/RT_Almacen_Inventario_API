@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
         cb(null, path.join(__dirname, "../public/uploads"));
     },
     filename: function (req, file, cb) {
-        cb(null, `${Date.now()}-${file.originalname}`);
+        cb(null, file.originalname);
     },
 });
 
@@ -36,7 +36,7 @@ const storageUser = multer.diskStorage({
         cb(null, path.join(__dirname, "../public/users"));
     },
     filename: function (req, file, cb) {
-        cb(null, `${Date.now()}-${file.originalname}`);
+        cb(null, file.originalname);
     },
 });
 
@@ -70,7 +70,7 @@ const storageAlmacen = multer.diskStorage({
         cb(null, path.join(__dirname, "../public/users/almacen/"));
     },
     filename: function (req, file, cb) {
-        cb(null, `${Date.now()}-${file.originalname}`);
+        cb(null, file.originalname);
     },
 });
 
@@ -81,7 +81,7 @@ const storageInventario = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "../public/users/inventario/"));
     }, filename: function (req, file, cb) {
-        cb(null, `${Date.now()}-${file.originalname}`);
+        cb(null, file.originalname);
     },
 });
 
@@ -93,7 +93,7 @@ const storagePolicy = multer.diskStorage({
         cb(null, path.join(__dirname, "../public/polizas/"));
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname));
+        cb(null, file.originalname);
     },
 });
 
@@ -105,7 +105,7 @@ const storageBills = multer.diskStorage({
         cb(null, path.join(__dirname, "../public/facturas/"));
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname));
+        cb(null, file.originalname);
     },
 });
 
@@ -117,7 +117,7 @@ const storageRequest = multer.diskStorage({
         cb(null, path.join(__dirname, "../public/solicitudes/"));
     },
     filename: function (req, file, cb) {
-        cb(null, `${Date.now()}-${file.originalname}`);
+        cb(null, file.originalname);
     },
 });
 
@@ -129,7 +129,7 @@ const storageRequisition_proposal = multer.diskStorage({
         cb(null, path.join(__dirname, "../public/propuestaRequisicion/"));
     },
     filename: function (req, file, cb) {
-        cb(null, `${Date.now()}-${file.originalname}`);
+        cb(null, file.originalname);
     },
 });
 
@@ -143,7 +143,7 @@ const storageDeliveries = multer.diskStorage({
         cb(null, path.join(__dirname, "../public/deliveries"));
     },
     filename: function (req, file, cb) {
-        cb(null, `${Date.now()}-${file.originalname}`);
+        cb(null, file.originalname);
     },
 });
 

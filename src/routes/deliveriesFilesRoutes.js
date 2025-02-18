@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { uploadDelivery } from '../middlewares/configStorageFile.js';
-import { listDeliveryFiles } from '../config/fileListConfig.js';
+import { listDeliveryFiles, getFileByNameDelivery } from '../config/fileListConfig.js';
 import { uploadPolicy } from '../controllers/uploadController.js';
 
 const router = Router();
@@ -112,5 +112,64 @@ router.post('/', uploadDelivery.single('file'), uploadPolicy);
 
 // Ruta para listar archivos de entregas
 router.get('/', listDeliveryFiles);
+
+/**
+ * @swagger
+ * /api/deliveries-files/{fileName}:
+ *   get:
+ *     summary: Obtiene un archivo específico por su nombre
+ *     description: Endpoint para obtener un archivo específico por su nombre
+ *     tags:
+ *       - Deliveries
+ *     parameters:
+ *       - in: path
+ *         name: fileName
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: El nombre del archivo a obtener
+ *     responses:
+ *       200:
+ *         description: Archivo obtenido correctamente
+ *         content:
+ *           application/octet-stream:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       404:
+ *         description: Archivo no encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "error"
+ *                 message:
+ *                   type: string
+ *                   example: "File not found"
+ *                 error:
+ *                   type: string
+ *                   example: "Error message"
+ *       500:
+ *         description: Error en el servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "error"
+ *                 message:
+ *                   type: string
+ *                   example: "Could not retrieve the file"
+ *                 error:
+ *                   type: string
+ *                   example: "Error message"
+ */
+// Nueva ruta para obtener un archivo por su nombre
+router.get('/:fileName', getFileByNameDelivery);
 
 export default router;
