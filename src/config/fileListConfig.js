@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import mime from 'mime-types';
 
 // TODO:Configuracion del listado de archivos terminada.
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -50,7 +51,19 @@ export const getFileByNameUploads = (req, res) => {
     }
 
     const filePath = path.join(directoryPath, matchedFile);
-    res.sendFile(filePath);
+    const mimeType = mime.lookup(matchedFile) || 'application/octet-stream';
+
+    res.setHeader('Content-Type', mimeType);
+    res.setHeader('Content-Disposition', `inline; filename="${matchedFile}"`);
+    res.sendFile(filePath, (err) => {
+      if (err) {
+        return res.status(500).json({
+          status: "error",
+          message: "Could not send the file",
+          error: err.message,
+        });
+      }
+    });
   });
 };
 
@@ -97,7 +110,19 @@ export const getFileByNameDelivery = (req, res) => {
     }
 
     const filePath = path.join(directoryPath, matchedFile);
-    res.sendFile(filePath);
+    const mimeType = mime.lookup(matchedFile) || 'application/octet-stream';
+
+    res.setHeader('Content-Type', mimeType);
+    res.setHeader('Content-Disposition', `inline; filename="${matchedFile}"`);
+    res.sendFile(filePath, (err) => {
+      if (err) {
+        return res.status(500).json({
+          status: "error",
+          message: "Could not send the file",
+          error: err.message,
+        });
+      }
+    });
   });
 };
 
