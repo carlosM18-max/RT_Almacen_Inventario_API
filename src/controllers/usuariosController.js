@@ -1,4 +1,5 @@
 import Usuarios from "../models/tb_Usuarios.js";
+import path from "path";
 
 export const getAllUsuarios = async (req, res) => {
     try {
@@ -30,7 +31,53 @@ export const getUsuarioById = async (req, res) => {
 
 export const createUsuario = async (req, res) => {
     try {
-        const newUsuario = await Usuarios.create(req.body);
+        const {
+            rol,
+            numero_trabajador,
+            nombre,
+            apellidos,
+            password,
+            confirm_password,
+            departamento,
+            email,
+            RFC,
+            CURP,
+            direccion_pertenencia,
+            organo_superior,
+            area_presupuestal,
+            fecha_registro
+        } = req.body;
+
+        // Obtener las rutas de los archivos
+        const identificacion = req.files ? req.files.identificacion[0].path : null;
+        const imagen = req.files ? req.files.imagen[0].path : null;
+
+        console.log(req.body); // Verifica los datos recibidos
+        console.log(req.files); // Verifica los archivos recibidos
+
+        if (!rol || !numero_trabajador || !nombre || !apellidos || !password || !confirm_password || !email) {
+            return res.status(400).json({ message: "Los campos obligatorios son: rol, numero_trabajador, nombre, apellidos, password, confirm_password, email" });
+        }
+
+        const newUsuario = await Usuarios.create({
+            rol,
+            numero_trabajador,
+            nombre,
+            apellidos,
+            password,
+            confirm_password,
+            departamento,
+            email,
+            RFC,
+            CURP,
+            direccion_pertenencia,
+            organo_superior,
+            area_presupuestal,
+            fecha_registro,
+            identificacion,
+            imagen
+        });
+
         res.status(201).json(newUsuario);
     } catch (error) {
         res.status(400).json({

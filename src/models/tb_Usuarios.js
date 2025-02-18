@@ -41,10 +41,10 @@ const Usuarios = db.define("tb_Usuarios", {
     type: DataTypes.STRING(50),
     allowNull: true,
   },
-  // identificacion: {
-  //   type: DataTypes.STRING(13),
-  //   allowNull: true,
-  // },
+  identificacion: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   RFC: {
     type: DataTypes.STRING(13),
     allowNull: true,
@@ -74,21 +74,21 @@ const Usuarios = db.define("tb_Usuarios", {
     defaultValue: 'RADIO Y TELEVICION DE HIDALGO'
     // Área presupuestal (DIRECCIÓN DE ADMINISTRACIÓN Y FINANZAS)
   },
-  /* cargo: {
-    type: DataTypes.ENUM("Jefe de Area A", "Jefe de Area B", "Jefe de Departamento C",
-      "Subdirector A", "Subdirector de Area C",
-      "Director de Area B", "Director General A", "Director General B",
-      "Subsecretario A", "Secretario В"),
-    allowNull: true,
-  }, */
+  //  cargo: {
+  //   type: DataTypes.ENUM("Jefe de Area A", "Jefe de Area B", "Jefe de Departamento C",
+  //     "Subdirector A", "Subdirector de Area C",
+  //     "Director de Area B", "Director General A", "Director General B",
+  //     "Subsecretario A", "Secretario В"),
+  //   allowNull: true,
+  // },
   fecha_registro: {
     type: DataTypes.DATE,
     allowNull: true,
   },
-  // imagen: {
-  //   type: DataTypes.BLOB("long"),
-  //   allowNull: true,
-  // },
+  imagen: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 },
   {
     timestamps: true,
