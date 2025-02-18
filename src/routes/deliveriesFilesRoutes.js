@@ -5,6 +5,8 @@ import { uploadPolicy } from '../controllers/uploadController.js';
 
 const router = Router();
 
+// TODO: Ruteos de entregas terminada
+
 /**
  * @swagger
  * /api/deliveries-upload:

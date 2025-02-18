@@ -5,6 +5,8 @@ import { uploadPolicy } from '../controllers/uploadController.js';
 
 const router = Router();
 
+// TODO: Ruteo de archivos generales terminado
+
 /**
  * @swagger
  * /api/upload:

@@ -5,6 +5,7 @@ import { uploadPolicy } from '../controllers/uploadController.js';
 
 const router = Router();
 
+// TODO: Ruteos de usuarios terminada
 
 /**
  * @swagger
