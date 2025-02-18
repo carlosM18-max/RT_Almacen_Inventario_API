@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import mime from 'mime-types';
 
 // TODO:Configuracion del listado de archivos terminada.
 const __filename = fileURLToPath(import.meta.url);
@@ -26,6 +27,33 @@ export const listFiles = (req, res) => {
   });
 };
 
+export const getFileByNameUploads = (req, res) => {
+  const { fileName } = req.params;
+  const directoryPath = path.join(__dirname, '../public/uploads');
+
+  fs.readdir(directoryPath, (err, files) => {
+    if (err) {
+      return res.status(500).json({
+        status: "error",
+        message: "Could not list the files",
+        error: err.message,
+      });
+    }
+
+    const matchedFile = files.find(file => path.parse(file).name === fileName);
+
+    if (!matchedFile) {
+      return res.status(404).json({
+        status: "error",
+        message: "File not found",
+      });
+    }
+
+    const filePath = path.join(directoryPath, matchedFile);
+    res.sendFile(filePath);
+  });
+};
+
 // Listar todos los archivos en el directorio de entregas
 export const listDeliveryFiles = (req, res) => {
   const directoryPath = path.join(__dirname, '../public/deliveries');
@@ -46,6 +74,33 @@ export const listDeliveryFiles = (req, res) => {
   });
 };
 
+export const getFileByNameDelivery = (req, res) => {
+  const { fileName } = req.params;
+  const directoryPath = path.join(__dirname, '../public/deliveries');
+
+  fs.readdir(directoryPath, (err, files) => {
+    if (err) {
+      return res.status(500).json({
+        status: "error",
+        message: "Could not list the files",
+        error: err.message,
+      });
+    }
+
+    const matchedFile = files.find(file => path.parse(file).name === fileName);
+
+    if (!matchedFile) {
+      return res.status(404).json({
+        status: "error",
+        message: "File not found",
+      });
+    }
+
+    const filePath = path.join(directoryPath, matchedFile);
+    res.sendFile(filePath);
+  });
+};
+
 // Listar todos los archivos en el directorio de usuarios
 export const listUserFiles = (req, res) => {
   const directoryPath = path.join(__dirname, '../public/users');
@@ -62,6 +117,46 @@ export const listUserFiles = (req, res) => {
     res.status(200).json({
       status: "success",
       files: files
+    });
+  });
+};
+
+// Función para obtener un archivo por su nombre
+export const getFileByNameUsers = (req, res) => {
+  const { fileName } = req.params;
+  const directoryPath = path.join(__dirname, '../public/users');
+
+  fs.readdir(directoryPath, (err, files) => {
+    if (err) {
+      return res.status(500).json({
+        status: "error",
+        message: "Could not list the files",
+        error: err.message,
+      });
+    }
+
+    const matchedFile = files.find(file => path.parse(file).name === fileName);
+
+    if (!matchedFile) {
+      return res.status(404).json({
+        status: "error",
+        message: "File not found",
+      });
+    }
+
+    const filePath = path.join(directoryPath, matchedFile);
+    const mimeType = mime.lookup(matchedFile) || 'application/octet-stream';
+
+    res.setHeader('Content-Type', mimeType);
+    res.setHeader('Content-Disposition', `inline; filename="${matchedFile}"`);
+    res.sendFile(filePath, (err) => {
+      if (err) {
+        return res.status(500).json({
+          status: "error",
+          message: "Could not send the file",
+          error: err.message,
+        });
+      }
     });
   });
 };
