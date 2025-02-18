@@ -6,6 +6,7 @@ import {
     updateUsuario,
     deleteUsuario
 } from "../controllers/usuariosController.js";
+import { uploadUser } from "../middlewares/configStorageFile.js";
 
 const router = Router();
 
@@ -24,6 +25,7 @@ const router = Router();
  *           description: ID auto-generado del usuario
  *         rol:
  *           type: string
+ *           enum: [Administrador, Almacenes, Inventario]
  *           description: Rol del usuario
  *         numero_trabajador:
  *           type: integer
@@ -43,6 +45,10 @@ const router = Router();
  *         departamento:
  *           type: string
  *           description: Departamento del usuario
+ *         identificacion:
+ *           type: string
+ *           format: binary
+ *           description: Identificación del usuario
  *         email:
  *           type: string
  *           description: Correo electrónico del usuario
@@ -79,6 +85,10 @@ const router = Router();
  *           type: string
  *           format: date
  *           description: Fecha de registro del usuario
+ *         imagen:
+ *           type: string
+ *           format: binary
+ *           description: Imagen del usuario
  */
 
 /**
@@ -135,12 +145,13 @@ router.get("/:id", getUsuarioById);
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
  *               rol:
  *                 type: string
+ *                 enum: [Administrador, Almacenes, Inventario]
  *               numero_trabajador:
  *                 type: integer
  *               nombre:
@@ -153,6 +164,9 @@ router.get("/:id", getUsuarioById);
  *                 type: string
  *               departamento:
  *                 type: string
+ *               identificacion:
+ *                 type: string
+ *                 format: binary
  *               email:
  *                 type: string
  *               RFC:
@@ -182,6 +196,9 @@ router.get("/:id", getUsuarioById);
  *               fecha_registro:
  *                type: string
  *                format: date
+ *               imagen:
+ *                 type: string
+ *                 format: binary
  *     responses:
  *       201:
  *         description: Usuario creado exitosamente
@@ -192,7 +209,7 @@ router.get("/:id", getUsuarioById);
  *       500:
  *         description: Algún error del servidor
  */
-router.post("/", createUsuario);
+router.post("/", uploadUser.fields([{ name: 'identificacion', maxCount: 1 }, { name: 'imagen', maxCount: 1 }]), createUsuario);
 
 /**
  * @swagger
@@ -210,12 +227,13 @@ router.post("/", createUsuario);
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
  *               rol:
  *                 type: string
+ *                 enum: [Administrador, Almacenes, Inventario]
  *               numero_trabajador:
  *                 type: integer
  *               nombre:
@@ -228,6 +246,9 @@ router.post("/", createUsuario);
  *                 type: string
  *               departamento:
  *                 type: string
+ *               identificacion:
+ *                 type: string
+ *                 format: binary
  *               email:
  *                 type: string
  *               RFC:
@@ -257,6 +278,9 @@ router.post("/", createUsuario);
  *               fecha_registro:
  *                type: string
  *                format: date
+ *               imagen:
+ *                 type: string
+ *                 format: binary
  *     responses:
  *       201:
  *         description: Usuario actualizado exitosamente
@@ -267,7 +291,7 @@ router.post("/", createUsuario);
  *       500:
  *         description: Algún error del servidor
  */
-router.put("/:id", updateUsuario);
+router.put("/:id", uploadUser.fields([{ name: 'identificacion', maxCount: 1 }, { name: 'imagen', maxCount: 1 }]), updateUsuario);
 
 /**
  * @swagger
