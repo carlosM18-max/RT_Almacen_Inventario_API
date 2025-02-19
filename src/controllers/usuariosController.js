@@ -49,8 +49,8 @@ export const createUsuario = async (req, res) => {
         } = req.body;
 
         // Obtener las rutas de los archivos
-        const identificacion = req.files ? req.files.identificacion[0].path : null;
-        const imagen = req.files ? req.files.imagen[0].path : null;
+        const identificacion = req.files ? req.files.identificacion.map(file => file.path) : [];
+        const imagen = req.files ? req.files.imagen.map(file => file.path) : [];
 
         console.log(req.body);
         console.log(req.files);
@@ -70,8 +70,8 @@ export const createUsuario = async (req, res) => {
             organo_superior,
             area_presupuestal,
             fecha_registro,
-            identificacion,
-            imagen
+            identificacion: identificacion.join(';'),
+            imagen: imagen.join(';') 
         });
 
         res.status(201).json(newUsuario);
