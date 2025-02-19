@@ -48,18 +48,13 @@ export const createUsuario = async (req, res) => {
             fecha_registro
         } = req.body;
 
-        // Comprobamos si identificacion y imagen tienen múltiples archivos
-        const identificacion = req.files && req.files.identificacion ? req.files.identificacion.map(file => file.path) : [];
-        const imagen = req.files && req.files.imagen ? req.files.imagen.map(file => file.path) : [];
+        // Obtener las rutas de los archivos
+        const identificacion = req.files ? req.files.identificacion.map(file => file.path) : [];
+        const imagen = req.files ? req.files.imagen.map(file => file.path) : [];
 
-        // Si identificacion o imagen tienen varios archivos, los almacenamos correctamente como array
-        const identificacionPaths = identificacion.length > 0 ? identificacion.join(';') : null;
-        const imagenPaths = imagen.length > 0 ? imagen.join(';') : null;
+        console.log(req.body);
+        console.log(req.files);
 
-        console.log("Identificación:", identificacionPaths);
-        console.log("Imagen:", imagenPaths);
-
-        // Creamos el nuevo usuario con las rutas de los archivos
         const newUsuario = await Usuarios.create({
             rol,
             numero_trabajador,
@@ -75,8 +70,8 @@ export const createUsuario = async (req, res) => {
             organo_superior,
             area_presupuestal,
             fecha_registro,
-            identificacion: identificacionPaths,
-            imagen: imagenPaths
+            identificacion: identificacion.join(';'),
+            imagen: imagen.join(';') 
         });
 
         res.status(201).json(newUsuario);
@@ -87,7 +82,6 @@ export const createUsuario = async (req, res) => {
         });
     }
 };
-
 
 export const updateUsuario = async (req, res) => {
     try {
