@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import mime from 'mime-types';
+import archiver from 'archiver';
 
 // TODO:Configuracion del listado de archivos terminada.
 
@@ -173,7 +174,8 @@ export const getFileByNameUsers = (req, res) => {
     const mimeType = mime.lookup(matchedFile) || 'application/octet-stream';
 
     res.setHeader('Content-Type', mimeType);
-    res.setHeader('Content-Disposition', `inline; filename="${matchedFile}"`);
+    res.setHeader('Content-Disposition', `attachment; filename="${matchedFile}"`);
+
     res.sendFile(filePath, (err) => {
       if (err) {
         return res.status(500).json({
@@ -184,4 +186,39 @@ export const getFileByNameUsers = (req, res) => {
       }
     });
   });
+};
+
+// Función para obtener múltiples archivos y comprimirlos en un archivo .zip
+export const downloadAsZip = (req, res) => {
+  const { files } = req.body;
+
+  if (!files || files.length === 0) {
+    return res.status(400).json({
+      status: "error",
+      message: "No file names provided",
+    });
+  }
+
+  const directoryPath = path.join(__dirname, '../public/users');
+  const zipFileName = 'download.zip';
+
+  const archive = archiver('zip', { zlib: { level: 9 } });
+
+  res.setHeader('Content-Type', 'application/zip');
+  res.setHeader('Content-Disposition', `attachment; filename="${zipFileName}"`);
+
+  archive.pipe(res);
+
+  files.forEach(fileName => {
+    const filePath = path.join(directoryPath, fileName);
+    console.log("Verificando archivo:", filePath); // <-- Agregar log para depuración
+    if (fs.existsSync(filePath)) {
+      archive.file(filePath, { name: fileName });
+    } else {
+      console.error(`File not found: ${filePath}`);
+    }
+  });
+
+
+  archive.finalize();
 };
