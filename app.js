@@ -22,6 +22,7 @@ import uploadUserRouter from './src/routes/userFilesRoutes.js';
 import uploadDeliveriesRouter from './src/routes/deliveriesFilesRoutes.js';
 // Relación (FK)
 import { relaciones } from './src/models/relacion_tablas.js';
+import { upload } from './src/middlewares/configStorageFile.js';
 
 dotenv.config();
 
@@ -85,10 +86,16 @@ app.use('/api/usuarios', usuariosRouter);
 app.use('/api/all-data', getAllData);
 // Rutas de descargas y cargas
 app.use('/api/upload', uploadRouter);
-app.use('/api/upload-files', uploadRouter);
+// Usuarios
+// Subir
 app.use('/api/users-upload', uploadUserRouter);
-app.use('/api/users', uploadUserRouter);
+// Lista
 app.use('/api/users-files', uploadUserRouter);
+// Por nombre
+app.use('/api/user-files', uploadUserRouter);
+// Descargas
+app.use('/api/users', uploadUserRouter);
+// Entregas
 app.use('/api/deliveries-upload', uploadDeliveriesRouter);
 app.use('/api/deliveries-files', uploadDeliveriesRouter);
 
