@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { uploadUser } from '../middlewares/configStorageFile.js';
-import { listUserFiles, getFileByNameUsers } from '../config/fileListConfig.js';
+import { listUserFiles, getFileByNameUsers, downloadAsZip } from '../config/fileListConfig.js';
 import { uploadPolicy } from '../controllers/uploadController.js';
 
 const router = Router();
@@ -105,34 +105,51 @@ router.post('/', uploadUser.single('file'), uploadPolicy);
  *                   example: "Error message"
  */
 
-// Ruta para listar archivos de entregas
+// Ruta para listar archivos de usuarios
 router.get('/', listUserFiles);
 
 /**
  * @swagger
- * /api/users-files/{fileName}:
- *   get:
- *     summary: Obtiene un archivo específico por su nombre
- *     description: Endpoint para obtener un archivo específico por su nombre
+ * /api/users/download-zip:
+ *   post:
+ *     summary: Descarga múltiples archivos como .zip
+ *     description: Endpoint para descargar múltiples archivos comprimidos como un archivo .zip
  *     tags:
  *       - Users
- *     parameters:
- *       - in: path
- *         name: fileName
- *         required: true
- *         schema:
- *           type: string
- *         description: El nombre del archivo a obtener
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               files:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *     responses:
  *       200:
- *         description: Archivo obtenido correctamente
+ *         description: Archivo .zip descargado correctamente
  *         content:
- *           application/octet-stream:
+ *           application/zip:
  *             schema:
  *               type: string
  *               format: binary
+ *       400:
+ *         description: No se proporcionaron nombres de archivo
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "error"
+ *                 message:
+ *                   type: string
+ *                   example: "No file names provided"
  *       404:
- *         description: Archivo no encontrado
+ *         description: Archivos no encontrados
  *         content:
  *           application/json:
  *             schema:
@@ -144,9 +161,6 @@ router.get('/', listUserFiles);
  *                 message:
  *                   type: string
  *                   example: "File not found"
- *                 error:
- *                   type: string
- *                   example: "Error message"
  *       500:
  *         description: Error en el servidor
  *         content:
@@ -159,12 +173,10 @@ router.get('/', listUserFiles);
  *                   example: "error"
  *                 message:
  *                   type: string
- *                   example: "Could not retrieve the file"
- *                 error:
- *                   type: string
- *                   example: "Error message"
+ *                   example: "Could not send the file"
  */
-// Nueva ruta para obtener un archivo por su nombre
-router.get('/:fileName', getFileByNameUsers);
+
+// Nueva ruta para descargar múltiples archivos como .zip
+router.post('/download-zip', downloadAsZip);
 
 export default router;

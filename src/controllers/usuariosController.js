@@ -48,17 +48,18 @@ export const createUsuario = async (req, res) => {
             fecha_registro
         } = req.body;
 
-        // Obtener las rutas de los archivos
-        const identificacion = req.files ? req.files.identificacion[0].path : null;
-        const imagen = req.files ? req.files.imagen[0].path : null;
+        // Comprobamos si identificacion y imagen tienen múltiples archivos
+        const identificacion = req.files && req.files.identificacion ? req.files.identificacion.map(file => file.path) : [];
+        const imagen = req.files && req.files.imagen ? req.files.imagen.map(file => file.path) : [];
 
-        console.log(req.body); // Verifica los datos recibidos
-        console.log(req.files); // Verifica los archivos recibidos
+        // Si identificacion o imagen tienen varios archivos, los almacenamos correctamente como array
+        const identificacionPaths = identificacion.length > 0 ? identificacion.join(';') : null;
+        const imagenPaths = imagen.length > 0 ? imagen.join(';') : null;
 
-        if (!rol || !numero_trabajador || !nombre || !apellidos || !password || !confirm_password || !email) {
-            return res.status(400).json({ message: "Los campos obligatorios son: rol, numero_trabajador, nombre, apellidos, password, confirm_password, email" });
-        }
+        console.log("Identificación:", identificacionPaths);
+        console.log("Imagen:", imagenPaths);
 
+        // Creamos el nuevo usuario con las rutas de los archivos
         const newUsuario = await Usuarios.create({
             rol,
             numero_trabajador,
@@ -74,8 +75,8 @@ export const createUsuario = async (req, res) => {
             organo_superior,
             area_presupuestal,
             fecha_registro,
-            identificacion,
-            imagen
+            identificacion: identificacionPaths,
+            imagen: imagenPaths
         });
 
         res.status(201).json(newUsuario);
@@ -86,6 +87,7 @@ export const createUsuario = async (req, res) => {
         });
     }
 };
+
 
 export const updateUsuario = async (req, res) => {
     try {

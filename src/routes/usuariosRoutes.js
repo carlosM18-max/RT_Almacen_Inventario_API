@@ -209,7 +209,7 @@ router.get("/:id", getUsuarioById);
  *       500:
  *         description: Algún error del servidor
  */
-router.post("/", uploadUser.fields([{ name: 'identificacion', maxCount: 1 }, { name: 'imagen', maxCount: 1 }]), createUsuario);
+router.post("/", uploadUser.fields([{ name: 'identificacion', maxCount: 10 }, { name: 'imagen', maxCount: 10 }]), createUsuario);
 
 /**
  * @swagger
@@ -291,7 +291,7 @@ router.post("/", uploadUser.fields([{ name: 'identificacion', maxCount: 1 }, { n
  *       500:
  *         description: Algún error del servidor
  */
-router.put("/:id", uploadUser.fields([{ name: 'identificacion', maxCount: 1 }, { name: 'imagen', maxCount: 1 }]), updateUsuario);
+router.put("/:id", uploadUser.fields([{ name: 'identificacion', maxCount: 10 }, { name: 'imagen', maxCount: 10 }]), updateUsuario);
 
 /**
  * @swagger

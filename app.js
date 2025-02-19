@@ -87,6 +87,7 @@ app.use('/api/all-data', getAllData);
 app.use('/api/upload', uploadRouter);
 app.use('/api/upload-files', uploadRouter);
 app.use('/api/users-upload', uploadUserRouter);
+app.use('/api/users', uploadUserRouter);
 app.use('/api/users-files', uploadUserRouter);
 app.use('/api/deliveries-upload', uploadDeliveriesRouter);
 app.use('/api/deliveries-files', uploadDeliveriesRouter);
