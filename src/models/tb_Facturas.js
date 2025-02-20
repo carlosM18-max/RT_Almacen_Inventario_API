@@ -72,7 +72,7 @@ const Facturas = db.define("tb_Facturas", {
         // Total
     },
     archivo_pdf: {
-        type: DataTypes.BLOB,
+        type: DataTypes.STRING,
         allowNull: false,
         // Archivo (PDF)
     },

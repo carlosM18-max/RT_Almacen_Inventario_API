@@ -20,7 +20,7 @@ const Solicitudes = db.define("tb_Solicitudes", {
         allowNull: true,
     },
     archivo: {
-        type: DataTypes.BLOB("long"),
+        type: DataTypes.STRING,
         allowNull: true,
     },
     // ID del usuario que aprueba el pedido
