@@ -8,7 +8,7 @@ const Usuarios = db.define("tb_Usuarios", {
     autoIncrement: true,
   },
   rol: {
-    type: DataTypes.ENUM("Administrador", "Almacenes", "Inventario"),
+    type: DataTypes.ENUM("Administrador", "Almacenes", "Inventario", "Usuario"),
     allowNull: true,
   },
   numero_trabajador: {
