@@ -21,7 +21,7 @@ const Proveedores = db.define("tb_Proveedores", {
         type: DataTypes.ENUM("Fisico", "Moral"),
         allowNull: false,
     },
-    rfc: {
+    RFC: {
         type: DataTypes.STRING(20),
         allowNull: false,
         // RFC
