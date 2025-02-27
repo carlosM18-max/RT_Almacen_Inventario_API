@@ -22,7 +22,6 @@ import uploadUserRouter from './src/routes/userFilesRoutes.js';
 import uploadDeliveriesRouter from './src/routes/deliveriesFilesRoutes.js';
 // Relación (FK)
 import { relaciones } from './src/models/relacion_tablas.js';
-import { upload } from './src/middlewares/configStorageFile.js';
 
 dotenv.config();
 
