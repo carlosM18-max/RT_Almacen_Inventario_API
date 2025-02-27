@@ -6,22 +6,30 @@ import swaggerUi from 'swagger-ui-express';
 // Configuración de la conexión
 import db from './src/config/db.js';
 import { getDbState, setDbState, resetDbState } from './src/config/db.State.js';
-// Importación de las rutas
+// Rutas Almacen con archivos de descargas y cargas
 import almacenRouter from './src/routes/almacenesRoutes.js';
+// Rutas Bajas con archivos de descargas y cargas
 import bajasRouter from './src/routes/bajasRoutes.js';
+// Rutas Entregas con archivos de descargas y cargas
 import entregasRouter from './src/routes/entregasRoutes.js';
-import objetoGastoRouter from './src/routes/objetoGastoRoutes.js';
-import solicitudesRouter from './src/routes/solicitudesRoutes.js';
-import facturasRouter from './src/routes/facturasRoutes.js';
-import polizasRouter from './src/routes/polizaRoutes.js';
-import usuariosRouter from './src/routes/usuariosRoutes.js';
-import proveedoresRouter from './src/routes/proveedorRoutes.js';
-import { getAllData } from './src/controllers/polizaController.js';
-// Importacion de archivos de descargas y cargas
-import uploadRouter from './src/routes/uploadFilesRoutes.js';
-import uploadUserRouter from './src/routes/userFilesRoutes.js';
 import uploadDeliveriesRouter from './src/routes/deliveriesFilesRoutes.js';
+// Rutas Facturas con archivos de descargas y cargas
+import facturasRouter from './src/routes/facturasRoutes.js';
+// Rutas Generales de descargas y cargas
+import uploadRouter from './src/routes/uploadFilesRoutes.js';
+// Rutas Objetos de Gasto con archivos de descargas y cargas
+import objetoGastoRouter from './src/routes/objetoGastoRoutes.js';
+// Rutas Polizas con archivos de descargas y cargas
+import polizasRouter from './src/routes/polizaRoutes.js';
+import { getAllData } from './src/controllers/polizaController.js';
+// Rutas Proveedores con archivos de descargas y cargas
+import proveedoresRouter from './src/routes/proveedorRoutes.js';
 import uploadProvRouter from './src/routes/proveedorFilesRoutes.js';
+// Rutas Solicitudes con archivos de descargas y cargas
+import solicitudesRouter from './src/routes/solicitudesRoutes.js';
+// Rutas Usuarios con archivos de descargas y cargas
+import usuariosRouter from './src/routes/usuariosRoutes.js';
+import uploadUserRouter from './src/routes/userFilesRoutes.js';
 // Relación (FK)
 import { relaciones } from './src/models/relacion_tablas.js';
 
