@@ -71,7 +71,7 @@ const Usuarios = db.define("tb_Usuarios", {
   area_presupuestal: {
     type: DataTypes.STRING,
     allowNull: true,
-    defaultValue: 'RADIO Y TELEVICION DE HIDALGO'
+    defaultValue: 'Radio Y Television de Hidalgo'
     // Área presupuestal (DIRECCIÓN DE ADMINISTRACIÓN Y FINANZAS)
   },
     cargo: {

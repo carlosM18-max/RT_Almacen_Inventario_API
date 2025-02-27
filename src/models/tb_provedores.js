@@ -18,7 +18,7 @@ const Proveedores = db.define("tb_Proveedores", {
         // Apellido Paterno
     },
     tipo_proveedor: {
-        type: DataTypes.ENUM("Persona Física", "Persona Moral"),
+        type: DataTypes.ENUM("Fisico", "Moral"),
         allowNull: false,
     },
     rfc: {
@@ -44,7 +44,7 @@ const Proveedores = db.define("tb_Proveedores", {
         allowNull: false,
         // Cuenta bancaria
     },
-    archivo_acuerdo: {
+    archivos: {
         type: DataTypes.STRING,
         allowNull: false,
         // Archivo (PDF)
