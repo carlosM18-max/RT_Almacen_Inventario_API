@@ -8,7 +8,7 @@ const Usuarios = db.define("tb_Usuarios", {
     autoIncrement: true,
   },
   rol: {
-    type: DataTypes.ENUM("Administrador", "Almacenes", "Inventario"),
+    type: DataTypes.ENUM("Administrador", "Almacenes", "Inventario", "Usuario"),
     allowNull: true,
   },
   numero_trabajador: {
@@ -74,13 +74,18 @@ const Usuarios = db.define("tb_Usuarios", {
     defaultValue: 'RADIO Y TELEVICION DE HIDALGO'
     // Área presupuestal (DIRECCIÓN DE ADMINISTRACIÓN Y FINANZAS)
   },
-  //  cargo: {
-  //   type: DataTypes.ENUM("Jefe de Area A", "Jefe de Area B", "Jefe de Departamento C",
-  //     "Subdirector A", "Subdirector de Area C",
-  //     "Director de Area B", "Director General A", "Director General B",
-  //     "Subsecretario A", "Secretario В"),
-  //   allowNull: true,
-  // },
+    cargo: {
+     type: DataTypes.ENUM("Jefe de Area A", "Jefe de Area B", "Jefe de Departamento C",
+       "Subdirector A", "Subdirector de Area C",
+     "Director de Area B", "Director General A", "Director General B",
+       "Subsecretario A", "Secretario В"),
+     allowNull: true,
+   },
+   nivel: {
+    type: DataTypes.ENUM("007", "89A", "89B", "09C", "10A", "10B", "10C","11A","11B","11C",
+      "11S","12S","12A","12B","13A","13B","13S","1S3","1A3", "14S","14B","015"),
+    allowNull: true,
+  },
   fecha_registro: {
     type: DataTypes.DATE,
     allowNull: true,

@@ -46,7 +46,7 @@ const Poliza = db.define("tb_Poliza", {
         allowNull: false
     },
     archivo: {
-        type: DataTypes.BLOB("long"),
+        type: DataTypes.STRING,
         allowNull: false
     },
     prima: {
