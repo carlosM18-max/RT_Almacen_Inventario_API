@@ -13,7 +13,6 @@ import VidaUtil from "./tb_VidaUtil.js";
 
 
 export const relaciones = () => {
-    // Referencias de Almacenes
    // Referencias de Almacenes
    Almacenes.belongsTo(Facturas, { foreignKey: "id_factura", as: "facturaAlmacen", onDelete: "CASCADE", onUpdate: "CASCADE" });
    Facturas.hasMany(Almacenes, { foreignKey: "id", as: "almacenesFactura", onDelete: "CASCADE", onUpdate: "CASCADE" });

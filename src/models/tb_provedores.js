@@ -32,7 +32,7 @@ const Proveedores = db.define("tb_Proveedores", {
         // Dirección
     },
     telefono: {
-        type: DataTypes.INTEGER(10),
+        type: DataTypes.STRING(10),
         allowNull: false,
     },
     email: {

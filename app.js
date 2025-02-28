@@ -127,7 +127,7 @@ const initializeDatabase = async (force = false) => {
     console.log('------> Inicializando la base de datos');
 
     // Sincronizar los modelos
-    await db.sync({ force: true });
+    await db.sync({ alter: true });
     console.log('------> Modelos sincronizados con la base de datos');
 
     // Ejecutar las relaciones de las tablas
