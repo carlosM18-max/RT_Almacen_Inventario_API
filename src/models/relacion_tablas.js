@@ -5,11 +5,12 @@ import Facturas from "./tb_Facturas.js";
 import Inventario from "./tb_Inventario.js";
 import ObjetoGastos from "./tb_ObjetoGasto.js";
 import Poliza from "./tb_Poliza.js";
-import Proveedores from "./tb_Provedores.js";
+import Proveedores from "./tb_provedores.js";
 import RegistroContable from "./tb_Registrocontable.js";
 import Solicitudes from "./tb_Solicitudes.js";
 import Usuarios from "./tb_Usuarios.js";
 import VidaUtil from "./tb_VidaUtil.js";
+import Personas from "./tb_personas.js";
 
 
 export const relaciones = () => {
@@ -65,4 +66,9 @@ export const relaciones = () => {
    // Referencias de Vida Útil
    VidaUtil.belongsTo(ObjetoGastos, { foreignKey: "id_partida", as: "partidaVidaUtil", onDelete: "CASCADE", onUpdate: "CASCADE" });
    ObjetoGastos.hasMany(VidaUtil, { foreignKey: "id_partida", as: "vidasUtilesPartida", onDelete: "CASCADE", onUpdate: "CASCADE" });
+
+   
+   // Relación entre Usuarios y Persona
+   Usuarios.belongsTo(Personas, { foreignKey: "id_persona", as: "persona", onDelete: "CASCADE", onUpdate: "CASCADE" });
+   Personas.hasMany(Usuarios, { foreignKey: "id", as: "usuarios", onDelete: "CASCADE", onUpdate: "CASCADE" });
 };
