@@ -11,10 +11,10 @@ const router = Router();
  * @swagger
  * /api/users-upload:
  *   post:
- *     summary: Sube un archivo de usuario
- *     description: Endpoint para subir un archivo de usuario
+ *     summary: Sube un archivo de persona
+ *     description: Endpoint para subir un archivo de persona
  *     tags:
- *       - Users
+ *       - Personas
  *     requestBody:
  *       content:
  *         multipart/form-data:
@@ -60,18 +60,16 @@ const router = Router();
  *                   type: string
  *                   example: "Error message"
  */
-
-// Ruta para subir archivos de entregas
 router.post('/', uploadUser.single('file'), uploadPolicy);
 
 /**
  * @swagger
  * /api/users-files:
  *   get:
- *     summary: Lista todos los archivos de usuarios subidos
- *     description: Endpoint para listar todos los archivos de usuarios subidos
+ *     summary: Lista todos los archivos de las personas subidas
+ *     description: Endpoint para listar todos los archivos de las personas subidas
  *     tags:
- *       - Users
+ *       - Personas
  *     responses:
  *       200:
  *         description: Lista de archivos obtenida correctamente
@@ -104,8 +102,6 @@ router.post('/', uploadUser.single('file'), uploadPolicy);
  *                   type: string
  *                   example: "Error message"
  */
-
-// Ruta para listar archivos de usuarios
 router.get('/', listUserFiles);
 
 /**
@@ -115,7 +111,7 @@ router.get('/', listUserFiles);
  *     summary: Obtiene un archivo específico por su nombre
  *     description: Endpoint para obtener un archivo específico por su nombre
  *     tags:
- *       - Users
+ *       - Personas
  *     parameters:
  *       - in: path
  *         name: fileName
@@ -164,7 +160,6 @@ router.get('/', listUserFiles);
  *                   type: string
  *                   example: "Error message"
  */
-// Nueva ruta para obtener un archivo por su nombre
 router.get('/:fileName', getFileByNameUsers);
 
 /**
@@ -174,7 +169,7 @@ router.get('/:fileName', getFileByNameUsers);
  *     summary: Descarga múltiples archivos como .zip
  *     description: Endpoint para descargar múltiples archivos comprimidos como un archivo .zip
  *     tags:
- *       - Users
+ *       - Personas
  *     requestBody:
  *       required: true
  *       content:
@@ -234,8 +229,6 @@ router.get('/:fileName', getFileByNameUsers);
  *                   type: string
  *                   example: "Could not send the file"
  */
-
-// Nueva ruta para descargar múltiples archivos como .zip
 router.post('/download-zip', downloadAsZip);
 
 export default router;

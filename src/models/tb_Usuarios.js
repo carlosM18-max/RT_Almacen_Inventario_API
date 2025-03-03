@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db.js";
-import Personas from "./tb_personas.js";
+import Personas from "./tb_Personas.js";
 
 const Usuarios = db.define("tb_Usuarios", {
   id: {
@@ -17,14 +17,14 @@ const Usuarios = db.define("tb_Usuarios", {
     }
   },
   rol: {
-    type: DataTypes.ENUM("Administrador", "Usuario"),
+    type: DataTypes.ENUM("Administrador", "Inventario", "Almacenes", "Usuario"),
     allowNull: false,
   },
   password: {
     type: DataTypes.STRING(100),
     allowNull: true,
   },
-  
+
 },
   {
     timestamps: true,

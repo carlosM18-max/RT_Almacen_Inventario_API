@@ -1,5 +1,5 @@
 import Usuarios from "../models/tb_Usuarios.js";
-import path from "path";
+import Personas from "../models/tb_Personas.js";
 
 export const getAllUsuarios = async (req, res) => {
     try {
@@ -31,47 +31,18 @@ export const getUsuarioById = async (req, res) => {
 
 export const createUsuario = async (req, res) => {
     try {
-        const {
-            rol,
-            numero_trabajador,
-            nombre,
-            apellidos,
-            password,
-            confirm_password,
-            departamento,
-            email,
-            RFC,
-            CURP,
-            direccion_pertenencia,
-            organo_superior,
-            area_presupuestal,
-            fecha_registro
-        } = req.body;
+        const { id_persona, rol, password } = req.body;
 
-        // Obtener las rutas de los archivos
-        const identificacion = req.files ? req.files.identificacion.map(file => file.path) : [];
-        const imagen = req.files ? req.files.imagen.map(file => file.path) : [];
-
-        console.log(req.body);
-        console.log(req.files);
+        // Verificar si la persona existe
+        const persona = await Personas.findByPk(id_persona);
+        if (!persona) {
+            return res.status(400).json({ message: "La persona no existe" });
+        }
 
         const newUsuario = await Usuarios.create({
+            id_persona,
             rol,
-            numero_trabajador,
-            nombre,
-            apellidos,
             password,
-            confirm_password,
-            departamento,
-            email,
-            RFC,
-            CURP,
-            direccion_pertenencia,
-            organo_superior,
-            area_presupuestal,
-            fecha_registro,
-            identificacion: identificacion.join(';'),
-            imagen: imagen.join(';') 
         });
 
         res.status(201).json(newUsuario);
@@ -107,6 +78,7 @@ export const deleteUsuario = async (req, res) => {
         const deleted = await Usuarios.destroy({
             where: { id: req.params.id },
         });
+
         if (deleted) {
             res.json({ message: "Usuario eliminado exitosamente" });
         } else {
