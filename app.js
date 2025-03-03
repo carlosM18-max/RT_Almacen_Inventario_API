@@ -25,11 +25,13 @@ import { getAllData } from './src/controllers/polizaController.js';
 // Rutas Proveedores con archivos de descargas y cargas
 import proveedoresRouter from './src/routes/proveedorRoutes.js';
 import uploadProvRouter from './src/routes/proveedorFilesRoutes.js';
+// Rutas Personas con archivos de descargas y cargas
+import personaRouter from './src/routes/personasRoutes.js';
+import uploadUserRouter from './src/routes/personsFilesRoutes.js';
 // Rutas Solicitudes con archivos de descargas y cargas
 import solicitudesRouter from './src/routes/solicitudesRoutes.js';
 // Rutas Usuarios con archivos de descargas y cargas
 import usuariosRouter from './src/routes/usuariosRoutes.js';
-import uploadUserRouter from './src/routes/userFilesRoutes.js';
 // Relación (FK)
 import { relaciones } from './src/models/relacion_tablas.js';
 
@@ -89,6 +91,7 @@ app.use('/api/bajas', bajasRouter);
 app.use('/api/entregas', entregasRouter);
 app.use('/api/facturas', facturasRouter);
 app.use('/api/objetoGastos', objetoGastoRouter);
+app.use('/api/personas', personaRouter);
 app.use('/api/polizas', polizasRouter);
 app.use('/api/solicitudes', solicitudesRouter);
 app.use('/api/usuarios', usuariosRouter);
@@ -96,7 +99,7 @@ app.use('/api/proveedor', proveedoresRouter);
 app.use('/api/all-data', getAllData);
 // Rutas de descargas y cargas
 app.use('/api/upload', uploadRouter);
-// Usuarios
+// personas
 app.use('/api/users-upload', uploadUserRouter); // Subir
 app.use('/api/users-files', uploadUserRouter); // Lista
 app.use('/api/user-files', uploadUserRouter); // Por nombre
