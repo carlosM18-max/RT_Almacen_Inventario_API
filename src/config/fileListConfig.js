@@ -174,7 +174,7 @@ export const getFileByNameUsers = (req, res) => {
     const mimeType = mime.lookup(matchedFile) || 'application/octet-stream';
 
     res.setHeader('Content-Type', mimeType);
-    res.setHeader('Content-Disposition', `inline; filename="${matchedFile}"`);
+    res.setHeader('Content-Disposition', `attachment; filename="${matchedFile}"`);
 
     res.sendFile(filePath, (err) => {
       if (err) {
