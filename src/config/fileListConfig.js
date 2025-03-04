@@ -174,6 +174,7 @@ export const getFileByNameUsers = (req, res) => {
     const mimeType = mime.lookup(matchedFile) || 'application/octet-stream';
 
     res.setHeader('Content-Type', mimeType);
+    // Cambiar a inline para hacerlo .zip
     res.setHeader('Content-Disposition', `attachment; filename="${matchedFile}"`);
 
     res.sendFile(filePath, (err) => {
