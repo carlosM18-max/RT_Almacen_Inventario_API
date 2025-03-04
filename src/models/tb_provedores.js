@@ -45,7 +45,7 @@ const Proveedores = db.define("tb_Proveedores", {
         // Cuenta bancaria
     },
     archivos: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
         // Archivo (PDF)
     },
