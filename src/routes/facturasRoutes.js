@@ -6,6 +6,7 @@ import {
   updateFactura,
   deleteFactura,
 } from "../controllers/facturasController.js";
+import { uploadBills } from "../middlewares/configStorageFile.js";
 
 const router = Router();
 
@@ -17,62 +18,70 @@ const router = Router();
  *       type: object
  *       required:
  *         - numero_de_factura
- *         - tipo_compra
  *         - concepto
- *         - fecha_factura
+ *         - id_proveedor
+ *         - cantidad
+ *         - precio_unitario
+ *         - sub_total
+ *         - iva
+ *         - total
  *       properties:
  *         id:
  *           type: integer
- *           description: El ID auto-generado de la factura
+ *           description: ID auto-generado de la factura
+ *         tipo_alta:
+ *           type: string
+ *           enum: ["Compra (CM)", "Domacion (DN)", "Comodato (CO)"]
+ *           description: Tipo de alta
+ *         tipo_documento_ampara:
+ *           type: string
+ *           enum: ["Contrato De Comodato (CO)", "Comprobante Fiscal Digital por Internet (CFDI)"]
+ *           description: Tipo de documento que ampara
+ *         fecha_adquisicion:
+ *           type: string
+ *           format: date
+ *           description: Fecha de adquisición
  *         numero_de_factura:
  *           type: string
- *           description: El número de la factura
+ *           description: Número de factura
  *         tipo_compra:
  *           type: string
- *           enum: [Adjudicacion, Licitacion, Donacion, Convenio, Intercambio]
- *           description: El tipo de compra
+ *           enum: ["Presupuesto", "Estatal"]
+ *           description: Tipo de compra
  *         concepto:
  *           type: string
- *           description: El concepto de la factura
- *         iva:
- *           type: number
- *           description: El monto del IVA
+ *           description: Concepto
  *         fecha_factura:
  *           type: string
  *           format: date
- *           description: La fecha de la factura
- *         nombre_proveedor:
- *           type: string
- *           description: El nombre del proveedor
+ *           description: Fecha de la factura
+ *         id_proveedor:
+ *           type: integer
+ *           description: ID del proveedor asociado
  *         cantidad:
  *           type: number
- *           description: La cantidad
+ *           format: float
+ *           description: Cantidad
  *         precio_unitario:
  *           type: number
- *           description: El precio unitario
+ *           format: float
+ *           description: Precio unitario
  *         sub_total:
  *           type: number
- *           description: El subtotal
+ *           format: float
+ *           description: Subtotal
+ *         iva:
+ *           type: number
+ *           format: float
+ *           description: IVA
  *         total:
  *           type: number
- *           description: El monto total
- *         telefono_proveedor:
- *           type: string
- *           description: El número de teléfono del proveedor
- *         RFC_proveedor:
- *           type: string
- *           description: El RFC del proveedor
- *         direccion_proveedor:
- *           type: string
- *           description: La dirección del proveedor
+ *           format: float
+ *           description: Total
  *         archivo_pdf:
  *           type: string
  *           format: binary
- *           description: El archivo PDF de la factura
- *         archivo_sat:
- *           type: string
- *           format: binary
- *           description: El archivo SAT de la factura
+ *           description: Archivo PDF de la factura
  */
 
 /**
@@ -89,7 +98,7 @@ const router = Router();
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Factura'
+ *                 $ref: '#/components/schemas/Facturas'
  */
 router.get("/", getAllFacturas);
 
@@ -112,7 +121,7 @@ router.get("/", getAllFacturas);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Factura'
+ *               $ref: '#/components/schemas/Facturas'
  *       404:
  *         description: No se encontró la factura
  */
@@ -131,38 +140,38 @@ router.get("/:id", getFacturaById);
  *           schema:
  *             type: object
  *             properties:
+ *               tipo_alta:
+ *                 type: string
+ *                 enum: [Compra (CM), Domacion (DN), Comodato (CO)]
+ *               tipo_documento_ampara:
+ *                 type: string
+ *                 enum: [Contrato De Comodato (CO), Comprobante Fiscal Digital por Internet (CFDI)]
+ *               fecha_adquisicion:
+ *                 type: string
+ *                 format: date
  *               numero_de_factura:
  *                 type: string
  *               tipo_compra:
  *                 type: string
- *                 enum: [Adjudicacion, Licitacion, Donacion, Convenio, Intercambio]
+ *                 enum: [Presupuesto, Estatal]
  *               concepto:
  *                 type: string
- *               iva:
- *                 type: number
  *               fecha_factura:
  *                 type: string
  *                 format: date
- *               nombre_proveedor:
- *                 type: string
+ *               id_proveedor:
+ *                 type: integer
  *               cantidad:
  *                 type: number
  *               precio_unitario:
  *                 type: number
  *               sub_total:
  *                 type: number
+ *               iva:
+ *                 type: number
  *               total:
  *                 type: number
- *               telefono_proveedor:
- *                 type: string
- *               RFC_proveedor:
- *                 type: string
- *               direccion_proveedor:
- *                 type: string
  *               archivo_pdf:
- *                 type: string
- *                 format: binary
- *               archivo_sat:
  *                 type: string
  *                 format: binary
  *     responses:
@@ -171,11 +180,11 @@ router.get("/:id", getFacturaById);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Factura'
+ *               $ref: '#/components/schemas/Facturas'
  *       500:
  *         description: Algún error del servidor
  */
-router.post("/", createFactura);
+router.post("/", uploadBills.fields([{ name: 'archivo_pdf', maxCount: 1 }]), createFactura);
 
 /**
  * @swagger
@@ -189,7 +198,7 @@ router.post("/", createFactura);
  *         schema:
  *           type: integer
  *         required: true
- *         description: El ID de la factura
+ *         description: El ID de la factura a actualizar
  *     requestBody:
  *       required: true
  *       content:
@@ -197,53 +206,54 @@ router.post("/", createFactura);
  *           schema:
  *             type: object
  *             properties:
+ *               tipo_alta:
+ *                 type: string
+ *                 enum: [Compra (CM), Domacion (DN), Comodato (CO)]
+ *               tipo_documento_ampara:
+ *                 type: string
+ *                 enum: [Contrato De Comodato (CO), Comprobante Fiscal Digital por Internet (CFDI)]
+ *               fecha_adquisicion:
+ *                 type: string
+ *                 format: date
  *               numero_de_factura:
  *                 type: string
  *               tipo_compra:
  *                 type: string
- *                 enum: [Adjudicacion, Licitacion, Donacion, Convenio, Intercambio]
+ *                 enum: [Presupuesto, Estatal]
  *               concepto:
  *                 type: string
- *               iva:
- *                 type: number
  *               fecha_factura:
  *                 type: string
  *                 format: date
- *               nombre_proveedor:
- *                 type: string
+ *               id_proveedor:
+ *                 type: integer
  *               cantidad:
  *                 type: number
  *               precio_unitario:
  *                 type: number
  *               sub_total:
  *                 type: number
+ *               iva:
+ *                 type: number
  *               total:
  *                 type: number
- *               telefono_proveedor:
- *                 type: string
- *               RFC_proveedor:
- *                 type: string
- *               direccion_proveedor:
- *                 type: string
  *               archivo_pdf:
- *                 type: string
- *                 format: binary
- *               archivo_sat:
  *                 type: string
  *                 format: binary
  *     responses:
  *       200:
- *         description: La factura fue actualizada
+ *         description: La factura fue actualizada exitosamente
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Factura'
+ *               $ref: '#/components/schemas/Facturas'
  *       404:
  *         description: No se encontró la factura
  *       500:
- *         description: Ocurrió algún error
+ *         description: Ocurrió algún error en el servidor
  */
-router.put("/:id", updateFactura);
+router.put("/:id", uploadBills.fields([{ name: 'archivo_pdf', maxCount: 1 }]), updateFactura);
+
 
 /**
  * @swagger

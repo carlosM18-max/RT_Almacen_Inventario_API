@@ -15,6 +15,7 @@ import entregasRouter from './src/routes/entregasRoutes.js';
 import uploadDeliveriesRouter from './src/routes/deliveriesFilesRoutes.js';
 // Rutas Facturas con archivos de descargas y cargas
 import facturasRouter from './src/routes/facturasRoutes.js';
+import uploadFacturasRouter from './src/routes/facturasFilesRoutes.js';
 // Rutas Generales de descargas y cargas
 import uploadRouter from './src/routes/uploadFilesRoutes.js';
 // Rutas Objetos de Gasto con archivos de descargas y cargas
@@ -99,6 +100,9 @@ app.use('/api/proveedor', proveedoresRouter);
 app.use('/api/all-data', getAllData);
 // Rutas de descargas y cargas
 app.use('/api/upload', uploadRouter);
+// Facturas
+app.use('/api/facturas-files', uploadFacturasRouter); // Lista
+app.use('/api/factura-files', uploadFacturasRouter); // Por nombre
 // personas
 app.use('/api/users-upload', uploadUserRouter); // Subir
 app.use('/api/users-files', uploadUserRouter); // Lista
