@@ -8,21 +8,21 @@ const Facturas = db.define("tb_Facturas", {
         autoIncrement: true,
     },
     tipo_alta: {
-        type: DataTypes.ENUM("Compra CM", "Domacion DN", "Comodato CO"),
+        type: DataTypes.ENUM("Compra (CM)", "Domacion (DN)", "Comodato (CO)"),
         allowNull: false,
     },
     tipo_documento_ampara: {
-        type: DataTypes.ENUM("(Contrato De Comodato CO", "Comprobante Fiscal Digital por Internet CFDI"),
+        type: DataTypes.ENUM("Contrato De Comodato (CO)", "Comprobante Fiscal Digital por Internet (CFDI)"),
         allowNull: false,
         // Tipo de documento que ampara
     },
     fecha_adquisicion: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
         // Fecha de adquisición
     },
     numero_de_factura: {
-        type: DataTypes.INTEGER(20),
+        type: DataTypes.STRING(255),
         allowNull: false,
         // Número de factura
     },
@@ -37,7 +37,7 @@ const Facturas = db.define("tb_Facturas", {
         // Concepto
     },
     fecha_factura: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
         // Fecha
     },
@@ -72,7 +72,7 @@ const Facturas = db.define("tb_Facturas", {
         // Total
     },
     archivo_pdf: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
         // Archivo (PDF)
     },

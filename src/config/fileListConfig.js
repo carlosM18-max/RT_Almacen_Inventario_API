@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import mime from 'mime-types';
 import archiver from 'archiver';
 
-// TODO:Configuracion del listado de archivos terminada.
+// FIXME:Configuracion del listado de archivos terminada.
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -318,4 +318,65 @@ export const downloadAsZipProveedores = (req, res) => {
 
 
   archive.finalize();
+};
+
+// Listar todos los archivos en el directorio de facturas
+export const listFacturasFiles = (req, res) => {
+  const directoryPath = path.join(__dirname, '../public/facturas');
+
+  fs.readdir(directoryPath, (err, files) => {
+    if (err) {
+      return res.status(500).json({
+        status: "error",
+        message: "Could not list the files",
+        error: err.message,
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      files: files
+    });
+  });
+};
+
+// Función para obtener un archivo por su nombre
+export const getFileByNameFacturas = (req, res) => {
+  const { fileName } = req.params;
+  const directoryPath = path.join(__dirname, '../public/facturas');
+
+  fs.readdir(directoryPath, (err, files) => {
+    if (err) {
+      return res.status(500).json({
+        status: "error",
+        message: "Could not list the files",
+        error: err.message,
+      });
+    }
+
+    const matchedFile = files.find(file => path.parse(file).name === fileName);
+
+    if (!matchedFile) {
+      return res.status(404).json({
+        status: "error",
+        message: "File not found",
+      });
+    }
+
+    const filePath = path.join(directoryPath, matchedFile);
+    const mimeType = mime.lookup(matchedFile) || 'application/octet-stream';
+
+    res.setHeader('Content-Type', mimeType);
+    res.setHeader('Content-Disposition', `inline; filename="${matchedFile}"`);
+
+    res.sendFile(filePath, (err) => {
+      if (err) {
+        return res.status(500).json({
+          status: "error",
+          message: "Could not send the file",
+          error: err.message,
+        });
+      }
+    });
+  });
 };

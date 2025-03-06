@@ -101,15 +101,37 @@ const uploadPolicy = multer({ storage: storagePolicy });
 
 // Ruta de archivos de Facturas
 const storageBills = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, "../public/facturas/"));
+    destination: function (req, _file, cb) {
+        cb(null, path.join(__dirname, "../public/facturas"));
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname);
     },
 });
 
-const uploadBills = multer({ storage: storageBills });
+const uploadBills = multer({ 
+    storage: storageBills ,
+    limits: { fileSize: 50 * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+        const allowedTypes = [
+            'application/pdf',
+            'application/zip',
+            'application/x-zip-compressed',
+            'application/x-compressed',
+            'application/x-rar-compressed',
+            'application/vnd.rar',
+            'image/jpeg',
+            'image/png'
+        ];
+        if (!allowedTypes.includes(file.mimetype)) {
+            return cb(new Error('Tipo de archivo no permitido'), false);
+        } else {
+            // Mostrar el datos del archivo
+            console.log('Archivo subido correctamente', file);
+        }
+        cb(null, true);
+    },
+});
 
 // Ruta de archivos de Solicitudes
 const storageRequest = multer.diskStorage({
