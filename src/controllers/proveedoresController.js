@@ -68,17 +68,56 @@ export const createProveedor = async (req, res) => {
     }
 };
 
+import fs from "fs"; // Importamos el módulo fs para manejar archivos
+
 export const updateProveedor = async (req, res) => {
     try {
-        const updated = await Proveedores.update(req.body, {
-            where: { id: req.params.id },
-        });
-        if (updated[0] === 1) {
-            const updatedProveedor = await Proveedores.findByPk(req.params.id);
-            res.json(updatedProveedor);
-        } else {
-            res.status(404).json({ message: "Proveedor no encontrado" });
+        const proveedor = await Proveedores.findByPk(req.params.id);
+
+        if (!proveedor) {
+            return res.status(404).json({ message: "Proveedor no encontrado" });
         }
+
+        const {
+            nombre,
+            apellidos,
+            tipo_proveedor,
+            RFC,
+            direccion,
+            telefono,
+            email,
+            cuenta_bancaria
+        } = req.body;
+
+        let archivos = proveedor.archivos; // Rutas actuales de los archivos
+        let archivosAntiguos = archivos ? archivos.split(';') : []; // Convertimos en array
+
+        if (req.files && req.files.archivos) {
+            // Si hay nuevos archivos, actualizamos la ruta
+            archivos = req.files.archivos.map(file => file.path).join(';');
+
+            // Eliminamos los archivos antiguos
+            archivosAntiguos.forEach(filePath => {
+                if (fs.existsSync(filePath)) {
+                    fs.unlinkSync(filePath); // Elimina el archivo
+                }
+            });
+        }
+
+        // Actualizamos la BD con los nuevos datos
+        await proveedor.update({
+            nombre,
+            apellidos,
+            tipo_proveedor,
+            RFC,
+            direccion,
+            telefono,
+            email,
+            cuenta_bancaria,
+            archivos, // Nueva ruta de archivos
+        });
+
+        res.json({ message: "Proveedor actualizado correctamente", proveedor });
     } catch (error) {
         res.status(400).json({
             message: "Error al actualizar el proveedor",
