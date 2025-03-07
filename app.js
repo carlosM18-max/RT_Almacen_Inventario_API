@@ -111,8 +111,6 @@ app.use('/api/users', uploadUserRouter); // Descargas
 // Proveedores
 app.use('/api/proveedores', uploadProvRouter);
 app.use('/api/proveedores-files', uploadProvRouter); // Lista
-app.use('/api/proveedor-files', uploadProvRouter); // Por nombre
-app.use('/api/proveedores', uploadProvRouter); // Descargas
 
 // Entregas
 app.use('/api/deliveries-upload', uploadDeliveriesRouter);

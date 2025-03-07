@@ -4,7 +4,10 @@ import {
     getProveedorById,
     createProveedor,
     updateProveedor,
-    deleteProveedor
+    deleteProveedor,
+    getProveedorArchivos,
+    deleteProveedorArchivo,
+    addProveedorArchivos
 } from "../controllers/proveedoresController.js";
 import { uploadProveedores } from "../middlewares/configStorageFile.js";
 
@@ -223,4 +226,197 @@ router.put("/:id", uploadProveedores.fields([{ name: 'archivos', maxCount: 10 }]
  */
 router.delete("/:id", deleteProveedor);
 
+/**
+ * @swagger
+ * /api/proveedor/{id}/archivos:
+ *   get:
+ *     summary: Obtener los archivos de un proveedor
+ *     description: Endpoint para obtener la lista de archivos asociados a un proveedor específico.
+ *     tags:
+ *       - Proveedores
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID del proveedor.
+ *     responses:
+ *       200:
+ *         description: Lista de archivos obtenida correctamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   description: ID del proveedor.
+ *                 archivos:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                   description: Lista de rutas de archivos.
+ *       404:
+ *         description: Proveedor no encontrado.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Proveedor no encontrado"
+ *       500:
+ *         description: Error en el servidor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error al obtener los archivos del proveedor"
+ *                 error:
+ *                   type: string
+ *                   example: "Error message"
+ */
+router.get("/:id/archivos", getProveedorArchivos); // Obtener archivos de un proveedor
+
+/**
+ * @swagger
+ * /api/proveedor/{id}/archivos:
+ *   delete:
+ *     summary: Eliminar un archivo específico de un proveedor por nombre
+ *     description: Endpoint para eliminar un archivo específico asociado a un proveedor usando su nombre.
+ *     tags:
+ *       - Proveedores
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID del proveedor.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               fileName:
+ *                 type: string
+ *                 description: Nombre del archivo a eliminar.
+ *                 example: "archivo1.png"
+ *     responses:
+ *       200:
+ *         description: Archivo eliminado correctamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Archivo eliminado correctamente"
+ *                 archivos:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                   description: Lista actualizada de rutas de archivos.
+ *       404:
+ *         description: Proveedor o archivo no encontrado.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Archivo no encontrado"
+ *       500:
+ *         description: Error en el servidor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error al eliminar el archivo del proveedor"
+ *                 error:
+ *                   type: string
+ *                   example: "Error message"
+ */
+router.delete("/:id/archivos", deleteProveedorArchivo); // Eliminar un archivo específico
+/**
+ * @swagger
+ * /api/proveedor/{id}/archivos:
+ *   post:
+ *     summary: Agregar más archivos a un proveedor
+ *     description: Endpoint para agregar más archivos a un proveedor existente.
+ *     tags:
+ *       - Proveedores
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID del proveedor.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               archivos:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   format: binary
+ *                 description: Archivos a agregar.
+ *     responses:
+ *       200:
+ *         description: Archivos agregados correctamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Archivos agregados correctamente"
+ *                 archivos:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                   description: Lista actualizada de rutas de archivos.
+ *       404:
+ *         description: Proveedor no encontrado.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Proveedor no encontrado"
+ *       500:
+ *         description: Error en el servidor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error al agregar archivos al proveedor"
+ *                 error:
+ *                   type: string
+ *                   example: "Error message"
+ */
+router.post("/:id/archivos", uploadProveedores.fields([{ name: 'archivos', maxCount: 10 }]), addProveedorArchivos); // Agregar más archivos
 export default router;
