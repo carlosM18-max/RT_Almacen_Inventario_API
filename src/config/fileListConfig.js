@@ -175,7 +175,7 @@ export const getFileByNameUsers = (req, res) => {
 
     res.setHeader('Content-Type', mimeType);
     // Cambiar a inline para hacerlo .zip
-    res.setHeader('Content-Disposition', `attachment; filename="${matchedFile}"`);
+    res.setHeader('Content-Disposition', `inline; filename="${matchedFile}"`);
 
     res.sendFile(filePath, (err) => {
       if (err) {
