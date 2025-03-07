@@ -143,3 +143,109 @@ export const deleteProveedor = async (req, res) => {
         });
     }
 };
+
+export const getProveedorArchivos = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Buscar el proveedor por su ID
+        const proveedor = await Proveedores.findByPk(id);
+
+        if (!proveedor) {
+            return res.status(404).json({ message: "Proveedor no encontrado" });
+        }
+
+        // Obtener la lista de archivos
+        const archivos = proveedor.archivos ? proveedor.archivos.split(';') : [];
+
+        res.json({
+            id: proveedor.id,
+            archivos: archivos,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Error al obtener los archivos del proveedor",
+            error: error.message,
+        });
+    }
+};
+
+export const deleteProveedorArchivo = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { fileName } = req.body; // Nombre del archivo a eliminar
+
+        // Buscar el proveedor por su ID
+        const proveedor = await Proveedores.findByPk(id);
+
+        if (!proveedor) {
+            return res.status(404).json({ message: "Proveedor no encontrado" });
+        }
+
+        // Obtener la lista actual de archivos
+        let archivosActuales = proveedor.archivos ? proveedor.archivos.split(';') : [];
+
+        // Buscar el archivo por su nombre
+        const archivoAEliminar = archivosActuales.find(file => file.includes(fileName));
+
+        if (!archivoAEliminar) {
+            return res.status(404).json({ message: "Archivo no encontrado" });
+        }
+
+        // Eliminar el archivo del sistema de archivos
+        if (fs.existsSync(archivoAEliminar)) {
+            fs.unlinkSync(archivoAEliminar); // Eliminar el archivo
+        }
+
+        // Eliminar la ruta del archivo de la lista
+        archivosActuales = archivosActuales.filter(file => !file.includes(fileName));
+
+        // Actualizar la BD con la nueva lista de archivos
+        await proveedor.update({ archivos: archivosActuales.join(';') });
+
+        res.json({
+            message: "Archivo eliminado correctamente",
+            archivos: archivosActuales,
+        });
+    } catch (error) {
+        res.status(400).json({
+            message: "Error al eliminar el archivo del proveedor",
+            error: error.message,
+        });
+    }
+};
+
+export const addProveedorArchivos = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Buscar el proveedor por su ID
+        const proveedor = await Proveedores.findByPk(id);
+
+        if (!proveedor) {
+            return res.status(404).json({ message: "Proveedor no encontrado" });
+        }
+
+        // Obtener la lista actual de archivos
+        let archivosActuales = proveedor.archivos ? proveedor.archivos.split(';') : [];
+
+        // Si hay nuevos archivos, agregarlos a la lista existente
+        if (req.files?.archivos) {
+            const nuevosArchivos = req.files.archivos.map(file => file.path);
+            archivosActuales = [...archivosActuales, ...nuevosArchivos];
+        }
+
+        // Actualizar la BD con los nuevos archivos
+        await proveedor.update({ archivos: archivosActuales.join(';') });
+
+        res.json({
+            message: "Archivos agregados correctamente",
+            archivos: archivosActuales,
+        });
+    } catch (error) {
+        res.status(400).json({
+            message: "Error al agregar archivos al proveedor",
+            error: error.message,
+        });
+    }
+};
