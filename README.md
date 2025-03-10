@@ -6,7 +6,7 @@ API para gestionar el almacenamiento e inventario de Radio y Televisión, asegur
 ## Requisitos
 Para poder ejecutar la API es necesario lo siguiente:
 
-* Tener instalado Node.js (versión 16 o superior), ademas de contar con un gestor de paquetes de tu preferencia
+* Tener instalado Node.js, ademas de contar con su gestor de paquetes
 [![Node](https://skillicons.dev/icons?i=nodejs)](https://nodejs.org/en) 
 [![npm](https://skillicons.dev/icons?i=npm)](https://www.npmjs.com/)
 
@@ -16,8 +16,6 @@ Para poder ejecutar la API es necesario lo siguiente:
 
 * Un editor de texto (en caso de que se necesite modificar algo a tu gusto) 
 [![VSCode](https://skillicons.dev/icons?i=vscode)](https://code.visualstudio.com/) 
-[![Eclipse](https://skillicons.dev/icons?i=eclipse)](https://www.eclipse.org/) 
-[![Android Studio](https://skillicons.dev/icons?i=androidstudio)](https://developer.android.com/studio) 
 
 ## Instalacion
 
