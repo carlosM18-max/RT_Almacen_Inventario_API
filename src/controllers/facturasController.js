@@ -123,7 +123,7 @@ export const deleteFactura = async (req, res) => {
   }
 };
 
-export const getFacturaArchivos = async (req, res) => {
+export const updatedFacturaArchivo = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -134,93 +134,34 @@ export const getFacturaArchivos = async (req, res) => {
       return res.status(404).json({ message: "Factura no encontrada" });
     }
 
-    // Obtener la lista de archivos
-    const archivos = factura.archivo_pdf ? factura.archivo_pdf.split(';') : [];
-
-    res.json({
-      id: factura.id,
-      archivos: archivos,
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: "Error al obtener los archivos de la factura",
-      error: error.message,
-    });
-  }
-};
-
-export const deleteFacturaArchivo = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { fileName } = req.body;
-
-    // Buscar la factura por su ID
-    const factura = await Facturas.findByPk(id);
-
-    if (!factura) {
-      return res.status(404).json({ message: "Factura no encontrada" });
-    }
-
-    // Obtener la lista actual de archivos
-    let archivosActuales = factura.archivo_pdf ? factura.archivo_pdf.split(';') : [];
-
-    // Buscar el archivo por su nombre
-    const archivoAEliminar = archivosActuales.find(file => file.includes(fileName));
-
-    if (!archivoAEliminar) {
-      return res.status(404).json({ message: "Archivo no encontrado" });
-    }
-
-    // Eliminar el archivo del sistema de archivos
-    if (fs.existsSync(archivoAEliminar)) {
-      fs.unlinkSync(archivoAEliminar); // Eliminar el archivo
-    }
-
-    // Eliminar la ruta del archivo de la lista
-    archivosActuales = archivosActuales.filter(file => !file.includes(fileName));
-
-    // Actualizar la factura con la nueva lista de archivos
-    await factura.update({ archivo_pdf: archivosActuales.join(';') });
-
-    res.json({ message: "Archivo eliminado exitosamente" });
-  } catch (error) {
-    res.status(500).json({
-      message: "Error al eliminar el archivo de la factura",
-      error: error.message,
-    });
-  }
-};
-
-export const addFacturaArchivo = async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    // Buscar la factura por su ID
-    const factura = await Facturas.findByPk(id);
-
-    if (!factura) {
-      return res.status(404).json({ message: "Factura no encontrada" });
-    }
-
-    // Verificar si se subió un archivo
+    // Verificar si se subió un nuevo archivo
     if (!req.file) {
       return res.status(400).json({ message: "No se subió ningún archivo" });
     }
 
     // Obtener la lista actual de archivos
-    let archivos = factura.archivo_pdf ? factura.archivo_pdf.split(';') : [];
+    let archivosActuales = factura.archivo_pdf ? factura.archivo_pdf.split(';') : [];
 
-    // Agregar el nuevo archivo a la lista
-    const newArchivo = req.file.path;
-    archivos.push(newArchivo);
+    // Eliminar el archivo anterior del sistema de archivos
+    archivosActuales.forEach(archivo => {
+      if (fs.existsSync(archivo)) {
+        fs.unlinkSync(archivo); // Eliminar el archivo
+      }
+    });
+
+    // Obtener la ruta del nuevo archivo
+    const nuevoArchivo = req.file.path;
+
+    // Actualizar la lista de archivos con el nuevo archivo
+    archivosActuales = [nuevoArchivo];
 
     // Actualizar la factura con la nueva lista de archivos
-    await factura.update({ archivo_pdf: archivos.join(';') });
+    await factura.update({ archivo_pdf: archivosActuales.join(';') });
 
-    res.json({ message: "Archivo agregado exitosamente" });
+    res.json({ message: "Archivo reemplazado exitosamente", nuevoArchivo });
   } catch (error) {
     res.status(500).json({
-      message: "Error al agregar el archivo a la factura",
+      message: "Error al reemplazar el archivo de la factura",
       error: error.message,
     });
   }
