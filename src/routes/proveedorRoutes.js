@@ -350,6 +350,7 @@ router.get("/:id/archivos", getProveedorArchivos); // Obtener archivos de un pro
  *                   example: "Error message"
  */
 router.delete("/:id/archivos", deleteProveedorArchivo); // Eliminar un archivo específico
+
 /**
  * @swagger
  * /api/proveedor/{id}/archivos:
