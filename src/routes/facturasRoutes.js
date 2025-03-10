@@ -34,7 +34,7 @@ const router = Router();
  *           description: ID auto-generado de la factura
  *         tipo_alta:
  *           type: string
- *           enum: ["Compra (CM)", "Domacion (DN)", "Comodato (CO)"]
+ *           enum: ["Compra (CM)", "Donacion (DN)", "Comodato (CO)"]
  *           description: Tipo de alta
  *         tipo_documento_ampara:
  *           type: string
@@ -145,7 +145,7 @@ router.get("/:id", getFacturaById);
  *             properties:
  *               tipo_alta:
  *                 type: string
- *                 enum: [Compra (CM), Domacion (DN), Comodato (CO)]
+ *                 enum: [Compra (CM), Donacion (DN), Comodato (CO)]
  *               tipo_documento_ampara:
  *                 type: string
  *                 enum: [Contrato De Comodato (CO), Comprobante Fiscal Digital por Internet (CFDI)]
@@ -211,7 +211,7 @@ router.post("/", uploadBills.fields([{ name: 'archivo_pdf', maxCount: 1 }]), cre
  *             properties:
  *               tipo_alta:
  *                 type: string
- *                 enum: [Compra (CM), Domacion (DN), Comodato (CO)]
+ *                 enum: [Compra (CM), Donacion (DN), Comodato (CO)]
  *               tipo_documento_ampara:
  *                 type: string
  *                 enum: [Contrato De Comodato (CO), Comprobante Fiscal Digital por Internet (CFDI)]

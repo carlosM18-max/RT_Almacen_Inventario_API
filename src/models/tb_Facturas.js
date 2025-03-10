@@ -8,7 +8,7 @@ const Facturas = db.define("tb_Facturas", {
         autoIncrement: true,
     },
     tipo_alta: {
-        type: DataTypes.ENUM("Compra (CM)", "Domacion (DN)", "Comodato (CO)"),
+        type: DataTypes.ENUM("Compra (CM)", "Donacion (DN)", "Comodato (CO)"),
         allowNull: false,
     },
     tipo_documento_ampara: {
