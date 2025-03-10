@@ -308,7 +308,7 @@ export const downloadAsZipProveedores = (req, res) => {
 
   files.forEach(fileName => {
     const filePath = path.join(directoryPath, fileName);
-    console.log("Verificando archivo:", filePath); // <-- Agregar log para depuración
+    console.log("Verificando archivo:", filePath); 
     if (fs.existsSync(filePath)) {
       archive.file(filePath, { name: fileName });
     } else {

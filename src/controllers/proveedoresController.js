@@ -1,5 +1,6 @@
 import Proveedores from "../models/tb_Provedores.js";
 import path from "path";
+import fs from "fs";
 
 export const getAllProveedores = async (req, res) => {
     try {
@@ -67,8 +68,6 @@ export const createProveedor = async (req, res) => {
         });
     }
 };
-
-import fs from "fs"; // Importamos el módulo fs para manejar archivos
 
 export const updateProveedor = async (req, res) => {
     try {
@@ -173,7 +172,7 @@ export const getProveedorArchivos = async (req, res) => {
 export const deleteProveedorArchivo = async (req, res) => {
     try {
         const { id } = req.params;
-        const { fileName } = req.body; // Nombre del archivo a eliminar
+        const { fileName } = req.body;
 
         // Buscar el proveedor por su ID
         const proveedor = await Proveedores.findByPk(id);
@@ -218,6 +217,7 @@ export const deleteProveedorArchivo = async (req, res) => {
 export const addProveedorArchivos = async (req, res) => {
     try {
         const { id } = req.params;
+        
 
         // Buscar el proveedor por su ID
         const proveedor = await Proveedores.findByPk(id);

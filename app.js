@@ -101,7 +101,7 @@ app.use('/api/all-data', getAllData);
 // Rutas de descargas y cargas
 app.use('/api/upload', uploadRouter);
 // Facturas
-app.use('/api/facturas-files', uploadFacturasRouter); // Lista
+app.use('/api/facturas', uploadFacturasRouter); // Lista
 app.use('/api/factura-files', uploadFacturasRouter); // Por nombre
 // personas
 app.use('/api/users-upload', uploadUserRouter); // Subir

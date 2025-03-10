@@ -5,6 +5,9 @@ import {
   createFactura,
   updateFactura,
   deleteFactura,
+  getFacturaArchivos,
+  deleteFacturaArchivo,
+  addFacturaArchivo
 } from "../controllers/facturasController.js";
 import { uploadBills } from "../middlewares/configStorageFile.js";
 
@@ -275,5 +278,200 @@ router.put("/:id", uploadBills.fields([{ name: 'archivo_pdf', maxCount: 1 }]), u
  *         description: No se encontró la factura
  */
 router.delete("/:id", deleteFactura);
+
+/**
+ * @swagger
+ * /api/facturas/{id}/archivos:
+ *   get:
+ *     summary: Obtener los archivos de una factura
+ *     description: Endpoint para obtener la lista de archivos asociados a una factura en específico.
+ *     tags:
+ *       - Facturas
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID de la factura.
+ *     responses:
+ *       200:
+ *         description: Lista de archivos obtenida correctamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   description: ID del proveedor.
+ *                 archivo_pdf:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                   description: Lista de rutas de archivos.
+ *       404:
+ *         description: Factura no encontrada.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Factura no encontrado"
+ *       500:
+ *         description: Error en el servidor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error al obtener los archivos de la factura"
+ *                 error:
+ *                   type: string
+ *                   example: "Error message"
+ */
+router.get("/:id/archivos", getFacturaArchivos); // Obtener archivos de un proveedor
+
+/**
+ * @swagger
+ * /api/facturas/{id}/archivos:
+ *   delete:
+ *     summary: Eliminar un archivo específico de una factura por nombre
+ *     description: Endpoint para eliminar un archivo específico asociado a una factura usando su nombre.
+ *     tags:
+ *       - Facturas
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID de la factura.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               fileName:
+ *                 type: string
+ *                 description: Nombre del archivo a eliminar.
+ *                 example: "archivo1.png"
+ *     responses:
+ *       200:
+ *         description: Archivo eliminado correctamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Archivo eliminado correctamente"
+ *                 archivo_pdf:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                   description: Lista actualizada de rutas de archivos.
+ *       404:
+ *         description: Factura o archivo no encontrado.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Archivo no encontrado"
+ *       500:
+ *         description: Error en el servidor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error al eliminar el archivo de la factura"
+ *                 error:
+ *                   type: string
+ *                   example: "Error message"
+ */
+router.delete("/:id/archivos/", deleteFacturaArchivo); // Eliminar un archivo específico
+
+/**
+ * @swagger
+ * /api/facturas/{id}/archivos:
+ *   post:
+ *     summary: Agregar más archivos a una factura
+ *     description: Endpoint para agregar más archivos a una factura existente.
+ *     tags:
+ *       - Facturas
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID de la factura.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               archivo_pdf:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   format: binary
+ *                 description: Archivos a agregar.
+ *     responses:
+ *       200:
+ *         description: Archivos agregados correctamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Archivos agregados correctamente"
+ *                 archivo_pdf:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                   description: Lista actualizada de rutas de archivos.
+ *       404:
+ *         description: Proveedor no encontrado.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Proveedor no encontrado"
+ *       500:
+ *         description: Error en el servidor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error al agregar archivos a la factura"
+ *                 error:
+ *                   type: string
+ *                   example: "Error message"
+ */
+router.post("/:id/archivos", uploadBills.single('archivo_pdf'), addFacturaArchivo); // Agregar más archivos
 
 export default router;
