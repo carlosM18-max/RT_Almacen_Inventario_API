@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db.js";
-import Personas from "./tb_Personas.js";
+import Personas from "./tb_personas.js";
 
 const Usuarios = db.define("tb_Usuarios", {
   id: {
