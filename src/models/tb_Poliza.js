@@ -26,6 +26,10 @@ const Poliza = db.define("tb_Poliza", {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false
     },
+    calidad: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+    },
     deducible: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: true,
