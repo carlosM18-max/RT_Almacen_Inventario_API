@@ -51,6 +51,11 @@ const Facturas = db.define("tb_Facturas", {
         allowNull: false,
         // Cantidad
     },
+    calidad: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+        // Calidad
+    },
     precio_unitario: {
         type: DataTypes. DECIMAL(10, 2),
         allowNull: false,
