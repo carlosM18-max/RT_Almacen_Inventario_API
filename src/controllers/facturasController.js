@@ -158,7 +158,10 @@ export const updatedFacturaArchivo = async (req, res) => {
     // Actualizar la factura con la nueva lista de archivos
     await factura.update({ archivo_pdf: archivosActuales.join(';') });
 
-    res.json({ message: "Archivo reemplazado exitosamente", nuevoArchivo });
+    res.json({
+      message: "Archivo reemplazado exitosamente",
+      nuevoArchivo
+    });
   } catch (error) {
     res.status(500).json({
       message: "Error al reemplazar el archivo de la factura",
