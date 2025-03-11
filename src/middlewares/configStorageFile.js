@@ -88,7 +88,7 @@ const storageInventario = multer.diskStorage({
 const uploadInventario = multer({ storage: storageInventario });
 
 // Ruta de archivos de Polizas
-const storagePolicy = multer.diskStorage({
+const storagePolicies = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "../public/polizas/"));
     },
@@ -97,7 +97,29 @@ const storagePolicy = multer.diskStorage({
     },
 });
 
-const uploadPolicy = multer({ storage: storagePolicy });
+const uploadPolicies = multer({
+    storage: storagePolicies,
+    limits: { fileSize: 50 * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+        const allowedTypes = [
+            'application/pdf',
+            'application/zip',
+            'application/x-zip-compressed',
+            'application/x-compressed',
+            'application/x-rar-compressed',
+            'application/vnd.rar',
+            'image/jpeg',
+            'image/png'
+        ];
+        if (!allowedTypes.includes(file.mimetype)) {
+            return cb(new Error('Tipo de archivo no permitido'), false);
+        } else {
+            // Mostrar el datos del archivo
+            console.log('Archivo subido correctamente', file);
+        }
+        cb(null, true);
+    },
+});
 
 // Ruta de archivos de Facturas
 const storageBills = multer.diskStorage({
@@ -109,8 +131,8 @@ const storageBills = multer.diskStorage({
     },
 });
 
-const uploadBills = multer({ 
-    storage: storageBills ,
+const uploadBills = multer({
+    storage: storageBills,
     limits: { fileSize: 50 * 1024 * 1024 },
     fileFilter: (req, file, cb) => {
         const allowedTypes = [
@@ -231,7 +253,7 @@ export {
     uploadUser,
     uploadAlmacen,
     uploadInventario,
-    uploadPolicy,
+    uploadPolicies,
     uploadBills,
     uploadRequest,
     uploadRequisition_proposal,
