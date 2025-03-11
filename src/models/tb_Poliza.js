@@ -41,16 +41,16 @@ const Poliza = db.define("tb_Poliza", {
         // Límites de indemnización
     },
     periodo_vigencia: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false
         // Periodo de vigencia
     },
     fecha: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false
     },
     archivo: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     },
     prima: {
