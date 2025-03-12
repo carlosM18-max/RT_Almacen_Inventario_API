@@ -2,11 +2,15 @@ import { DataTypes } from "sequelize";
 import db from "../config/db.js";
 
 const ObjetoGastos = db.define("tb_Objeto_Gastos", {
-  id_partida: {
+  id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
-    // se relaciona con el codigo armonizado de la tabla de almacenes
+    
+  },
+  numero_partida: {
+    type: DataTypes.INTEGER(255),
+    allowNull
   },
   capitulo: {
     type: DataTypes.STRING(255),
