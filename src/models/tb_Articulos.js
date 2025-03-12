@@ -12,7 +12,7 @@ const Articulos = db.define("tb_Articulos", {
     allowNull: false,
   },
   numero_partida: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   nombre: {
