@@ -22,7 +22,7 @@ export const relaciones = () => {
    Poliza.hasMany(Almacenes, { foreignKey: "id", as: "almacenesPoliza", onDelete: "CASCADE", onUpdate: "CASCADE" });
 
    Almacenes.belongsTo(ObjetoGastos, { foreignKey: "codigo_armonizable", as: "partidaPresupuestal", onDelete: "CASCADE", onUpdate: "CASCADE" });
-   ObjetoGastos.hasMany(Almacenes, { foreignKey: "id_partida", as: "almacenesPartida", onDelete: "CASCADE", onUpdate: "CASCADE" });
+   ObjetoGastos.hasMany(Almacenes, { foreignKey: "numero_partida", as: "almacenesPartida", onDelete: "CASCADE", onUpdate: "CASCADE" });
 
    Bajas.belongsTo(Inventario, { foreignKey: "id_inventario", as: "bienBaja", onDelete: "CASCADE", onUpdate: "CASCADE" });
    Inventario.hasMany(Bajas, { foreignKey: "id", as: "bajasInventario", onDelete: "CASCADE", onUpdate: "CASCADE" });
@@ -71,4 +71,8 @@ export const relaciones = () => {
    // Relación entre Usuarios y Persona
    Usuarios.belongsTo(Personas, { foreignKey: "id_persona", as: "persona", onDelete: "CASCADE", onUpdate: "CASCADE" });
    Personas.hasMany(Usuarios, { foreignKey: "id", as: "usuarios", onDelete: "CASCADE", onUpdate: "CASCADE" });
+
+   // Relación entre Articulos y Objeto de gasto
+   Articulos.belongsTo(ObjetoGastos, { foreignKey: "numero_partida", as: "partidaArticulo", onDelete: "CASCADE", onUpdate: "CASCADE" });
+   ObjetoGastos.hasMany(Articulos, { foreignKey: "numero_partida", as: "articulosPartida", onDelete: "CASCADE", onUpdate: "CASCADE" });
 };
