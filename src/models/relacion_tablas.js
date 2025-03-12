@@ -5,12 +5,12 @@ import Facturas from "./tb_Facturas.js";
 import Inventario from "./tb_Inventario.js";
 import ObjetoGastos from "./tb_ObjetoGasto.js";
 import Poliza from "./tb_Poliza.js";
-import Proveedores from "./tb_Provedores.js";
+import Proveedores from "./tb_Proveedores.js";
 import RegistroContable from "./tb_Registrocontable.js";
 import Solicitudes from "./tb_Solicitudes.js";
 import Usuarios from "./tb_Usuarios.js";
 import VidaUtil from "./tb_VidaUtil.js";
-import Personas from "./tb_personas.js";
+import Personas from "./tb_Personas.js";
 
 
 export const relaciones = () => {

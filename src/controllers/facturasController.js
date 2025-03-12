@@ -1,5 +1,5 @@
 import Facturas from "../models/tb_Facturas.js";
-import Proveedores from "../models/tb_Provedores.js";
+import Proveedores from "../models/tb_Proveedores.js";
 import path from "path";
 import fs from "fs";
 
