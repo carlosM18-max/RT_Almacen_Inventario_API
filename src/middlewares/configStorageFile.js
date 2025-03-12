@@ -103,13 +103,6 @@ const uploadPolicies = multer({
     fileFilter: (req, file, cb) => {
         const allowedTypes = [
             'application/pdf',
-            'application/zip',
-            'application/x-zip-compressed',
-            'application/x-compressed',
-            'application/x-rar-compressed',
-            'application/vnd.rar',
-            'image/jpeg',
-            'image/png'
         ];
         if (!allowedTypes.includes(file.mimetype)) {
             return cb(new Error('Tipo de archivo no permitido'), false);
@@ -137,13 +130,6 @@ const uploadBills = multer({
     fileFilter: (req, file, cb) => {
         const allowedTypes = [
             'application/pdf',
-            'application/zip',
-            'application/x-zip-compressed',
-            'application/x-compressed',
-            'application/x-rar-compressed',
-            'application/vnd.rar',
-            'image/jpeg',
-            'image/png'
         ];
         if (!allowedTypes.includes(file.mimetype)) {
             return cb(new Error('Tipo de archivo no permitido'), false);
