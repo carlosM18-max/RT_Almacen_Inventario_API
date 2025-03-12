@@ -74,6 +74,6 @@ export const relaciones = () => {
    Personas.hasMany(Usuarios, { foreignKey: "id", as: "usuarios", onDelete: "CASCADE", onUpdate: "CASCADE" });
 
    // Relación entre Articulos y Objeto de gasto
-   Articulos.belongsTo(ObjetoGastos, { foreignKey: "numero_partida", as: "partidaArticulo", onDelete: "CASCADE", onUpdate: "CASCADE" });
+   Articulos.belongsTo(ObjetoGastos, { foreignKey: "id_objetogasto", as: "partidaArticulo", onDelete: "CASCADE", onUpdate: "CASCADE" });
    ObjetoGastos.hasMany(Articulos, { foreignKey: "numero_partida", as: "articulosPartida", onDelete: "CASCADE", onUpdate: "CASCADE" });
 };

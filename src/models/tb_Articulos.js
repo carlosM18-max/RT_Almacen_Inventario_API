@@ -11,7 +11,7 @@ const Articulos = db.define("tb_Articulos", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  numero_partida: {
+  id_objetogasto: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
