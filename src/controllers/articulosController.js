@@ -29,17 +29,17 @@ export const createArticulo = async (req, res) => {
     try {
         const {
             numero_factura,
-            numero_partida, //foranea
+            id_objetogasto, //foranea
             nombre,
             importe_sin_iva,
             iva,
             importe_con_iva,
             cantidad,
-            unidadmedidatotalingreso,
+            unidad_medida,
         } = req.body;
 
         // Verificar si un objeto de gasto existe
-        const objetoGasto = await ObjetoGastos.findByPk(numero_partida);
+        const objetoGasto = await ObjetoGastos.findByPk(id_objetogasto);
         if (!objetoGasto) {
             return res.status(400).json({ message: "El objeto de gasto no existe" });
         }
@@ -51,13 +51,13 @@ export const createArticulo = async (req, res) => {
 
         const newArticulo = await Articulos.create({
             numero_factura,
-            numero_partida, //foranea
+            id_objetogasto, //foranea
             nombre,
             importe_sin_iva,
             iva,
             importe_con_iva,
             cantidad,
-            unidadmedidatotalingreso,
+            unidad_medida,
             foto_articulo: foto_articulo.join(';'),
         });
 
@@ -80,13 +80,13 @@ export const updateArticulo = async (req, res) => {
 
         const {
             numero_factura,
-            numero_partida, //foranea
+            id_objetogasto, //foranea
             nombre,
             importe_sin_iva,
             iva,
             importe_con_iva,
             cantidad,
-            unidadmedidatotalingreso,
+            unidad_medida,
         } = req.body;
 
         let archivos = articulo.foto_articulo; // Rutas actuales de los archivos
@@ -106,13 +106,13 @@ export const updateArticulo = async (req, res) => {
 
         await articulo.update({
             numero_factura,
-            numero_partida, //foranea
+            id_objetogasto, //foranea
             nombre,
             importe_sin_iva,
             iva,
             importe_con_iva,
             cantidad,
-            unidadmedidatotalingreso,
+            unidad_medida,
             foto_articulo: archivos,
         });
 

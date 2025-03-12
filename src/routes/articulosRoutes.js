@@ -20,13 +20,13 @@ const router = Router();
  *       type: object
  *       required:
  *         - numero_factura
- *         - numero_partida
+ *         - id_objetogasto
  *         - nombre
  *         - importe_sin_iva
  *         - iva
  *         - importe_con_iva
  *         - cantidad
- *         - unidadmedidatotalingreso
+ *         - unidad_medida
  *       properties:
  *         id:
  *           type: integer
@@ -34,9 +34,9 @@ const router = Router();
  *         numero_factura:
  *           type: string
  *           description: Número de factura
- *         numero_partida:
+ *         id_objetogasto:
  *           type: integer
- *           description: Número de partida presupuestal (foráneo)
+ *           description: ID del objeto de gasto
  *         nombre:
  *           type: string
  *           description: Nombre del artículo
@@ -52,9 +52,18 @@ const router = Router();
  *         cantidad:
  *           type: integer
  *           description: Cantidad adquirida
- *         unidadmedidatotalingreso:
+ *         unidad_medida:
  *           type: string
- *           description: Unidad de medida total de ingreso
+ *           enum:
+ *              - Piezas
+ *              - Paquetes
+ *              - Cajas
+ *              - Kilogramos
+ *              - Litros
+ *              - Metros
+ *              - Rollos
+ *              - Bultos
+ *           description: Unidad de medida
  *         foto_articulo:
  *           type: string
  *           format: binary
@@ -121,7 +130,7 @@ router.get("/:id", getArticulosById);
  *             properties:
  *               numero_factura:
  *                 type: string
- *               numero_partida:
+ *               id_objetogasto:
  *                 type: integer
  *               nombre:
  *                 type: string
@@ -133,8 +142,17 @@ router.get("/:id", getArticulosById);
  *                 type: number
  *               cantidad:
  *                 type: integer
- *               unidadmedidatotalingreso:
+ *               unidad_medida:
  *                 type: string
+ *                 enum:
+ *                     - Piezas
+ *                     - Paquetes
+ *                     - Cajas
+ *                     - Kilogramos
+ *                     - Litros
+ *                     - Metros
+ *                     - Rollos
+ *                     - Bultos
  *               foto_articulo:
  *                 type: string
  *                 format: binary
@@ -179,8 +197,17 @@ router.post("/", uploadArticulos.fields([{ name: 'foto_articulo', maxCount: 10 }
  *               importe_con_iva:
  *                 type: number
  *               cantidad:
- *                 type: integer
- *               unidadmedidatotalingreso:
+ *                 type: string
+ *                 enum:
+ *                     - Piezas
+ *                     - Paquetes
+ *                     - Cajas
+ *                     - Kilogramos
+ *                     - Litros
+ *                     - Metros
+ *                     - Rollos
+ *                     - Bultos
+ *               unidad_medida:
  *                 type: string
  *     responses:
  *       201:

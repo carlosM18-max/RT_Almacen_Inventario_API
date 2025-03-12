@@ -35,8 +35,8 @@ const Articulos = db.define("tb_Articulos", {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false
   },
-  unidadmedidatotalingreso: {
-    type: DataTypes.STRING,
+  unidad_medida: {
+    type: DataTypes.ENUM("Piezas", "Paquetes", "Cajas", "Kilogramos", "Litros", "Metros", "Rollos", "Bultos"),
     allowNull: false,
   },
   foto_articulo: {
