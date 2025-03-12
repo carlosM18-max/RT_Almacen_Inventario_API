@@ -6,7 +6,6 @@ const ObjetoGastos = db.define("tb_Objeto_Gastos", {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
-    
   },
   numero_partida: {
     type: DataTypes.STRING(255),

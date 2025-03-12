@@ -8,6 +8,9 @@ import db from './src/config/db.js';
 import { getDbState, setDbState, resetDbState } from './src/config/db.State.js';
 // Rutas Almacen con archivos de descargas y cargas
 import almacenRouter from './src/routes/almacenesRoutes.js';
+// Rutas Articulos con archivos de descargas y cargas
+import articulosRouter from './src/routes/articulosRoutes.js';
+import uploadArticulosRouter from './src/routes/articulosFilesRoutes.js';
 // Rutas Bajas con archivos de descargas y cargas
 import bajasRouter from './src/routes/bajasRoutes.js';
 // Rutas Entregas con archivos de descargas y cargas
@@ -89,6 +92,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Rutas
 app.use('/api/almacenes', almacenRouter);
+app.use('/api/articulos', articulosRouter);
+app.use('/api/articulos-files', uploadArticulosRouter);
 app.use('/api/bajas', bajasRouter);
 app.use('/api/entregas', entregasRouter);
 app.use('/api/facturas', facturasRouter);
