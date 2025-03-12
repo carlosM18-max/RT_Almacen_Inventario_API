@@ -24,8 +24,20 @@ export const getObjetoGastoById = async (req, res) => {
 
 export const createObjetoGasto = async (req, res) => {
     try {
-        const { capitulo, concepto, gestion, especifica, nombre, descripcion } = req.body;
-        const newObjetoGasto = await ObjetoGastos.create({ capitulo, concepto, gestion, especifica, nombre, descripcion });
+        const {
+            numero_partida,
+            capitulo,
+            nombre,
+            descripcion
+        } = req.body;
+        
+        const newObjetoGasto = await ObjetoGastos.create({
+            numero_partida,
+            capitulo,
+            nombre,
+            descripcion
+        }
+        );
         res.status(201).json(newObjetoGasto);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -34,19 +46,25 @@ export const createObjetoGasto = async (req, res) => {
 
 export const updateObjetoGasto = async (req, res) => {
     try {
-        const { capitulo, concepto, gestion, especifica, nombre, descripcion } = req.body;
-        const updated = await ObjetoGastos.update(
-            { capitulo, concepto, gestion, especifica, nombre, descripcion },
-            { where: { id: req.params.id } }
-        );
-        if (updated[0] === 1) {
-            const updatedObjetoGasto = await ObjetoGastos.findByPk(req.params.id);
-            res.json(updatedObjetoGasto);
+        const {
+            numero_partida,
+            capitulo,
+            nombre,
+            descripcion
+        } = req.body;
+        const objetoGasto = await ObjetoGastos.findByPk(req.params.id);
+        if (objetoGasto) {
+            objetoGasto.numero_partida = numero_partida;
+            objetoGasto.capitulo = capitulo;
+            objetoGasto.nombre = nombre;
+            objetoGasto.descripcion = descripcion;
+            await objetoGasto.save();
+            res.json(objetoGasto);
         } else {
             res.status(404).json({ message: 'Objeto de Gasto no encontrado' });
         }
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
 };
 

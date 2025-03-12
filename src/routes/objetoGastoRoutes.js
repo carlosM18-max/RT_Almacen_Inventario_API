@@ -1,5 +1,11 @@
 import { Router } from "express";
-import { getAllObjetoGastos, getObjetoGastoById, createObjetoGasto, updateObjetoGasto, deleteObjetoGasto } from "../controllers/objetoGastoController.js";
+import {
+    getAllObjetoGastos,
+    getObjetoGastoById,
+    createObjetoGasto,
+    updateObjetoGasto,
+    deleteObjetoGasto
+} from "../controllers/objetoGastoController.js";
 
 const router = Router();
 
@@ -15,18 +21,12 @@ const router = Router();
  *         id:
  *           type: integer
  *           description: ID auto-generado del objeto gasto 
+ *         numero_partida:
+ *           type: string
+ *           description: Numero de partida del objeto gasto
  *         capitulo:
  *           type: string
  *           description: Capitulo del objeto gasto
- *         concepto:     
- *           type: string
- *           description: Concepto del objeto gasto
- *         gestion:
- *           type: string
- *           description: Gestion del objeto gasto
- *         especifica:
- *           type: string
- *           description: Especifica del objeto gasto
  *         nombre:
  *           type: string
  *           description: Nombre del objeto gasto
@@ -87,17 +87,13 @@ router.get("/:id", getObjetoGastoById);
  *     requestBody:
  *       required: true
  *       content:   
- *         multipart/form-data:
+ *         application/json:
  *           schema:
  *             type: object
  *             properties:
+ *               numero_partida:
+ *                 type: string
  *               capitulo:
- *                 type: string
- *               concepto:
- *                 type: string
- *               gestion:
- *                 type: string
- *               especifica:
  *                 type: string
  *               nombre:
  *                 type: string
@@ -131,17 +127,13 @@ router.post("/", createObjetoGasto);
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
  *             type: object
  *             properties:
+ *               numero_partida:
+ *                 type: string
  *               capitulo:
- *                 type: string
- *               concepto:
- *                 type: string
- *               gestion:
- *                 type: string
- *               especifica:
  *                 type: string
  *               nombre:
  *                 type: string

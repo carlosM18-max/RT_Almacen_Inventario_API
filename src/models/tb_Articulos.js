@@ -34,13 +34,13 @@ const Articulos = db.define("tb_Articulos", {
   cantidad: {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false
-},
+  },
   unidadmedidatotalingreso: {
     type: DataTypes.STRING,
     allowNull: false,
   },
   foto_articulo: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: true,
   },
 }, {

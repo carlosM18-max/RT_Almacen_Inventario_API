@@ -234,6 +234,35 @@ const uploadProveedores = multer({
     },
 });
 
+// Ruta de archivos de Articulos
+const storageArticulos = multer.diskStorage({
+    destination: function (req, _file, cb) {
+        cb(null, path.join(__dirname, "../public/articles"));
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    },
+});
+
+const uploadArticulos = multer({
+    storage: storageArticulos,
+    limits: { fileSize: 50 * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+        const allowedTypes = [
+            'image/jpeg',
+            'image/jpg',
+            'image/png'
+        ];
+        if (!allowedTypes.includes(file.mimetype)) {
+            return cb(new Error('Tipo de archivo no permitido'), false);
+        } else {
+            // Mostrar el datos del archivo
+            console.log('Archivo subido correctamente', file);
+        }
+        cb(null, true);
+    },
+});
+
 export {
     upload,
     uploadUser,
@@ -244,5 +273,6 @@ export {
     uploadRequest,
     uploadRequisition_proposal,
     uploadDelivery,
-    uploadProveedores
+    uploadProveedores,
+    uploadArticulos
 };
