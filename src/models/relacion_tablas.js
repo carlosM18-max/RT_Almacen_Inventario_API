@@ -1,4 +1,5 @@
 import Almacenes from "./tb_Almacenes.js";
+import Articulos from "./tb_Articulos.js";
 import Bajas from "./tb_Bajas.js";
 import Entregas from "./tb_Entregas.js";
 import Facturas from "./tb_Facturas.js";

@@ -10,7 +10,7 @@ const ObjetoGastos = db.define("tb_Objeto_Gastos", {
   },
   numero_partida: {
     type: DataTypes.INTEGER(255),
-    allowNull
+    allowNull: true,
   },
   capitulo: {
     type: DataTypes.STRING(255),
