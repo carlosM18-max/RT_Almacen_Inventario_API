@@ -200,7 +200,7 @@ const uploadDelivery = multer({
         cb(null, true);
     },
 });
-// Ruta de archivos de Proveedores
+// TODO: Multer para Proveedores
 const storageProveedores = multer.diskStorage({
     destination: function (req, _file, cb) {
         cb(null, path.join(__dirname, "../public/proveedores"));
