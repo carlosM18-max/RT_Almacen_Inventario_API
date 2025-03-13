@@ -2,6 +2,8 @@ import Proveedores from "../models/tb_Proveedores.js";
 import path from "path";
 import fs from "fs";
 
+// TODO: Controlador de Proveedores terminado
+
 export const getAllProveedores = async (req, res) => {
     try {
         const proveedores = await Proveedores.findAll();

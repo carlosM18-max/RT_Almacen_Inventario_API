@@ -224,7 +224,7 @@ export const downloadAsZip = (req, res) => {
   archive.finalize();
 };
 
-// Listar todos los archivos en el directorio de proveedores
+// TODO:Listar todos los archivos en el directorio de proveedores
 export const listProveedorFiles = (req, res) => {
   const directoryPath = path.join(__dirname, '../public/proveedores');
 
@@ -244,7 +244,7 @@ export const listProveedorFiles = (req, res) => {
   });
 };
 
-// Función para obtener un archivo por su nombre
+// TODO: Función para obtener un archivo por su nombre
 export const getFileByNameProveedores = (req, res) => {
   const { fileName } = req.params;
   const directoryPath = path.join(__dirname, '../public/proveedores');
@@ -285,7 +285,7 @@ export const getFileByNameProveedores = (req, res) => {
   });
 };
 
-// Función para obtener múltiples archivos y comprimirlos en un archivo .zip
+// TODO: Función para obtener múltiples archivos y comprimirlos en un archivo .zip
 export const downloadAsZipProveedores = (req, res) => {
   const { files } = req.body;
 

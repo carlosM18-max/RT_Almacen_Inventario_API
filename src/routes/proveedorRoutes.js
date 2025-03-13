@@ -11,6 +11,8 @@ import {
 } from "../controllers/proveedoresController.js";
 import { uploadProveedores } from "../middlewares/configStorageFile.js";
 
+// TODO: Ruteo de proveedores terminado
+
 const router = Router();
 
 /**
