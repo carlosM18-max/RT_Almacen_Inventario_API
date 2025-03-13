@@ -8,7 +8,7 @@ const ObjetoGastos = db.define("tb_Objeto_Gastos", {
     autoIncrement: true,
   },
   numero_partida: {
-    type: DataTypes.STRING(255),
+    type: DataTypes.INTEGER(255),
     allowNull: true,
   },
   capitulo: {
