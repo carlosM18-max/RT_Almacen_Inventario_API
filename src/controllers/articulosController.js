@@ -29,13 +29,14 @@ export const createArticulo = async (req, res) => {
     try {
         const {
             numero_factura,
-            id_objetogasto, //foranea
+            id_objetogasto, 
             nombre,
             importe_sin_iva,
             iva,
             importe_con_iva,
             cantidad,
             unidad_medida,
+            total_ingreso
         } = req.body;
 
         // Verificar si un objeto de gasto existe
@@ -58,6 +59,7 @@ export const createArticulo = async (req, res) => {
             importe_con_iva,
             cantidad,
             unidad_medida,
+            total_ingreso,
             foto_articulo: foto_articulo.join(';'),
         });
 
@@ -80,17 +82,18 @@ export const updateArticulo = async (req, res) => {
 
         const {
             numero_factura,
-            id_objetogasto, //foranea
+            id_objetogasto,
             nombre,
             importe_sin_iva,
             iva,
             importe_con_iva,
             cantidad,
             unidad_medida,
+            total_ingreso
         } = req.body;
 
-        let archivos = articulo.foto_articulo; // Rutas actuales de los archivos
-        let archivosAntiguos = archivos ? archivos.split(';') : []; // Convertimos en array
+        let archivos = articulo.foto_articulo;
+        let archivosAntiguos = archivos ? archivos.split(';') : []; 
 
         if (req.files && req.files.foto_articulo) {
             // Si hay nuevos archivos, actualizamos la ruta
@@ -99,20 +102,21 @@ export const updateArticulo = async (req, res) => {
             // Eliminamos los archivos antiguos
             archivosAntiguos.forEach(filePath => {
                 if (fs.existsSync(filePath)) {
-                    fs.unlinkSync(filePath); // Elimina el archivo
+                    fs.unlinkSync(filePath);
                 }
             });
         }
 
         await articulo.update({
             numero_factura,
-            id_objetogasto, //foranea
+            id_objetogasto,
             nombre,
             importe_sin_iva,
             iva,
             importe_con_iva,
             cantidad,
             unidad_medida,
+            total_ingreso,
             foto_articulo: archivos,
         });
 
@@ -148,14 +152,14 @@ export const deleteArticuloArchivo = async (req, res) => {
         const { id } = req.params;
         const { fileName } = req.body;
 
-        // Buscar el articulo por su ID
+        // Buscamos por el ID
         const articulo = await Articulos.findByPk(id);
 
         if (!articulo) {
             return res.status(404).json({ message: "Articulo no encontrado" });
         }
 
-        // Obtener la lista actual de archivos
+        // lista de los archivos
         let archivosActuales = articulo.foto_articulo ? articulo.foto_articulo.split(';') : [];
 
         // Buscar el archivo por su nombre
@@ -165,15 +169,15 @@ export const deleteArticuloArchivo = async (req, res) => {
             return res.status(404).json({ message: "Archivo no encontrado" });
         }
 
-        // Eliminar el archivo del sistema de archivos
+        // Eliminar el archivo
         if (fs.existsSync(archivoAEliminar)) {
-            fs.unlinkSync(archivoAEliminar); // Eliminar el archivo
+            fs.unlinkSync(archivoAEliminar);
         }
 
-        // Eliminar la ruta del archivo de la lista
+        // Eliminar la ruta del archivo existente
         archivosActuales = archivosActuales.filter(file => !file.includes(fileName));
 
-        // Actualizar la BD con la nueva lista de archivos
+        // Actualizar la BD con las nuevas rutas
         await articulo.update({ foto_articulo: archivosActuales.join(';') });
 
         res.status(200).json({
@@ -192,23 +196,23 @@ export const addArticuloArchivo = async (req, res) => {
     try {
         const { id } = req.params;
 
-        // Buscar el articulo por su ID
+        // Buscamos por el ID
         const articulo = await Articulos.findByPk(id);
 
         if (!articulo) {
             return res.status(404).json({ message: "Articulo no encontrado" });
         }
 
-        // Obtener la lista actual de archivos
+        // Lista de los archivos
         let archivosActuales = articulo.foto_articulo ? articulo.foto_articulo.split(';') : [];
 
-        // Si hay nuevos archivos, agregarlos a la lista existente
+        // Agregar nuevos archivos a los que ya existen
         if (req.files?.foto_articulo && req.files.foto_articulo.length > 0) {
             const nuevosArchivos = req.files.foto_articulo.map(file => file.path);
             archivosActuales = [...archivosActuales, ...nuevosArchivos];
         }
 
-        // Actualizar la BD con los nuevos archivos
+        // Actualizar la BD con las nuevas rutas
         await articulo.update({ foto_articulo: archivosActuales.join(';') });
 
         res.json({
