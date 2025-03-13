@@ -21,12 +21,6 @@ const router = Router();
  *       required:
  *         - numero_factura
  *         - id_objetogasto
- *         - nombre
- *         - importe_sin_iva
- *         - iva
- *         - importe_con_iva
- *         - cantidad
- *         - unidad_medida
  *       properties:
  *         id:
  *           type: integer
@@ -50,7 +44,7 @@ const router = Router();
  *           type: number
  *           description: Importe total con IVA
  *         cantidad:
- *           type: integer
+ *           type: number
  *           description: Cantidad adquirida
  *         unidad_medida:
  *           type: string
@@ -64,6 +58,9 @@ const router = Router();
  *              - Rollos
  *              - Bultos
  *           description: Unidad de medida
+ *         total_ingreso:
+ *           type: integer
+ *           description: Total de ingreso
  *         foto_articulo:
  *           type: string
  *           format: binary
@@ -141,7 +138,7 @@ router.get("/:id", getArticulosById);
  *               importe_con_iva:
  *                 type: number
  *               cantidad:
- *                 type: integer
+ *                 type: number
  *               unidad_medida:
  *                 type: string
  *                 enum:
@@ -153,6 +150,8 @@ router.get("/:id", getArticulosById);
  *                     - Metros
  *                     - Rollos
  *                     - Bultos
+ *               total_ingreso:
+ *                  type: integer
  *               foto_articulo:
  *                 type: string
  *                 format: binary
@@ -197,7 +196,7 @@ router.post("/", uploadArticulos.fields([{ name: 'foto_articulo', maxCount: 10 }
  *               importe_con_iva:
  *                 type: number
  *               cantidad:
- *                 type: string
+ *                 type: number
  *                 enum:
  *                     - Piezas
  *                     - Paquetes
@@ -207,6 +206,8 @@ router.post("/", uploadArticulos.fields([{ name: 'foto_articulo', maxCount: 10 }
  *                     - Metros
  *                     - Rollos
  *                     - Bultos
+ *               total_ingreso:
+ *                  type: integer
  *               unidad_medida:
  *                 type: string
  *     responses:
