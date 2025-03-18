@@ -1,6 +1,8 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db.js";
-import Personas from "./tb_personas.js";
+import Personas from "./tb_Personas.js";
+
+// TODO: Tabla de Usuarios terminada
 
 const Usuarios = db.define("tb_Usuarios", {
   id: {

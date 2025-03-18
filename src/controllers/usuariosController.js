@@ -1,6 +1,8 @@
 import Usuarios from "../models/tb_Usuarios.js";
 import Personas from "../models/tb_Personas.js";
 
+// TODO: Controlador de Usuarios terminado
+
 export const getAllUsuarios = async (req, res) => {
     try {
         const usuarios = await Usuarios.findAll();

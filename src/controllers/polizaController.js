@@ -3,6 +3,8 @@ import Facturas from "../models/tb_Facturas.js";
 import path from "path";
 import fs from "fs";
 
+// TODO: Controlador de Polizas terminado
+
 export const getAllPolizas = async (req, res) => {
   try {
     const polizas = await Poliza.findAll();
