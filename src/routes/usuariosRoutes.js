@@ -7,6 +7,8 @@ import {
     deleteUsuario
 } from "../controllers/usuariosController.js";
 
+// TODO: Ruteos de Usuarios terminado
+
 const router = Router();
 
 /**

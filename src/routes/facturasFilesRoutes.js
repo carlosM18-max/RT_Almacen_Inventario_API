@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { listFacturasFiles, getFileByNameFacturas } from "../config/fileListConfig.js";
 
+// TODO: Ruteo de archivos de facturas terminado
+
 const router = Router();
 
 /**

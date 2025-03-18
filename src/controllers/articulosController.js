@@ -3,6 +3,8 @@ import ObjetoGastos from "../models/tb_ObjetoGasto.js";
 import path from "path";
 import fs from "fs";
 
+// TODO: Controlador de Articulos terminado
+
 export const getAllArticulos = async (req, res) => {
     try {
         const articulos = await Articulos.findAll();

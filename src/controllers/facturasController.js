@@ -3,6 +3,8 @@ import Proveedores from "../models/tb_Proveedores.js";
 import path from "path";
 import fs from "fs";
 
+// TODO: Controlador de Facturas terminado
+
 export const getAllFacturas = async (req, res) => {
   try {
     const proveedores = await Facturas.findAll();

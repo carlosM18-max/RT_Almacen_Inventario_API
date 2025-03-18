@@ -10,13 +10,15 @@ import {
 } from "../controllers/polizaController.js";
 import { uploadPolicies } from "../middlewares/configStorageFile.js";
 
+// TODO: Ruteos de Polizas terminado
+
 const router = Router();
 
 /**
  * @swagger
  * components:
  *   schemas:
- *     Poliza:
+ *     Polizas:
  *       type: object
  *       required:
  *         - tipo
@@ -71,6 +73,65 @@ const router = Router();
  *         clausulas_exclusion:
  *           type: string
  *           description: Cláusulas de exclusión
+ *     Facturas:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           description: ID auto-generado de la factura
+ *         tipo_alta:
+ *           type: string
+ *           enum: ["Compra (CM)", "Donacion (DN)", "Comodato (CO)"]
+ *           description: Tipo de alta
+ *         tipo_documento_ampara:
+ *           type: string
+ *           enum: ["Contrato De Comodato (CO)", "Comprobante Fiscal Digital por Internet (CFDI)"]
+ *           description: Tipo de documento que ampara
+ *         fecha_adquisicion:
+ *           type: string
+ *           format: date
+ *           description: Fecha de adquisición
+ *         numero_de_factura:
+ *           type: string
+ *           description: Número de factura
+ *         tipo_compra:
+ *           type: string
+ *           enum: ["Presupuesto", "Estatal"]
+ *           description: Tipo de compra
+ *         concepto:
+ *           type: string
+ *           description: Concepto
+ *         fecha_factura:
+ *           type: string
+ *           format: date
+ *           description: Fecha de la factura
+ *         id_proveedor:
+ *           type: integer
+ *           description: ID del proveedor asociado
+ *         cantidad:
+ *           type: number
+ *           format: float
+ *           description: Cantidad
+ *         precio_unitario:
+ *           type: number
+ *           format: float
+ *           description: Precio unitario
+ *         sub_total:
+ *           type: number
+ *           format: float
+ *           description: Subtotal
+ *         iva:
+ *           type: number
+ *           format: float
+ *           description: IVA
+ *         total:
+ *           type: number
+ *           format: float
+ *           description: Total
+ *         archivo_pdf:
+ *           type: string
+ *           format: binary
+ *           description: Archivo PDF de la factura
  */
 
 /**

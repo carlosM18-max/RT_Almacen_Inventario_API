@@ -1,6 +1,8 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db.js";
 
+// TODO: Tabla de Polizas terminada
+
 const Poliza = db.define("tb_Poliza", {
     id: {
         type: DataTypes.INTEGER,

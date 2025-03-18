@@ -8,6 +8,8 @@ import {
 } from "../controllers/personasController.js";
 import { uploadUser } from "../middlewares/configStorageFile.js";
 
+// TODO: Ruteos de Personas terminado
+
 const router = Router();
 
 /**

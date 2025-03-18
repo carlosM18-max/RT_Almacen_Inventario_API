@@ -1,6 +1,8 @@
 import Personas from "../models/tb_Personas.js";
 import path from "path";
 
+// TODO: Controlador de Personas terminado
+
 export const getAllPersons = async (req, res) => {
     try {
         const personas = await Personas.findAll();

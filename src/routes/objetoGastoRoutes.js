@@ -7,6 +7,8 @@ import {
     deleteObjetoGasto
 } from "../controllers/objetoGastoController.js";
 
+// TODO: Ruteos de ObjetoGastos terminado
+
 const router = Router();
 
 /**

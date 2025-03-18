@@ -4,6 +4,8 @@ import {
     getFileByNameArticulos,
 } from "../config/fileListConfig.js";
 
+// TODO: Ruteo de archivos de articulos terminado
+
 const router = Router();
 
 /**

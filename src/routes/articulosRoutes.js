@@ -10,6 +10,8 @@ import {
 } from "../controllers/articulosController.js";
 import { uploadArticulos } from "../middlewares/configStorageFile.js";
 
+// TODO: Ruteos de Articulos terminada
+
 const router = Router();
 
 /**

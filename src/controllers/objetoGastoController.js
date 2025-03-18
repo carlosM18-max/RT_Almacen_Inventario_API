@@ -1,5 +1,7 @@
 import ObjetoGastos from "../models/tb_ObjetoGasto.js";
 
+// TODO: Controlador de ObjetoGastos terminado
+
 export const getAllObjetoGastos = async (req, res) => {
     try {
         const objetoGastos = await ObjetoGastos.findAll();
