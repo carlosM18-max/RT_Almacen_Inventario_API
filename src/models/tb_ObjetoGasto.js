@@ -13,18 +13,10 @@ const ObjetoGastos = db.define("tb_Objeto_Gastos", {
     type: DataTypes.STRING(255),
     allowNull: true,
   },
-  capitulo: {
-    type: DataTypes.STRING(255),
-    allowNull: true,
-  },
   nombre: {
     type: DataTypes.STRING(255),
     allowNull: true,
   },
-  descripcion: {
-    type: DataTypes.STRING(255),
-    allowNull: true,
-  }
 },
   {
     timestamps: true

@@ -9,14 +9,14 @@ const Facturas = db.define("tb_Facturas", {
         primaryKey: true,
         autoIncrement: true,
     },
-    tipo_alta: {
-        type: DataTypes.ENUM("Compra (CM)", "Donacion (DN)", "Comodato (CO)"),
+    tipo_compra: {
+        type: DataTypes.ENUM("Directa", "Licitacion", "Invitacion"),
         allowNull: false,
     },
-    tipo_documento_ampara: {
-        type: DataTypes.ENUM("Contrato De Comodato (CO)", "Comprobante Fiscal Digital por Internet (CFDI)"),
-        allowNull: false,
-        // Tipo de documento que ampara
+    contrato_compra : {
+        type: DataTypes.TEXT,
+        allowNull: false
+        // Documento de contrato
     },
     fecha_adquisicion: {
         type: DataTypes.DATEONLY,
@@ -28,20 +28,10 @@ const Facturas = db.define("tb_Facturas", {
         allowNull: false,
         // Número de factura
     },
-    tipo_compra: {
-        type: DataTypes.ENUM("Presupuesto", "Estatal"),
+    tipo_presupuesto: {
+        type: DataTypes.ENUM("Ingresos Propios", "Recurso Estatal"),
         allowNull: false,
         // Tipo de compra
-    },
-    concepto: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
-        // Concepto
-    },
-    fecha_factura: {
-        type: DataTypes.DATEONLY,
-        allowNull: false,
-        // Fecha
     },
     id_proveedor: {
         type: DataTypes.INTEGER,
@@ -52,11 +42,6 @@ const Facturas = db.define("tb_Facturas", {
         type: DataTypes. DECIMAL(10, 2),
         allowNull: false,
         // Cantidad
-    },
-    precio_unitario: {
-        type: DataTypes. DECIMAL(10, 2),
-        allowNull: false,
-        // Precio unitario
     },
     sub_total: {
         type: DataTypes. DECIMAL(10, 2),
