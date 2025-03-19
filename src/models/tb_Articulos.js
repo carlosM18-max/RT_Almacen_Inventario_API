@@ -17,11 +17,11 @@ const Articulos = db.define("tb_Articulos", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  nombre: {
+  descripcion: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  importe_sin_iva: {
+  presio_unitario: {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
   },
