@@ -28,16 +28,12 @@ export const createObjetoGasto = async (req, res) => {
     try {
         const {
             numero_partida,
-            capitulo,
-            nombre,
-            descripcion
+            nombre
         } = req.body;
         
         const newObjetoGasto = await ObjetoGastos.create({
             numero_partida,
-            capitulo,
-            nombre,
-            descripcion
+            nombre
         }
         );
         res.status(201).json(newObjetoGasto);
@@ -50,16 +46,12 @@ export const updateObjetoGasto = async (req, res) => {
     try {
         const {
             numero_partida,
-            capitulo,
-            nombre,
-            descripcion
+            nombre
         } = req.body;
         const objetoGasto = await ObjetoGastos.findByPk(req.params.id);
         if (objetoGasto) {
             objetoGasto.numero_partida = numero_partida;
-            objetoGasto.capitulo = capitulo;
             objetoGasto.nombre = nombre;
-            objetoGasto.descripcion = descripcion;
             await objetoGasto.save();
             res.json(objetoGasto);
         } else {
