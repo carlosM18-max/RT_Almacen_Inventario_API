@@ -32,8 +32,8 @@ export const createArticulo = async (req, res) => {
         const {
             numero_factura,
             id_objetogasto, 
-            nombre,
-            importe_sin_iva,
+            descripcion,
+            precio_unitario,
             iva,
             importe_con_iva,
             cantidad,
@@ -54,9 +54,9 @@ export const createArticulo = async (req, res) => {
 
         const newArticulo = await Articulos.create({
             numero_factura,
-            id_objetogasto, //foranea
-            nombre,
-            importe_sin_iva,
+            id_objetogasto, 
+            descripcion,
+            precio_unitario,
             iva,
             importe_con_iva,
             cantidad,
@@ -84,9 +84,9 @@ export const updateArticulo = async (req, res) => {
 
         const {
             numero_factura,
-            id_objetogasto,
-            nombre,
-            importe_sin_iva,
+            id_objetogasto, 
+            descripcion,
+            precio_unitario,
             iva,
             importe_con_iva,
             cantidad,
@@ -111,9 +111,9 @@ export const updateArticulo = async (req, res) => {
 
         await articulo.update({
             numero_factura,
-            id_objetogasto,
-            nombre,
-            importe_sin_iva,
+            id_objetogasto, 
+            descripcion,
+            precio_unitario,
             iva,
             importe_con_iva,
             cantidad,

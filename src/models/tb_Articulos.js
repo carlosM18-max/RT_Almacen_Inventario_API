@@ -21,7 +21,7 @@ const Articulos = db.define("tb_Articulos", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  presio_unitario: {
+  precio_unitario: {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
   },

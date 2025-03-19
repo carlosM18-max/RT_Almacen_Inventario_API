@@ -33,10 +33,10 @@ const router = Router();
  *         id_objetogasto:
  *           type: integer
  *           description: ID del objeto de gasto
- *         nombre:
+ *         descripcion:
  *           type: string
  *           description: Nombre del artículo
- *         importe_sin_iva:
+ *         precio_unitario:
  *           type: number
  *           description: Importe sin IVA
  *         iva:
@@ -131,9 +131,9 @@ router.get("/:id", getArticulosById);
  *                 type: string
  *               id_objetogasto:
  *                 type: integer
- *               nombre:
+ *               descripcion:
  *                 type: string
- *               importe_sin_iva:
+ *               precio_unitario:
  *                 type: number
  *               iva:
  *                 type: number
@@ -185,13 +185,17 @@ router.post("/", uploadArticulos.fields([{ name: 'foto_articulo', maxCount: 10 }
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
- *               nombre:
+ *               numero_factura:
  *                 type: string
- *               importe_sin_iva:
+ *               id_objetogasto:
+ *                 type: integer
+ *               descripcion:
+ *                 type: string
+ *               precio_unitario:
  *                 type: number
  *               iva:
  *                 type: number
@@ -199,6 +203,8 @@ router.post("/", uploadArticulos.fields([{ name: 'foto_articulo', maxCount: 10 }
  *                 type: number
  *               cantidad:
  *                 type: number
+ *               unidad_medida:
+ *                 type: string
  *                 enum:
  *                     - Piezas
  *                     - Paquetes
@@ -210,8 +216,9 @@ router.post("/", uploadArticulos.fields([{ name: 'foto_articulo', maxCount: 10 }
  *                     - Bultos
  *               total_ingreso:
  *                  type: integer
- *               unidad_medida:
+ *               foto_articulo:
  *                 type: string
+ *                 format: binary
  *     responses:
  *       201:
  *         description: Artículo actualizado exitosamente
