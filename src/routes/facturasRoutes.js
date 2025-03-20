@@ -32,14 +32,14 @@ const router = Router();
  *         id:
  *           type: integer
  *           description: ID auto-generado de la factura
- *         tipo_alta:
+ *         tipo_compra:
  *           type: string
- *           enum: ["Compra (CM)", "Donacion (DN)", "Comodato (CO)"]
+ *           enum: ["Directa", "Licitacion", "Invitacion"]
  *           description: Tipo de alta
- *         tipo_documento_ampara:
+ *         contrato_compra:
  *           type: string
- *           enum: ["Contrato De Comodato (CO)", "Comprobante Fiscal Digital por Internet (CFDI)"]
- *           description: Tipo de documento que ampara
+ *           format: binary
+ *           description: Archivo PDF de la factura
  *         fecha_adquisicion:
  *           type: string
  *           format: date
@@ -47,17 +47,10 @@ const router = Router();
  *         numero_de_factura:
  *           type: string
  *           description: Número de factura
- *         tipo_compra:
+ *         tipo_presupuesto:
  *           type: string
- *           enum: ["Presupuesto", "Estatal"]
- *           description: Tipo de compra
- *         concepto:
- *           type: string
- *           description: Concepto
- *         fecha_factura:
- *           type: string
- *           format: date
- *           description: Fecha de la factura
+ *           enum: ["Ingresos Propios", "Recurso Estatal"]
+ *           description: Tipo de alta
  *         id_proveedor:
  *           type: integer
  *           description: ID del proveedor asociado
@@ -65,10 +58,6 @@ const router = Router();
  *           type: number
  *           format: float
  *           description: Cantidad
- *         precio_unitario:
- *           type: number
- *           format: float
- *           description: Precio unitario
  *         sub_total:
  *           type: number
  *           format: float
@@ -143,30 +132,23 @@ router.get("/:id", getFacturaById);
  *           schema:
  *             type: object
  *             properties:
- *               tipo_alta:
+ *               tipo_compra:
  *                 type: string
- *                 enum: [Compra (CM), Donacion (DN), Comodato (CO)]
- *               tipo_documento_ampara:
+ *                 enum: [Directa, Licitacion, Invitacion]
+ *               contrato_compra:
  *                 type: string
- *                 enum: [Contrato De Comodato (CO), Comprobante Fiscal Digital por Internet (CFDI)]
+ *                 format: binary
  *               fecha_adquisicion:
  *                 type: string
  *                 format: date
  *               numero_de_factura:
  *                 type: string
- *               tipo_compra:
+ *               tipo_presupuesto:
  *                 type: string
- *                 enum: [Presupuesto, Estatal]
- *               concepto:
- *                 type: string
- *               fecha_factura:
- *                 type: string
- *                 format: date
+ *                 enum: [Ingresos Propios, Recurso Estatal]
  *               id_proveedor:
  *                 type: integer
  *               cantidad:
- *                 type: number
- *               precio_unitario:
  *                 type: number
  *               sub_total:
  *                 type: number
@@ -187,7 +169,7 @@ router.get("/:id", getFacturaById);
  *       500:
  *         description: Algún error del servidor
  */
-router.post("/", uploadBills.fields([{ name: 'archivo_pdf', maxCount: 1 }]), createFactura);
+router.post("/", uploadBills.fields([{ name: 'archivo_pdf', maxCount: 1 }, { name: 'contrato_compra', maxCount: 1 }]), createFactura);
 
 /**
  * @swagger
@@ -209,30 +191,23 @@ router.post("/", uploadBills.fields([{ name: 'archivo_pdf', maxCount: 1 }]), cre
  *           schema:
  *             type: object
  *             properties:
- *               tipo_alta:
+ *               tipo_compra:
  *                 type: string
- *                 enum: [Compra (CM), Donacion (DN), Comodato (CO)]
- *               tipo_documento_ampara:
+ *                 enum: [Directa, Licitacion, Invitacion]
+ *               contrato_compra:
  *                 type: string
- *                 enum: [Contrato De Comodato (CO), Comprobante Fiscal Digital por Internet (CFDI)]
+ *                 format: binary
  *               fecha_adquisicion:
  *                 type: string
  *                 format: date
  *               numero_de_factura:
  *                 type: string
- *               tipo_compra:
+ *               tipo_presupuesto:
  *                 type: string
- *                 enum: [Presupuesto, Estatal]
- *               concepto:
- *                 type: string
- *               fecha_factura:
- *                 type: string
- *                 format: date
+ *                 enum: [Ingresos Propios, Recurso Estatal]
  *               id_proveedor:
  *                 type: integer
  *               cantidad:
- *                 type: number
- *               precio_unitario:
  *                 type: number
  *               sub_total:
  *                 type: number
@@ -255,7 +230,7 @@ router.post("/", uploadBills.fields([{ name: 'archivo_pdf', maxCount: 1 }]), cre
  *       500:
  *         description: Ocurrió algún error en el servidor
  */
-router.put("/:id", uploadBills.fields([{ name: 'archivo_pdf', maxCount: 1 }]), updateFactura);
+router.put("/:id", uploadBills.fields([{ name: 'archivo_pdf', maxCount: 1 }, { name: 'contrato_compra', maxCount: 1 }]), updateFactura);
 
 
 /**
@@ -281,10 +256,10 @@ router.delete("/:id", deleteFactura);
 
 /**
  * @swagger
- * /api/facturas/{id}/reemplazar-archivo:
+ * /api/facturas/{id}/reemplazar-archivos:
  *   put:
- *     summary: Reemplazar el archivo de una factura
- *     description: Endpoint para reemplazar el archivo de una factura existente. Elimina el archivo anterior y sube uno nuevo.
+ *     summary: Reemplazar archivos de una factura
+ *     description: Permite reemplazar el archivo de la factura y el contrato compra, eliminando los anteriores.
  *     tags:
  *       - Facturas
  *     parameters:
@@ -304,10 +279,14 @@ router.delete("/:id", deleteFactura);
  *               archivo_pdf:
  *                 type: string
  *                 format: binary
- *                 description: Nuevo archivo PDF para reemplazar el existente.
+ *                 description: Nuevo archivo PDF de la factura.
+ *               contrato_compra:
+ *                 type: string
+ *                 format: binary
+ *                 description: Nuevo archivo de contrato ampara.
  *     responses:
  *       200:
- *         description: Archivo reemplazado exitosamente.
+ *         description: Archivos reemplazados exitosamente.
  *         content:
  *           application/json:
  *             schema:
@@ -315,44 +294,21 @@ router.delete("/:id", deleteFactura);
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Archivo reemplazado exitosamente"
- *                 nuevoArchivo:
+ *                   example: "Archivos reemplazados exitosamente"
+ *                 nuevoArchivoPDF:
  *                   type: string
- *                   description: Ruta del nuevo archivo.
+ *                   description: Ruta del nuevo archivo PDF de la factura.
+ *                 nuevoContratoCompra:
+ *                   type: string
+ *                   description: Ruta del nuevo contrato ampara.
  *       400:
  *         description: No se subió ningún archivo.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "No se subió ningún archivo"
  *       404:
  *         description: Factura no encontrada.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Factura no encontrada"
  *       500:
  *         description: Error en el servidor.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Error al reemplazar el archivo de la factura"
- *                 error:
- *                   type: string
- *                   example: "Error message"
  */
-router.put("/:id/reemplazar-archivo", uploadBills.single('archivo_pdf'), updatedFacturaArchivo);
+router.put("/:id/reemplazar-archivos", uploadBills.fields([{ name: "archivo_pdf", maxCount: 1 },{ name: "contrato_compra", maxCount: 1 }]), updatedFacturaArchivo);
 
 export default router;
+
