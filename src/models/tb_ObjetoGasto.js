@@ -18,7 +18,7 @@ const ObjetoGastos = db.define("tb_Objeto_Gastos", {
     type: DataTypes.STRING(255),
     allowNull: true,
   },
-  descrpcion: {
+  descripcion: {
     type: DataTypes.STRING(1000),
     allowNull: true,
   },
