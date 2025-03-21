@@ -9,8 +9,8 @@ const Articulos = db.define("tb_Articulos", {
     primaryKey: true,
     autoIncrement: true,
   },
-  numero_factura: {
-    type: DataTypes.STRING,
+  id_factura: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   id_objetogasto: {

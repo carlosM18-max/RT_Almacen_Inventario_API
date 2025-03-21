@@ -12,14 +12,19 @@ const ObjetoGastos = db.define("tb_Objeto_Gastos", {
   numero_partida: {
     type: DataTypes.STRING(255),
     allowNull: true,
+    unique: true,
   },
   nombre: {
     type: DataTypes.STRING(255),
     allowNull: true,
   },
+  descrpcion: {
+    type: DataTypes.STRING(1000),
+    allowNull: true,
+  },
 },
   {
-    timestamps: true
+    timestamps: false
   }
 );
 
