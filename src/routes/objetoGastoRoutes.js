@@ -29,6 +29,9 @@ const router = Router();
  *         nombre:
  *           type: string
  *           description: Nombre del objeto gasto
+ *         descripcion:
+ *           type: string
+ *           description: Descripcion del objeto gasto
  */
 
 /**
@@ -91,6 +94,8 @@ router.get("/:id", getObjetoGastoById);
  *                 type: string
  *               nombre:
  *                 type: string
+ *               descripcion:
+ *                 type: string
  *     responses:
  *       201:
  *         description: Objeto gasto creado correctamente
@@ -126,6 +131,8 @@ router.post("/", createObjetoGasto);
  *               numero_partida:
  *                 type: string
  *               nombre:
+ *                 type: string
+ *               descripcion:
  *                 type: string
  *     responses:
  *       200:

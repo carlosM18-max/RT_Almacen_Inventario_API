@@ -1,5 +1,6 @@
 import Articulos from "../models/tb_Articulos.js";
 import ObjetoGastos from "../models/tb_ObjetoGasto.js";
+import Facturas from "../models/tb_Facturas.js";
 import path from "path";
 import fs from "fs";
 
@@ -30,7 +31,7 @@ export const getArticulosById = async (req, res) => {
 export const createArticulo = async (req, res) => {
     try {
         const {
-            numero_factura,
+            id_factura,
             id_objetogasto, 
             descripcion,
             precio_unitario,
@@ -46,6 +47,10 @@ export const createArticulo = async (req, res) => {
         if (!objetoGasto) {
             return res.status(400).json({ message: "El objeto de gasto no existe" });
         }
+        const factura = await Facturas.findByPk(id_factura);
+        if (!factura) {
+            return res.status(400).json({ message: "La factura no existe" });
+        }
 
         // Verificar si se han subido archivos
         const foto_articulo = req.files ? req.files.foto_articulo.map(file => file.path) : [];
@@ -53,7 +58,7 @@ export const createArticulo = async (req, res) => {
         console.log(req.files);
 
         const newArticulo = await Articulos.create({
-            numero_factura,
+            id_factura,
             id_objetogasto, 
             descripcion,
             precio_unitario,
@@ -83,7 +88,7 @@ export const updateArticulo = async (req, res) => {
         }
 
         const {
-            numero_factura,
+            id_factura,
             id_objetogasto, 
             descripcion,
             precio_unitario,
@@ -110,7 +115,7 @@ export const updateArticulo = async (req, res) => {
         }
 
         await articulo.update({
-            numero_factura,
+            id_factura,
             id_objetogasto, 
             descripcion,
             precio_unitario,

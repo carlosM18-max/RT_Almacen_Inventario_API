@@ -27,9 +27,9 @@ const router = Router();
  *         id:
  *           type: integer
  *           description: ID auto-generado del artículo
- *         numero_factura:
- *           type: string
- *           description: Número de factura
+ *         id_factura:
+ *           type: integer
+ *           description: ID de la factura
  *         id_objetogasto:
  *           type: integer
  *           description: ID del objeto de gasto
@@ -127,8 +127,8 @@ router.get("/:id", getArticulosById);
  *           schema:
  *             type: object
  *             properties:
- *               numero_factura:
- *                 type: string
+ *               id_factura:
+ *                 type: integer
  *               id_objetogasto:
  *                 type: integer
  *               descripcion:
@@ -189,8 +189,8 @@ router.post("/", uploadArticulos.fields([{ name: 'foto_articulo', maxCount: 10 }
  *           schema:
  *             type: object
  *             properties:
- *               numero_factura:
- *                 type: string
+ *               id_factura:
+ *                 type: integer
  *               id_objetogasto:
  *                 type: integer
  *               descripcion:
