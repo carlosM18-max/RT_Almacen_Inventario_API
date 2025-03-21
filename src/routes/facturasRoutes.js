@@ -5,7 +5,8 @@ import {
   createFactura,
   updateFactura,
   deleteFactura,
-  updatedFacturaArchivo
+  updatedFacturaArchivo,
+  updatedFacturaArchivoContrato
 } from "../controllers/facturasController.js";
 import { uploadBills } from "../middlewares/configStorageFile.js";
 
@@ -256,59 +257,155 @@ router.delete("/:id", deleteFactura);
 
 /**
  * @swagger
- * /api/facturas/{id}/reemplazar-archivos:
+ * /api/facturas/{id}/reemplazar-pdf:
  *   put:
- *     summary: Reemplazar archivos de una factura
- *     description: Permite reemplazar el archivo de la factura y el contrato compra, eliminando los anteriores.
- *     tags:
- *       - Facturas
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: ID de la factura.
- *     requestBody:
- *       required: true
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               archivo_pdf:
- *                 type: string
- *                 format: binary
- *                 description: Nuevo archivo PDF de la factura.
- *               contrato_compra:
- *                 type: string
- *                 format: binary
- *                 description: Nuevo archivo de contrato ampara.
- *     responses:
- *       200:
- *         description: Archivos reemplazados exitosamente.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Archivos reemplazados exitosamente"
- *                 nuevoArchivoPDF:
- *                   type: string
- *                   description: Ruta del nuevo archivo PDF de la factura.
- *                 nuevoContratoCompra:
- *                   type: string
- *                   description: Ruta del nuevo contrato ampara.
- *       400:
- *         description: No se subió ningún archivo.
- *       404:
- *         description: Factura no encontrada.
- *       500:
- *         description: Error en el servidor.
- */
-router.put("/:id/reemplazar-archivos", uploadBills.fields([{ name: "archivo_pdf", maxCount: 1 },{ name: "contrato_compra", maxCount: 1 }]), updatedFacturaArchivo);
+  *     summary: Reemplazar el archivo pdf de la factura
+  *     description: Endpoint para reemplazar el archivo pdf de una factura existente. Elimina el archivo anterior y sube uno nuevo.
+  *     tags:
+  *       - Facturas
+  *     parameters:
+  *       - in: path
+  *         name: id
+  *         required: true
+  *         schema:
+  *           type: integer
+  *         description: ID de la factura.
+  *     requestBody:
+  *       required: true
+  *       content:
+  *         multipart/form-data:
+  *           schema:
+  *             type: object
+  *             properties:
+  *               archivo_pdf:
+  *                 type: string
+  *                 format: binary
+  *                 description: Nuevo archivo PDF para reemplazar el existente.
+  *     responses:
+  *       200:
+  *         description: Archivo reemplazado exitosamente.
+  *         content:
+  *           application/json:
+  *             schema:
+  *               type: object
+  *               properties:
+  *                 message:
+  *                   type: string
+  *                   example: "Archivo reemplazado exitosamente"
+  *                 nuevoArchivo:
+  *                   type: string
+  *                   description: Ruta del nuevo archivo.
+  *       400:
+  *         description: No se subió ningún archivo.
+  *         content:
+  *           application/json:
+  *             schema:
+  *               type: object
+  *               properties:
+  *                 message:
+  *                   type: string
+  *                   example: "No se subió ningún archivo"
+  *       404:
+  *         description: Factura no encontrada.
+  *         content:
+  *           application/json:
+  *             schema:
+  *               type: object
+  *               properties:
+  *                 message:
+  *                   type: string
+  *                   example: "Factura no encontrada"
+  *       500:
+  *         description: Error en el servidor.
+  *         content:
+  *           application/json:
+  *             schema:
+  *               type: object
+  *               properties:
+  *                 message:
+  *                   type: string
+  *                   example: "Error al reemplazar el archivo de la factura"
+  *                 error:
+  *                   type: string
+  *                   example: "Error message"
+  */
+router.put("/:id/reemplazar-pdf", uploadBills.single('archivo_pdf'), updatedFacturaArchivo);
+
+/**
+ * @swagger
+ * /api/facturas/{id}/reemplazar-contrato:
+ *   put:
+  *     summary: Reemplazar el archivo de contrato de la factura
+  *     description: Endpoint para reemplazar el archivo de contrato de una factura existente. Elimina el archivo anterior y sube uno nuevo.
+  *     tags:
+  *       - Facturas
+  *     parameters:
+  *       - in: path
+  *         name: id
+  *         required: true
+  *         schema:
+  *           type: integer
+  *         description: ID de la factura.
+  *     requestBody:
+  *       required: true
+  *       content:
+  *         multipart/form-data:
+  *           schema:
+  *             type: object
+  *             properties:
+  *               contrato_compra:
+  *                 type: string
+  *                 format: binary
+  *                 description: Nuevo archivo de contrato para reemplazar el existente.
+  *     responses:
+  *       200:
+  *         description: Archivo reemplazado exitosamente.
+  *         content:
+  *           application/json:
+  *             schema:
+  *               type: object
+  *               properties:
+  *                 message:
+  *                   type: string
+  *                   example: "Archivo reemplazado exitosamente"
+  *                 nuevoArchivoContrato:
+  *                   type: string
+  *                   description: Ruta del nuevo archivo.
+  *       400:
+  *         description: No se subió ningún archivo.
+  *         content:
+  *           application/json:
+  *             schema:
+  *               type: object
+  *               properties:
+  *                 message:
+  *                   type: string
+  *                   example: "No se subió ningún archivo"
+  *       404:
+  *         description: Factura no encontrada.
+  *         content:
+  *           application/json:
+  *             schema:
+  *               type: object
+  *               properties:
+  *                 message:
+  *                   type: string
+  *                   example: "Factura no encontrada"
+  *       500:
+  *         description: Error en el servidor.
+  *         content:
+  *           application/json:
+  *             schema:
+  *               type: object
+  *               properties:
+  *                 message:
+  *                   type: string
+  *                   example: "Error al reemplazar el archivo de la factura"
+  *                 error:
+  *                   type: string
+  *                   example: "Error message"
+  */
+router.put("/:id/reemplazar-contrato", uploadBills.single('contrato_compra'), updatedFacturaArchivoContrato);
 
 export default router;
 

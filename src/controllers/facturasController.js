@@ -130,51 +130,84 @@ export const updatedFacturaArchivo = async (req, res) => {
       return res.status(404).json({ message: "Factura no encontrada" });
     }
 
-    // Verificar si se subieron archivos
-    if (!req.files || (!req.files.archivo_pdf && !req.files.contrato_compra)) {
+    // Verificar si se subió un nuevo archivo
+    if (!req.file) {
       return res.status(400).json({ message: "No se subió ningún archivo" });
     }
 
-    // Manejo del archivo PDF de la factura
-    if (req.files.archivo_pdf) {
-      let archivosActuales = factura.archivo_pdf ? factura.archivo_pdf.split(';') : [];
+    // Obtener la lista actual de archivos
+    let archivosActuales = factura.archivo_pdf ? factura.archivo_pdf.split(';') : [];
 
-      // Eliminar archivos anteriores
-      archivosActuales.forEach(archivo => {
-        if (fs.existsSync(archivo)) {
-          fs.unlinkSync(archivo);
-        }
-      });
+    // Eliminar el archivo anterior del sistema de archivos
+    archivosActuales.forEach(archivo => {
+      if (fs.existsSync(archivo)) {
+        fs.unlinkSync(archivo); // Eliminar el archivo
+      }
+    });
 
-      // Guardar nuevo archivo
-      const nuevoArchivoPDF = req.files.archivo_pdf.map(file => file.path);
-      await factura.update({ archivo_pdf: nuevoArchivoPDF.join(';') });
-    }
+    // Obtener la ruta del nuevo archivo
+    const nuevoArchivo = req.file.path;
 
-    // Manejo del contrato ampara
-    if (req.files.contrato_compra) {
-      let contratosActuales = factura.contrato_compra ? factura.contrato_compra.split(';') : [];
+    // Actualizar la lista de archivos con el nuevo archivo
+    archivosActuales = [nuevoArchivo];
 
-      // Eliminar archivos anteriores
-      contratosActuales.forEach(archivo => {
-        if (fs.existsSync(archivo)) {
-          fs.unlinkSync(archivo);
-        }
-      });
-
-      // Guardar nuevo archivo
-      const nuevoContratoCompra = req.files.contrato_compra.map(file => file.path);
-      await factura.update({ contrato_compra: nuevoContratoCompra.join(';') });
-    }
+    // Actualizar la factura con la nueva lista de archivos
+    await factura.update({ archivo_pdf: archivosActuales.join(';') });
 
     res.json({
-      message: "Archivos reemplazados exitosamente",
-      nuevoArchivoPDF: req.files.archivo_pdf ? req.files.archivo_pdf.map(file => file.path) : null,
-      nuevoContratoCompra: req.files.contrato_compra ? req.files.contrato_compra.map(file => file.path) : null
+      message: "Archivo reemplazado exitosamente",
+      nuevoArchivo
     });
   } catch (error) {
     res.status(500).json({
-      message: "Error al reemplazar los archivos de la factura",
+      message: "Error al reemplazar el archivo de la factura",
+      error: error.message,
+    });
+  }
+};
+
+export const updatedFacturaArchivoContrato = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Buscar la factura por su ID
+    const factura = await Facturas.findByPk(id);
+
+    if (!factura) {
+      return res.status(404).json({ message: "Factura no encontrada" });
+    }
+
+    // Verificar si se subió un nuevo archivo
+    if (!req.file) {
+      return res.status(400).json({ message: "No se subió ningún archivo" });
+    }
+
+    // Obtener la lista actual de archivos
+    let archivosActuales = factura.contrato_compra ? factura.contrato_compra.split(';') : [];
+
+    // Eliminar el archivo anterior del sistema de archivos
+    archivosActuales.forEach(archivo => {
+      if (fs.existsSync(archivo)) {
+        fs.unlinkSync(archivo); // Eliminar el archivo
+      }
+    });
+
+    // Obtener la ruta del nuevo archivo
+    const nuevoArchivoContrato = req.file.path;
+
+    // Actualizar la lista de archivos con el nuevo archivo
+    archivosActuales = [nuevoArchivoContrato];
+
+    // Actualizar la factura con la nueva lista de archivos
+    await factura.update({ contrato_compra: archivosActuales.join(';') });
+
+    res.json({
+      message: "Archivo reemplazado exitosamente",
+      nuevoArchivoContrato
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al reemplazar el archivo de la factura",
       error: error.message,
     });
   }
