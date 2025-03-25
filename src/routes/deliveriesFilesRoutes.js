@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { uploadDelivery } from '../middlewares/configStorageFile.js';
-import { listDeliveryFiles, getFileByNameDelivery } from '../config/fileListConfig.js';
+import { listDeliveryFiles, getFileByNameDelivery } from '../middlewares/fileListConfig.js';
 import { uploadPolicy } from '../controllers/uploadController.js';
 
 const router = Router();

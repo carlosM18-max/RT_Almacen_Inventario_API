@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { uploadUser } from '../middlewares/configStorageFile.js';
-import { listUserFiles, getFileByNameUsers, downloadAsZip } from '../config/fileListConfig.js';
+import { listUserFiles, getFileByNameUsers, downloadAsZip } from '../middlewares/fileListConfig.js';
 import { uploadPolicy } from '../controllers/uploadController.js';
 
 // TODO: Ruteo de archivos de personas terminado
