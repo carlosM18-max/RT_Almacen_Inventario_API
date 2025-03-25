@@ -4,41 +4,41 @@ import dotenv from 'dotenv';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 // Configuración de la conexión
-import db from './src/config/db.js';
-import { getDbState, setDbState, resetDbState } from './src/config/db.State.js';
+import db from './config/db.js';
+import { getDbState, setDbState, resetDbState } from './config/db.State.js';
 // Rutas Almacen con archivos de descargas y cargas
-import almacenRouter from './src/routes/almacenesRoutes.js';
+import almacenRouter from './routes/almacenesRoutes.js';
 // Rutas Articulos con archivos de descargas y cargas
-import articulosRouter from './src/routes/articulosRoutes.js';
-import uploadArticulosRouter from './src/routes/articulosFilesRoutes.js';
+import articulosRouter from './routes/articulosRoutes.js';
+import uploadArticulosRouter from './routes/articulosFilesRoutes.js';
 // Rutas Bajas con archivos de descargas y cargas
-import bajasRouter from './src/routes/bajasRoutes.js';
+import bajasRouter from './routes/bajasRoutes.js';
 // Rutas Entregas con archivos de descargas y cargas
-import entregasRouter from './src/routes/entregasRoutes.js';
-import uploadDeliveriesRouter from './src/routes/deliveriesFilesRoutes.js';
+import entregasRouter from './routes/entregasRoutes.js';
+import uploadDeliveriesRouter from './routes/deliveriesFilesRoutes.js';
 // Rutas Facturas con archivos de descargas y cargas
-import facturasRouter from './src/routes/facturasRoutes.js';
-import uploadFacturasRouter from './src/routes/facturasFilesRoutes.js';
+import facturasRouter from './routes/facturasRoutes.js';
+import uploadFacturasRouter from './routes/facturasFilesRoutes.js';
 // Rutas Generales de descargas y cargas
-import uploadRouter from './src/routes/uploadFilesRoutes.js';
+import uploadRouter from './routes/uploadFilesRoutes.js';
 // Rutas Objetos de Gasto con archivos de descargas y cargas
-import objetoGastoRouter from './src/routes/objetoGastoRoutes.js';
+import objetoGastoRouter from './routes/objetoGastoRoutes.js';
 // Rutas Polizas con archivos de descargas y cargas
-import polizasRouter from './src/routes/polizaRoutes.js';
-import uploadPolizasRouter from './src/routes/polizaFileRoutes.js';
-import { getAllData } from './src/controllers/polizaController.js';
+import polizasRouter from './routes/polizaRoutes.js';
+import uploadPolizasRouter from './routes/polizaFileRoutes.js';
+import { getAllData } from './controllers/polizaController.js';
 // Rutas Proveedores con archivos de descargas y cargas
-import proveedoresRouter from './src/routes/proveedorRoutes.js';
-import uploadProvRouter from './src/routes/proveedorFilesRoutes.js';
+import proveedoresRouter from './routes/proveedorRoutes.js';
+import uploadProvRouter from './routes/proveedorFilesRoutes.js';
 // Rutas Personas con archivos de descargas y cargas
-import personaRouter from './src/routes/personasRoutes.js';
-import uploadUserRouter from './src/routes/personsFilesRoutes.js';
+import personaRouter from './routes/personasRoutes.js';
+import uploadUserRouter from './routes/personsFilesRoutes.js';
 // Rutas Solicitudes con archivos de descargas y cargas
-import solicitudesRouter from './src/routes/solicitudesRoutes.js';
+import solicitudesRouter from './routes/solicitudesRoutes.js';
 // Rutas Usuarios con archivos de descargas y cargas
-import usuariosRouter from './src/routes/usuariosRoutes.js';
+import usuariosRouter from './routes/usuariosRoutes.js';
 // Relación (FK)
-import { relaciones } from './src/models/relacion_tablas.js';
+import { relaciones } from './models/relacion_tablas.js';
 
 dotenv.config();
 

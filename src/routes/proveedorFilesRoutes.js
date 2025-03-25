@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { listProveedorFiles, getFileByNameProveedores, downloadAsZipProveedores } from '../config/fileListConfig.js';
+import { listProveedorFiles, getFileByNameProveedores, downloadAsZipProveedores } from '../middlewares/fileListConfig.js';
 
 // TODO: Ruteo de proveedores (listado, busqueda,descarga) terminado
 

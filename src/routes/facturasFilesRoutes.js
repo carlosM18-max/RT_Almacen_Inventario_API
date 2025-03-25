@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { listFacturasFiles, getFileByNameFacturas } from "../config/fileListConfig.js";
+import { listFacturasFiles, getFileByNameFacturas } from "../middlewares/fileListConfig.js";
 
 // TODO: Ruteo de archivos de facturas terminado
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { listPolizasFiles, getFileByNamePolizas } from "../config/fileListConfig.js";
+import { listPolizasFiles, getFileByNamePolizas } from "../middlewares/fileListConfig.js";
 
 // TODO: Ruteo de archivos de polizas terminado
 

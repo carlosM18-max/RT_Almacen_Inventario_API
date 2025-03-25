@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
     listArticulosFiles,
     getFileByNameArticulos,
-} from "../config/fileListConfig.js";
+} from "../middlewares/fileListConfig.js";
 
 // TODO: Ruteo de archivos de articulos terminado
 
