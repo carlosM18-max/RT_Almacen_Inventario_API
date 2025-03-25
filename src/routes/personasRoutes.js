@@ -147,7 +147,7 @@ router.get("/", getAllPersons);
  * @swagger
  * /api/personas/{id}:
  *   get:
- *     summary: Obtener un usuario por su ID
+ *     summary: Obtener una persona por su ID
  *     tags: [Personas]
  *     parameters:
  *       - in: path
