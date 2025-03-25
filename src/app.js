@@ -33,6 +33,8 @@ import uploadProvRouter from './routes/proveedorFilesRoutes.js';
 // Rutas Personas con archivos de descargas y cargas
 import personaRouter from './routes/personasRoutes.js';
 import uploadUserRouter from './routes/personsFilesRoutes.js';
+// Rutas Salida de Existencia con archivos de descargas y cargas
+import salidaExistenciaRouter from './routes/salidaExistenciaRoutes.js';
 // Rutas Solicitudes con archivos de descargas y cargas
 import solicitudesRouter from './routes/solicitudesRoutes.js';
 // Rutas Usuarios con archivos de descargas y cargas
@@ -101,6 +103,7 @@ app.use('/api/objetoGastos', objetoGastoRouter);
 app.use('/api/personas', personaRouter);
 app.use('/api/polizas', polizasRouter);
 app.use('/api/polizas-files', uploadPolizasRouter);
+app.use('/api/salidaExistencias', salidaExistenciaRouter);
 app.use('/api/solicitudes', solicitudesRouter);
 app.use('/api/usuarios', usuariosRouter);
 app.use('/api/proveedor', proveedoresRouter);
