@@ -1,14 +1,19 @@
-import express from "express";
-import { getAllSolicitudes, getSolicitudById, createSolicitud, updateSolicitud, deleteSolicitud } from "../controllers/solicitudesController.js";
-import { uploadRequest } from "../middlewares/configStorageFile.js";
+import { Router } from "express";
+import {
+    getAllSolicitudes,
+    getSolicitudById,
+    createSolicitud,
+    updateSolicitud,
+    deleteSolicitud,
+} from "../controllers/solicitudesController.js";
 
-const router = express.Router();
+const router = Router();
 
 /**
  * @swagger
  * components:
  *   schemas:
- *     Solicitud:   
+ *     Solicitudes:   
  *       type: object
  *       required:
  *         - descripcion
@@ -16,56 +21,30 @@ const router = express.Router();
  *         id:
  *           type: integer
  *           description: ID auto-generado de la solicitud
- *         descripcion:
+ *         direccion_solicitante:
  *           type: string
+ *           enum:
+ *             - Direccion General
+ *             - Direccion de Coordinacion Financiera Y Planeacion
+ *             - Direccion de Television
+ *             - Direccion de Noticias
+ *             - Direccion de Radio
+ *             - Direccion de Ingenieria
+ *             - Direccion de Proyectos Estrategicos
+ *             - Organo Interno de Control
+ *             - Direccion de Promocion e Intercambio
+ *             - Direccion Juridica
+ *             - Direccion de Vinculacion
+ *             - Imagen
+ *             - Estaciones de Radio
+ *             - Estaciones de Television
  *           description: Descripción de la solicitud
- *         cantidad:
- *           type: integer
- *           description: Cantidad de la solicitud
- *         tipo:
- *           type: string
- *           enum: [Insumo, Bien]
- *           description: Cantidad de la solicitud
- *         estado:
- *           type: string
- *           enum: [En Revision, Aceptado, Rechazado]
- *           description: Estado de la solicitud
- *         archivo:
- *           type: string
- *           format: binary
- *           description: Archivo de la baja
- *         id_usuario_aprobador:
- *           type: integer
- *           description: ID del usuario aprobado
- *         id_usuario_solicitud:
- *           type: integer
- *           description: ID del usuario de la solicitud
  *         id_articulo:
  *           type: integer
- *           description: ID del article de la solicitud
- *         id_numero_inventario:
- *           type: integer
- *           description: ID del inventario de la solicitud
- *         id_numero_almacen:
- *           type: integer
- *           description: ID del almacén de la solicitud
- *         comentario:
- *           type: string
- *           description: Comentarios de la solicitud
- *         tipo_rechazo:
- *           type: string
- *           enum: [Falta de presupuesto, No planeado, Incompleto, Fuera de Plazo]
- *           description: Tipo de rechazo de la solicitud
- *         tipo_proyecto:
- *           type: string
- *           enum: [Radio, Television]
- *           description: Tipo de proyecto de la solicitud
- *         id_propuesta_requicicion:
- *           type: integer
- *           description: ID de la propuesta de requicicion de la solicitud
- *         id_peticion_de_padre:
- *           type: integer
- *           description: ID de la petición de padre de la solicitud
+ *           description: ID del articulo solicitado
+ *         cantidad_entregada:
+ *           type: number
+ *           description: Cantidad entregada de la solicitud
  */
 
 /**
@@ -82,7 +61,7 @@ const router = express.Router();
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Solicitud'
+ *                 $ref: '#/components/schemas/Solicitudes'
  *       500:
  *         description: Error al obtener las solicitudes
  */
@@ -107,7 +86,7 @@ router.get("/", getAllSolicitudes);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Solicitud'
+ *               $ref: '#/components/schemas/Solicitudes'
  *       500:
  *         description: Error al obtener la solicitud
  */
@@ -122,55 +101,42 @@ router.get("/:id", getSolicitudById);
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
  *             type: object
  *             properties:
- *               descripcion:
+ *               direccion_solicitante:
  *                 type: string
- *               cantidad:
- *                 type: integer
- *               tipo:
- *                 type: string
- *               estado:
- *                 type: string
- *                 enum: [En Revision, Aceptado, Rechazado]
- *               archivo:
- *                 type: string
- *                 format: binary
- *               id_usuario_aprobador:
- *                 type: integer
- *               id_usuario_solicitud:
- *                 type: integer
+ *                 enum:
+ *                   - Direccion General
+ *                   - Direccion de Coordinacion Financiera Y Planeacion
+ *                   - Direccion de Television
+ *                   - Direccion de Noticias    
+ *                   - Direccion de Radio
+ *                   - Direccion de Ingenieria
+ *                   - Direccion de Proyectos Estrategicos
+ *                   - Organo Interno de Control
+ *                   - Direccion de Promocion e Intercambio
+ *                   - Direccion Juridica
+ *                   - Direccion de Vinculacion
+ *                   - Imagen
+ *                   - Estaciones de Radio
+ *                   - Estaciones de Television
  *               id_articulo:
  *                 type: integer
- *               id_numero_inventario:
- *                 type: integer
- *               id_numero_almacen:
- *                 type: integer
- *               comentario:
- *                 type: string
- *               tipo_rechazo:
- *                 type: string
- *                 enum: [Falta de presupuesto, No planeado, Incompleto, Fuera de Plazo]
- *               tipo_proyecto:
- *                 type: string
- *                 enum: [Radio, Television]
- *               id_propuesta_requicicion:
- *                 type: integer
- *               id_peticion_de_padre:
- *                 type: integer
+ *               cantidad_entregada:
+ *                 type: number
  *     responses:
  *       201:
  *         description: Solicitud creada exitosamente
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Solicitud'
+ *               $ref: '#/components/schemas/Solicitudes'
  *       500:
  *         description: Error al crear la solicitud
  */
-router.post("/", uploadRequest.single("archivo"),createSolicitud);
+router.post("/", createSolicitud);
 
 /**
  * @swagger
@@ -188,57 +154,44 @@ router.post("/", uploadRequest.single("archivo"),createSolicitud);
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
  *             type: object
  *             properties:
- *               descripcion:
+ *               direccion_solicitante:
  *                 type: string
- *               cantidad:
- *                 type: integer
- *               tipo:
- *                 type: string
- *               estado:
- *                 type: string
- *                 enum: [En Revision, Aceptado, Rechazado]
- *               archivo:
- *                 type: string
- *                 format: binary
- *               id_usuario_aprobador:
- *                 type: integer
- *               id_usuario_solicitud:
- *                 type: integer
+ *                 enum:
+ *                   - Direccion General
+ *                   - Direccion de Coordinacion Financiera Y Planeacion
+ *                   - Direccion de Television
+ *                   - Direccion de Noticias    
+ *                   - Direccion de Radio
+ *                   - Direccion de Ingenieria
+ *                   - Direccion de Proyectos Estrategicos
+ *                   - Organo Interno de Control
+ *                   - Direccion de Promocion e Intercambio
+ *                   - Direccion Juridica
+ *                   - Direccion de Vinculacion
+ *                   - Imagen
+ *                   - Estaciones de Radio
+ *                   - Estaciones de Television
  *               id_articulo:
  *                 type: integer
- *               id_numero_inventario:
- *                 type: integer
- *               id_numero_almacen:
- *                 type: integer
- *               comentario:
- *                 type: string
- *               tipo_rechazo:
- *                 type: string
- *                 enum: [Falta de presupuesto, No planeado, Incompleto, Fuera de Plazo]
- *               tipo_proyecto:
- *                 type: string
- *                 enum: [Radio, Television]
- *               id_propuesta_requicicion:
- *                 type: integer
- *               id_peticion_de_padre:
- *                 type: integer
+ *               cantidad_entregada:
+ *                 type: number
  *     responses:
  *       200:
  *         description: Solicitud actualizada exitosamente
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Solicitud'
+ *               $ref: '#/components/schemas/Solicitudes'
  *       404:
  *         description: Solicitud no encontrada
  *       500:
  *         description: Error al actualizar la solicitud
  */
-router.put("/:id", uploadRequest.single("archivo") ,updateSolicitud);
+router.put("/:id", updateSolicitud);
 
 /**
  * @swagger

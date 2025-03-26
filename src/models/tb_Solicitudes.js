@@ -13,14 +13,13 @@ const Solicitudes = db.define("tb_Solicitudes", {
             "Direccion de Ingenieria", "Direccion de Proyectos Estrategicos", "Organo Interno de Control",
             "Direccion de Promocion e Intercambio", "Direccion Juridica",
             "Direccion de Vinculacion", "Imagen", "Estaciones de Radio", "Estaciones de Television",
-          ),
-          allowNull: true,
+        ),
+        allowNull: true,
     },
     id_articulo: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    // ID del usuario que realiza la solicitud
     cantidad_entregada: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
