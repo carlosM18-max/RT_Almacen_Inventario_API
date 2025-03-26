@@ -24,6 +24,10 @@ const Solicitudes = db.define("tb_Solicitudes", {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
     },
+    numero_solicitud: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+    },
 },
     {
         timestamps: true
