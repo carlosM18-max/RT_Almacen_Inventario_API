@@ -55,13 +55,12 @@ export const createFactura = async (req, res) => {
 
     // Obtener las rutas de los archivos
     const archivo_pdf = req.files ? req.files.archivo_pdf.map(file => file.path) : [];
-    const contrato_compra = req.files ? req.files.contrato_compra.map(file => file.path) : [];
+
     console.log(req.body);
     console.log(req.files);
 
     const newFactura = await Facturas.create({
       tipo_compra,
-      contrato_compra: contrato_compra.join(';'),
       fecha_adquisicion,
       numero_de_factura,
       tipo_presupuesto,
@@ -71,16 +70,18 @@ export const createFactura = async (req, res) => {
       iva,
       total,
       archivo_pdf: archivo_pdf.join(';'),
+      contrato_compra: "" // Se envía vacío por defecto
     });
 
     res.status(201).json(newFactura);
   } catch (error) {
     res.status(400).json({
-      message: "Error al crear el proveedor",
+      message: "Error al crear la factura",
       error: error.message,
     });
   }
 };
+
 
 export const updateFactura = async (req, res) => {
   try {
