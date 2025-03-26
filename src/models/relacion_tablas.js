@@ -55,14 +55,9 @@ export const relaciones = () => {
    RegistroContable.hasMany(Inventario, { foreignKey: "id", as: "Regisinventa", onDelete: "CASCADE", onUpdate: "CASCADE" });
 
    // Referencias de Solicitudes
-   Solicitudes.belongsTo(Usuarios, { foreignKey: "id_usuario_solicitud", as: "usuarioCreadorSolicitud", onDelete: "CASCADE", onUpdate: "CASCADE" });
-   Usuarios.hasMany(Solicitudes, { foreignKey: "id", as: "solicitudesCreadas", onDelete: "CASCADE", onUpdate: "CASCADE" });
-
-   Solicitudes.belongsTo(Usuarios, { foreignKey: "id_usuario_aprobador", as: "usuarioaprobadorSolicitud", onDelete: "CASCADE", onUpdate: "CASCADE" });
-   Usuarios.hasMany(Solicitudes, { foreignKey: "id", as: "solicitudesaprobadas", onDelete: "CASCADE", onUpdate: "CASCADE" });
-
-   Solicitudes.belongsTo(Almacenes, { foreignKey: "id_almacen", as: "solicitudalmacen", onDelete: "CASCADE", onUpdate: "CASCADE" });
-   Almacenes.hasMany(Solicitudes, { foreignKey: "id", as: "alamacens", onDelete: "CASCADE", onUpdate: "CASCADE" });
+    // Relación entre solicitides y articulos
+   Solicitudes.belongsTo(Articulos, { foreignKey: "id_articulo", as: "articuloSolicitud", onDelete: "CASCADE", onUpdate: "CASCADE" });
+   Articulos.hasMany(Solicitudes, { foreignKey: "id", as: "solicitudesArticulo", onDelete: "CASCADE", onUpdate: "CASCADE" });
 
    // Referencias de Vida Útil
    VidaUtil.belongsTo(ObjetoGastos, { foreignKey: "id_partida", as: "partidaVidaUtil", onDelete: "CASCADE", onUpdate: "CASCADE" });
@@ -79,4 +74,6 @@ export const relaciones = () => {
    // Relación entre Articulos y Facturas
    Articulos.belongsTo(Facturas, { foreignKey: "id_factura", as: "facturaArticulo", onDelete: "CASCADE", onUpdate: "CASCADE" });
    Facturas.hasMany(Articulos, { foreignKey: "id", as: "articulosFactura", onDelete: "CASCADE", onUpdate: "CASCADE" });
+  
+   
 };
