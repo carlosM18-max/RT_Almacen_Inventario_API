@@ -7,6 +7,10 @@ const Solicitudes = db.define("tb_Solicitudes", {
         primaryKey: true,
         autoIncrement: true,
     },
+    numero_solicitud: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+    },
     direccion_solicitante: {
         type: DataTypes.ENUM("Direccion General", "Direccion de Coordinacion Financiera Y Planeacion",
             "Direccion de Television", "Direccion de Noticias", "Direccion de Radio",
@@ -22,10 +26,6 @@ const Solicitudes = db.define("tb_Solicitudes", {
     },
     cantidad_entregada: {
         type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
-    },
-    numero_solicitud: {
-        type: DataTypes.STRING(255),
         allowNull: false,
     },
 },
