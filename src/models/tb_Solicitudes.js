@@ -7,35 +7,23 @@ const Solicitudes = db.define("tb_Solicitudes", {
         primaryKey: true,
         autoIncrement: true,
     },
-    cantidad_solicitar: {
-        type: DataTypes.INTEGER(50),
-        allowNull: true,
+    direccion_solicitante: {
+        type: DataTypes.ENUM("Direccion General", "Direccion de Coordinacion Financiera Y Planeacion",
+            "Direccion de Television", "Direccion de Noticias", "Direccion de Radio",
+            "Direccion de Ingenieria", "Direccion de Proyectos Estrategicos", "Organo Interno de Control",
+            "Direccion de Promocion e Intercambio", "Direccion Juridica",
+            "Direccion de Vinculacion", "Imagen", "Estaciones de Radio", "Estaciones de Television",
+          ),
+          allowNull: true,
     },
-    unidad_medida: {
-        type: DataTypes.INTEGER(50),
-        allowNull: true,
-    },
-    descripcion: {
-        type: DataTypes.STRING(255),
-        allowNull: true,
-    },
-    archivo: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-    // ID del usuario que aprueba el pedido
-    id_usuario_aprobador: {
+    id_articulo: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
     },
     // ID del usuario que realiza la solicitud
-    id_usuario_solicitud: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-    },
-    id_almacen: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
+    cantidad_entregada: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false,
     },
 },
     {
