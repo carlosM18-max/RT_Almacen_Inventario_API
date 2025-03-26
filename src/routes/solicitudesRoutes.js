@@ -21,6 +21,9 @@ const router = Router();
  *         id:
  *           type: integer
  *           description: ID auto-generado de la solicitud
+ *         numero_solicitud:
+ *           type: string
+ *           description: Número de solicitud
  *         direccion_solicitante:
  *           type: string
  *           enum:
@@ -105,6 +108,8 @@ router.get("/:id", getSolicitudById);
  *           schema:
  *             type: object
  *             properties:
+ *               numero_solicitud:
+ *                 type: string
  *               direccion_solicitante:
  *                 type: string
  *                 enum:
@@ -158,6 +163,8 @@ router.post("/", createSolicitud);
  *           schema:
  *             type: object
  *             properties:
+ *               numero_solicitud:
+ *                 type: string
  *               direccion_solicitante:
  *                 type: string
  *                 enum:

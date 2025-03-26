@@ -26,6 +26,7 @@ export const getSolicitudById = async (req, res) => {
 export const createSolicitud = async (req, res) => {
     try {
         const {
+            numero_solicitud,
             direccion_solicitante,
             id_articulo,
             cantidad_entregada,
@@ -38,6 +39,7 @@ export const createSolicitud = async (req, res) => {
         }
 
         const newSolicitud = await Solicitudes.create({
+            numero_solicitud,
             direccion_solicitante,
             id_articulo,
             cantidad_entregada,
@@ -60,12 +62,14 @@ export const updateSolicitud = async (req, res) => {
         }
 
         const {
+            numero_solicitud,
             direccion_solicitante,
             id_articulo,
             cantidad_entregada,
         } = req.body;
 
         await solicitud.update({
+            numero_solicitud,
             direccion_solicitante,
             id_articulo,
             cantidad_entregada,
