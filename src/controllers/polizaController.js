@@ -33,20 +33,13 @@ export const getPolizaById = async (req, res) => {
   }
 };
 
-export const createPoliza = (req, res) => {
+export const createPoliza =  async (req, res) => {
   try {
     const {
+      numero_poliza,
       descripcion,
-      cobertura,
       tipo,
-      cantidad,
-      calidad,
-      deducible,
-      limites_indemnizacion,
-      periodo_vigencia,
       fecha,
-      prima,
-      clausulas_exclusion
     } = req.body;
 
     // Obtener las rutas de los archivos
@@ -54,19 +47,12 @@ export const createPoliza = (req, res) => {
     console.log(req.body);
     console.log(req.files);
 
-    const newPoliza = Poliza.create({
+    const newPoliza =  await Poliza.create({
+      numero_poliza,
       descripcion,
-      cobertura,
       tipo,
-      cantidad,
-      calidad,
-      deducible,
-      limites_indemnizacion,
-      periodo_vigencia,
       fecha,
       archivo: archivo.join(';'),
-      prima,
-      clausulas_exclusion
     });
 
     res.status(201).json(newPoliza);
@@ -80,17 +66,45 @@ export const createPoliza = (req, res) => {
 
 export const updatePoliza = async (req, res) => {
   try {
-    const updated = await Poliza.update(req.body, {
-      where: { id: req.params.id },
-    });
-    if (updated[0] === 1) {
-      const updatedPoliza = await Poliza.findByPk(req.params.id);
-      res.json(updatedPoliza);
-    } else {
-      res.status(404).json({ message: "Poliza no encontrada" });
+    const poliza = await Poliza.findByPk(req.params.id);
+
+    if (!poliza) {
+      return res.status(404).json({ message: "Poliza no encontrada" });
     }
+
+    const {
+      numero_poliza,
+      descripcion,
+      tipo,
+      fecha,
+    } = req.body;
+
+    let archivos = poliza.archivo;
+    let archivosAntiguos = archivos ? archivos.split(';') : [];
+
+    if (req.files && req.files.archivo) {
+      // Si hay nuevos archivos, actualizamos la ruta
+      archivos = req.files.archivo.map(file => file.path).join(';');
+
+      // Eliminamos los archivos antiguos
+      archivosAntiguos.forEach(filePath => {
+        if (fs.existsSync(filePath)) {
+          fs.unlinkSync(filePath);
+        }
+      });
+    }
+
+    await poliza.update({
+      numero_poliza,
+      descripcion,
+      tipo,
+      fecha,
+      archivo: archivos,
+    });
+
+    res.json({ message: "Poliza actualizada exitosamente", poliza });
   } catch (error) {
-    res.status(500).json({
+    res.status(400).json({
       message: "Error al actualizar la poliza",
       error: error.message,
     });

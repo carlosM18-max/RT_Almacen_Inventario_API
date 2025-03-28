@@ -21,43 +21,22 @@ const router = Router();
  *     Polizas:
  *       type: object
  *       required:
- *         - tipo
- *         - cantidad
- *         - deducible
- *         - prima
- *         - clausulas_exclusion
+ *         - numero_poliza
+ *         - archivo
  *       properties:
  *         id:
  *           type: integer
  *           description: ID único de la póliza
+ *         numero_poliza:
+ *           type: string
+ *           description: Número de la póliza
  *         descripcion:
  *           type: string
  *           description: Descripción de la póliza
- *         cobertura:
- *           type: string
- *           description: Tipo de cobertura
  *         tipo:
  *           type: string
  *           enum: [Egresos, Presupuestales, Donaciones, Cheques, Ingresos, Transferencias, Retenciones, Depositos]
  *           description: Tipo de póliza
- *         cantidad:
- *           type: number
- *           format: decimal
- *           description: Cantidad asociada a la póliza
- *         calidad:
- *           type: string
- *           description: Calidad del bien asegurado
- *         deducible:
- *           type: number
- *           format: decimal
- *           description: Deducible de la póliza
- *         limites_indemnizacion:
- *           type: string
- *           description: Límites de indemnización
- *         periodo_vigencia:
- *           type: string
- *           format: date
- *           description: Periodo de vigencia de la póliza
  *         fecha:
  *           type: string
  *           format: date
@@ -66,13 +45,6 @@ const router = Router();
  *           type: string
  *           format: binary
  *           description: Archivo adjunto de la póliza
- *         prima:
- *           type: number
- *           format: decimal
- *           description: Prima de la póliza
- *         clausulas_exclusion:
- *           type: string
- *           description: Cláusulas de exclusión
  *     Facturas:
  *       type: object
  *       properties:
@@ -192,37 +164,19 @@ router.get("/:id", getPolizaById);
  *           schema:
  *             type: object
  *             properties:
- *               descripcion:
+ *               numero_poliza:
  *                 type: string
- *               cobertura:
+ *               descripcion:
  *                 type: string
  *               tipo:
  *                 type: string
  *                 enum: [Egresos, Presupuestales, Donaciones, Cheques, Ingresos, Transferencias, Retenciones, Depositos]
- *               cantidad:
- *                 type: number
- *                 format: decimal
- *               calidad:
- *                 type: string
- *               deducible:
- *                 type: number
- *                 format: decimal
- *               limites_indemnizacion:
- *                 type: string
- *               periodo_vigencia:
- *                 type: string
- *                 format: date
  *               fecha:
  *                 type: string
  *                 format: date
  *               archivo:
  *                 type: string
  *                 format: binary
- *               prima:
- *                 type: number
- *                 format: decimal
- *               clausulas_exclusion:
- *                 type: string
  *     responses:
  *       201:
  *         description: Póliza creada exitosamente
@@ -255,37 +209,19 @@ router.post("/", uploadPolicies.fields([{ name: 'archivo', maxCount: 1 }]), crea
  *           schema:
  *             type: object
  *             properties:
- *               descripcion:
+ *               numero_poliza:
  *                 type: string
- *               cobertura:
+ *               descripcion:
  *                 type: string
  *               tipo:
  *                 type: string
  *                 enum: [Egresos, Presupuestales, Donaciones, Cheques, Ingresos, Transferencias, Retenciones, Depositos]
- *               cantidad:
- *                 type: number
- *                 format: decimal
- *               calidad:
- *                 type: string
- *               deducible:
- *                 type: number
- *                 format: decimal
- *               limites_indemnizacion:
- *                 type: string
- *               periodo_vigencia:
- *                 type: string
- *                 format: date
  *               fecha:
  *                 type: string
  *                 format: date
  *               archivo:
  *                 type: string
  *                 format: binary
- *               prima:
- *                 type: number
- *                 format: decimal
- *               clausulas_exclusion:
- *                 type: string
  *     responses:
  *       200:
  *         description: Póliza actualizada exitosamente
