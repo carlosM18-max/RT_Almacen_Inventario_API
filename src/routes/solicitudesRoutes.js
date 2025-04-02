@@ -42,6 +42,24 @@ const router = Router();
  *             - Estaciones de Radio
  *             - Estaciones de Television
  *           description: Descripción de la solicitud
+ *         area:
+ *           type: string
+ *           enum:
+ *             - Direccion General
+ *             - Direccion de Coordinacion Financiera Y Planeacion
+ *             - Direccion de Television
+ *             - Direccion de Noticias
+ *             - Direccion de Radio
+ *             - Direccion de Ingenieria
+ *             - Direccion de Proyectos Estrategicos
+ *             - Organo Interno de Control
+ *             - Direccion de Promocion e Intercambio
+ *             - Direccion Juridica
+ *             - Direccion de Vinculacion
+ *             - Imagen
+ *             - Estaciones de Radio
+ *             - Estaciones de Television
+ *           description: Area de la solicitud
  *         id_articulo:
  *           type: integer
  *           description: ID del articulo solicitado
@@ -127,6 +145,23 @@ router.get("/:id", getSolicitudById);
  *                   - Imagen
  *                   - Estaciones de Radio
  *                   - Estaciones de Television
+ *               area:
+ *                 type: string
+ *                 enum:
+ *                   - Direccion General
+ *                   - Direccion de Coordinacion Financiera Y Planeacion
+ *                   - Direccion de Television
+ *                   - Direccion de Noticias    
+ *                   - Direccion de Radio
+ *                   - Direccion de Ingenieria
+ *                   - Direccion de Proyectos Estrategicos
+ *                   - Organo Interno de Control
+ *                   - Direccion de Promocion e Intercambio
+ *                   - Direccion Juridica
+ *                   - Direccion de Vinculacion
+ *                   - Imagen
+ *                   - Estaciones de Radio
+ *                   - Estaciones de Television
  *               id_articulo:
  *                 type: integer
  *               cantidad_entregada:
@@ -166,6 +201,23 @@ router.post("/", createSolicitud);
  *               numero_solicitud:
  *                 type: string
  *               direccion_solicitante:
+ *                 type: string
+ *                 enum:
+ *                   - Direccion General
+ *                   - Direccion de Coordinacion Financiera Y Planeacion
+ *                   - Direccion de Television
+ *                   - Direccion de Noticias    
+ *                   - Direccion de Radio
+ *                   - Direccion de Ingenieria
+ *                   - Direccion de Proyectos Estrategicos
+ *                   - Organo Interno de Control
+ *                   - Direccion de Promocion e Intercambio
+ *                   - Direccion Juridica
+ *                   - Direccion de Vinculacion
+ *                   - Imagen
+ *                   - Estaciones de Radio
+ *                   - Estaciones de Television
+ *               area:
  *                 type: string
  *                 enum:
  *                   - Direccion General
