@@ -28,6 +28,7 @@ export const createSolicitud = async (req, res) => {
         const {
             numero_solicitud,
             direccion_solicitante,
+            area,
             id_articulo,
             cantidad_entregada,
         } = req.body;
@@ -41,6 +42,7 @@ export const createSolicitud = async (req, res) => {
         const newSolicitud = await Solicitudes.create({
             numero_solicitud,
             direccion_solicitante,
+            area,
             id_articulo,
             cantidad_entregada,
         });
@@ -64,6 +66,7 @@ export const updateSolicitud = async (req, res) => {
         const {
             numero_solicitud,
             direccion_solicitante,
+            area,
             id_articulo,
             cantidad_entregada,
         } = req.body;
@@ -71,6 +74,7 @@ export const updateSolicitud = async (req, res) => {
         await solicitud.update({
             numero_solicitud,
             direccion_solicitante,
+            area,
             id_articulo,
             cantidad_entregada,
         });
