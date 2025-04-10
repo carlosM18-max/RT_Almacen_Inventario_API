@@ -41,6 +41,10 @@ export const createUsuario = async (req, res) => {
             return res.status(400).json({ message: "La persona no existe" });
         }
 
+         // Establecer la variable de sesión @usuario_email
+        const usuarioEmail = req.user?.email || "correo-no-disponible";
+        await db.query(`SET @usuario_email = '${usuarioEmail}';`);
+
         const newUsuario = await Usuarios.create({
             id_persona,
             rol,

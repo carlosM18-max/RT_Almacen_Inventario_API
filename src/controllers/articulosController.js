@@ -1,6 +1,7 @@
 import Articulos from "../models/tb_Articulos.js";
 import ObjetoGastos from "../models/tb_ObjetoGasto.js";
 import Facturas from "../models/tb_Facturas.js";
+import db from "../config/db.js";
 import path from "path";
 import fs from "fs";
 
@@ -41,6 +42,10 @@ export const createArticulo = async (req, res) => {
             unidad_medida,
             total_ingreso
         } = req.body;
+
+        // Establecer la variable de sesión @usuario_email
+        const usuarioEmail = req.user?.email || "correo-no-disponible";
+        await db.query(`SET @usuario_email = '${usuarioEmail}';`);
 
         // Verificar si un objeto de gasto existe
         const objetoGasto = await ObjetoGastos.findByPk(id_objetogasto);
@@ -99,6 +104,11 @@ export const updateArticulo = async (req, res) => {
             total_ingreso
         } = req.body;
 
+        // Establecer la variable de sesión @usuario_email
+        const usuarioEmail = req.user?.email || "correo-no-disponible";
+        await db.query(`SET @usuario_email = '${usuarioEmail}';`);
+
+
         let archivos = articulo.foto_articulo;
         let archivosAntiguos = archivos ? archivos.split(';') : []; 
 
@@ -138,6 +148,11 @@ export const updateArticulo = async (req, res) => {
 
 export const deleteArticulo = async (req, res) => {
     try {
+
+        // Establecer la variable de sesión @usuario_email
+        const usuarioEmail = req.user?.email || "correo-no-disponible";
+        await db.query(`SET @usuario_email = '${usuarioEmail}';`);
+
         const deleted = await Articulos.destroy({
             where: { id: req.params.id },
         });
@@ -158,6 +173,10 @@ export const deleteArticuloArchivo = async (req, res) => {
     try {
         const { id } = req.params;
         const { fileName } = req.body;
+
+        // Establecer la variable de sesión @usuario_email
+        const usuarioEmail = req.user?.email || "correo-no-disponible";
+        await db.query(`SET @usuario_email = '${usuarioEmail}';`);
 
         // Buscamos por el ID
         const articulo = await Articulos.findByPk(id);
