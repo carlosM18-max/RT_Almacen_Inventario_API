@@ -12,11 +12,11 @@ const Bitacora = db.define("tb_Bitacora", {
     allowNull: false,
   },
   operacion: {
-    type: DataTypes.STRING(50),
+    type: DataTypes.STRING(250),
     allowNull: false,
   },
   descrpcion: {
-    type: DataTypes.STRING(50),
+    type: DataTypes.STRING(250),
     allowNull: false,
   },
   usuario_responsable: {

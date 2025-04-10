@@ -1,5 +1,6 @@
 import Solicitudes from "../models/tb_Solicitudes.js";
 import Articulos from "../models/tb_Articulos.js";
+import db from "../config/db.js";
 
 export const getAllSolicitudes = async (req, res) => {
     try {
@@ -33,6 +34,10 @@ export const createSolicitud = async (req, res) => {
             cantidad_entregada,
         } = req.body;
 
+        // Establecer la variable de sesión @usuario_email
+        const usuarioEmail = req.user?.email || "correo-no-disponible";
+        await db.query(`SET @usuario_email = '${usuarioEmail}';`);
+
         // Verificar si el artículo existe
         const articulo = await Articulos.findByPk(id_articulo);
         if (!articulo) {
@@ -58,6 +63,10 @@ export const createSolicitud = async (req, res) => {
 export const updateSolicitud = async (req, res) => {
     try {
         const solicitud = await Solicitudes.findByPk(req.params.id);
+
+        // Establecer la variable de sesión @usuario_email
+        const usuarioEmail = req.user?.email || "correo-no-disponible";
+        await db.query(`SET @usuario_email = '${usuarioEmail}';`);
 
         if (!solicitud) {
             return res.status(404).json({ message: "Solicitud no encontrada" });
@@ -91,6 +100,11 @@ export const updateSolicitud = async (req, res) => {
 export const deleteSolicitud = async (req, res) => {
     try {
         const solicitud = await Solicitudes.findByPk(req.params.id);
+
+        // Establecer la variable de sesión @usuario_email
+        const usuarioEmail = req.user?.email || "correo-no-disponible";
+        await db.query(`SET @usuario_email = '${usuarioEmail}';`);
+
         if (!solicitud) {
             return res.status(404).json({ message: "Solicitud no encontrada" });
         }

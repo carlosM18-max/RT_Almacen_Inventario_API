@@ -1,5 +1,6 @@
 import Facturas from "../models/tb_Facturas.js";
 import Proveedores from "../models/tb_Proveedores.js";
+import db from "../config/db.js";
 import path from "path";
 import fs from "fs";
 
@@ -47,6 +48,10 @@ export const createFactura = async (req, res) => {
       total
     } = req.body;
 
+    // Establecer la variable de sesión @usuario_email
+    const usuarioEmail = req.user?.email || "correo-no-disponible";
+    await db.query(`SET @usuario_email = '${usuarioEmail}';`);
+
     // Verificar si un proveedor existe
     const proveedor = await Proveedores.findByPk(id_proveedor);
     if (!proveedor) {
@@ -85,6 +90,10 @@ export const createFactura = async (req, res) => {
 
 export const updateFactura = async (req, res) => {
   try {
+    // Establecer la variable de sesión @usuario_email
+    const usuarioEmail = req.user?.email || "correo-no-disponible";
+    await db.query(`SET @usuario_email = '${usuarioEmail}';`);
+
     const updated = await Facturas.update(req.body, {
       where: { id: req.params.id },
     });
@@ -104,6 +113,11 @@ export const updateFactura = async (req, res) => {
 
 export const deleteFactura = async (req, res) => {
   try {
+
+    // Establecer la variable de sesión @usuario_email
+    const usuarioEmail = req.user?.email || "correo-no-disponible";
+    await db.query(`SET @usuario_email = '${usuarioEmail}';`);
+
     const deleted = await Facturas.destroy({
       where: { id: req.params.id },
     });
@@ -123,6 +137,10 @@ export const deleteFactura = async (req, res) => {
 export const updatedFacturaArchivo = async (req, res) => {
   try {
     const { id } = req.params;
+
+    // Establecer la variable de sesión @usuario_email
+    const usuarioEmail = req.user?.email || "correo-no-disponible";
+    await db.query(`SET @usuario_email = '${usuarioEmail}';`);
 
     // Buscar la factura por su ID
     const factura = await Facturas.findByPk(id);
@@ -170,7 +188,9 @@ export const updatedFacturaArchivo = async (req, res) => {
 export const updatedFacturaArchivoContrato = async (req, res) => {
   try {
     const { id } = req.params;
-
+    // Establecer la variable de sesión @usuario_email
+    const usuarioEmail = req.user?.email || "correo-no-disponible";
+    await db.query(`SET @usuario_email = '${usuarioEmail}';`);
     // Buscar la factura por su ID
     const factura = await Facturas.findByPk(id);
 
